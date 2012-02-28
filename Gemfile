@@ -29,6 +29,7 @@ end
 group :test do
   gem "rspec-rails", "2.8.1"
   gem "factory_girl_rails"
+  gem 'shoulda-matchers', '1.0.0'
 end
 
 group :development do
