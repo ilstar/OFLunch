@@ -75,6 +75,7 @@ GEM
     multi_json (1.1.0)
     mysql2 (0.3.11)
     orm_adapter (0.0.5)
+    pg (0.11.0)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.1)
@@ -154,6 +155,7 @@ DEPENDENCIES
   factory_girl_rails
   jquery-rails (= 2.0.0)
   mysql2 (= 0.3.11)
+  pg
   rails (= 3.2.1)
   rspec-rails (= 2.8.1)
   sass-rails (~> 3.2.3)
