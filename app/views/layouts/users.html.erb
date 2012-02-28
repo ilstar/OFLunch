@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>OFLunch</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <head>
+    <title>OFLunch</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="navbar-example" class="navbar navbar-static">
+      <div class="navbar-inner">
+        <div class="container">
+          <img class="brand" src="http://openfeint.com/images/footer/of_footer_logo.png" style="padding: 0px 10px"/>
+        </div>
+      </div>
+    </div>
 
-<%= yield %>
+    <div class="container">
+      <%= render 'notice' %>
 
-</body>
+      <div class="row">
+        
+        <div class="span7">
+          <img src="http://farm8.staticflickr.com/7014/6521206005_4c1ecf7e38.jpg" class='pull-right' style="padding-right: 50px;"/>
+        </div>
+        <div class="span5">
+          
+      <%= yield %>
+        </div>
+      </div>
+      <footer class="footer">
+      <hr/>
+      <p>@openfeint</p>
+      </footer>
+    </div>
+
+  </body>
 </html>
-
