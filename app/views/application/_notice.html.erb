@@ -1,7 +1,14 @@
 <%- if notice %>
-  <p class="notice"><%= notice %></p>
+  <div class="alert">
+    <a class="close" data-dismiss="alert">×</a>
+    <strong>Notice!</strong> <%= notice %>
+  </div>
+
 <%- end %>
 
 <%- if alert %>
-  <p class="alert"><%= alert %></p>
+  <div class="alert">
+    <a class="close" data-dismiss="alert">×</a>
+    <strong>Alert!</strong> <%= alert %>
+  </div>
 <%- end %>
