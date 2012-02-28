@@ -8,9 +8,15 @@
   </head>
   <body>
     <%= render 'nav' %>
+    <div class="container">
     <%= render 'notice' %>
 
     <%= yield %>
+      <footer class="footer">
+        <hr/>
+        <p>@openfeint</p>
+      </footer>
+    </div>
 
   </body>
 </html>
