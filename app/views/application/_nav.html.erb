@@ -6,7 +6,7 @@
       <ul class="nav">
         <li><%= link_to 'home', root_path  %></li>
         <% if current_user.admin? %>
-          <li><%= link_to 'MOD', '#'  %></li>
+          <li><%= link_to 'MOD', meal_times_url  %></li>
         <% end %>
       </ul>
       <ul class="nav pull-right">

@@ -1,5 +1,8 @@
 OFLunch::Application.routes.draw do
-  resources :meal_times
+
+  resources :meal_times do
+    resources :menu_of_meals, only: %w{create destroy index}
+  end
 
   resources :menu_items
 

@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="span6">
+    <h1>All Vendors</h1>
+    <table>
+      <% @vendors.each do |vendor| %>
+        <% next if @meal_time.vendors.include?(vendor) %>
+        <tr>
+          <td>
+            <%= vendor.name %>
+            <%= link_to 'add', meal_time_menu_of_meals_url(@meal_time, vendor_id: vendor.id), method: 'post' %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class-="span6">
+    <h1>Menu of Today</h1>
+    <table>
+      <% @meal_time.menu_of_meals.each do |menu_of_meal| %>
+        <tr>
+          <td>
+            <%= menu_of_meal.vendor.name %>
+            <%= link_to 'remove', meal_time_menu_of_meal_url(@meal_time, menu_of_meal), method: 'delete' %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
