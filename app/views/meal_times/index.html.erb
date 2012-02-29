@@ -1,21 +1,3 @@
-<h1>Listing meal_times</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @meal_times.each do |meal_time| %>
-  <tr>
-    <td><%= link_to 'Show', meal_time %></td>
-    <td><%= link_to 'Edit', edit_meal_time_path(meal_time) %></td>
-    <td><%= link_to 'Destroy', meal_time, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% if @today_meal_time.nil? %>
+  <%= link_to 'Choose MOD', meal_times_path, method: 'post' %>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Meal time', new_meal_time_path %>
