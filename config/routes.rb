@@ -1,4 +1,6 @@
 OFLunch::Application.routes.draw do
+  resources :meal_times
+
   resources :menu_items
 
   resources :vendors

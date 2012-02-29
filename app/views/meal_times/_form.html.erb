@@ -1,0 +1,13 @@
+<%= simple_form_for(@meal_time) do |f| %>
+  <%= f.error_notification %>
+
+  <% @vendors.each do |vendor| %>
+    <%=  f.check_box "vendor_ids" %> <%= vendor.name %>
+  <% end %>
+  <div class="form-inputs">
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "MOD" %>
+  </div>
+<% end %>
