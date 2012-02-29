@@ -1,0 +1,199 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>admin_login.sikuli</h2> <a href="admin_login.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+loginPageTitle = <img src="OGREJ.png" />
+
+
+<span class="cmt"># open browser
+</span><span class="kw">def</span> openBrowser():
+  browser = App(<span class="str">"Google Chrome Canary"</span>)
+  browser.open()
+  browserPattern = <img src="Chrome.png" />
+  <span class="skw">wait</span>(browserPattern, <span class="dig">20</span>)
+
+<span class="cmt"># close browser
+</span><span class="kw">def</span> closeBrowser():
+  browser = App(<span class="str">"Google Chrome Canary"</span>)
+  browser.focus()
+  browser.close()
+
+<span class="cmt"># navigate to site
+</span><span class="kw">def</span> openHomePage():
+  homeurl = <span class="str">"http://tuantuanfan.herokuapp.com/"</span>
+  browserNavigationBar = <img src="1330415953990.png" />
+  <span class="skw">type</span>(browserNavigationBar, homeurl + Key.ENTER)
+  <span class="skw">wait</span>(loginPageTitle, <span class="dig">20</span>)
+
+<span class="cmt"># initial step of login
+</span><span class="kw">def</span> loginInit():
+  <span class="skw">wait</span>(<span class="dig">5</span>)
+  openBrowser()
+  openHomePage()
+
+loginInit()
+adminEmail = <span class="str">"xingkui.wang@gree.co.jp"</span>
+<span class="cmt"># elements in login page
+</span>singinButton = <img src="1330416320591.png" />
+emailLabel = <img src="IfTIBlI.png" />
+passwordLabel = <img src="Password.png" />
+textField = <img src="1330420667189.png" />
+<span class="cmt"># you can use highlight to debug the region is what you want
+</span>emailField = <span class="skw">find</span>(emailLabel).below(<span class="dig">60</span>).<span class="skw">find</span>(textField)
+passwordField = <span class="skw">find</span>(passwordLabel).below(<span class="dig">60</span>).<span class="skw">find</span>(textField)
+rememberMeCheckbox = <img src="1330417595269.png" />
+wrongEmailOrPassword = <img src="AlertInvalid.png" />
+<span class="cmt"># elements in admin home page
+</span>adminFlag = <img src="homeMOD.png" />
+accountMenu = <img src="Account.png" />
+logoutItem = <img src="Logout.png" />
+
+
+<span class="cmt"># login withought email and password
+</span><span class="kw">def</span> loginWithoughtEmailAndPassword():
+  <span class="skw">click</span>(singinButton)
+  <span class="skw">wait</span>(wrongEmailOrPassword, <span class="dig">20</span>)
+  closeBrowser()
+
+
+
+<span class="cmt"># login with email and empty password
+</span><span class="kw">def</span> loginWithEmailAndEmptyPassword():
+  loginInit()
+  <span class="skw">type</span>(emailField, adminEmail)
+  <span class="skw">click</span>(singinButton)
+  <span class="skw">wait</span>(wrongEmailOrPassword, <span class="dig">20</span>)
+  closeBrowser()
+
+
+<span class="cmt"># login with wrong email and password
+</span><span class="kw">def</span> loginWithWrongEmailAndPassword():
+  loginInit()
+  <span class="skw">type</span>(emailField, adminEmail)
+  <span class="skw">type</span>(passwordField, <span class="str">"123456"</span>)
+  <span class="skw">click</span>(singinButton)
+  <span class="skw">wait</span>(wrongEmailOrPassword, <span class="dig">20</span>)
+  closeBrowser()
+
+<span class="cmt"># Admin login with right email and password and see MOD menu
+</span><span class="kw">def</span> adminLoginWithRightEmailAndPassword():
+  loginInit()
+  <span class="skw">type</span>(emailField, adminEmail)
+  <span class="skw">type</span>(passwordField, <span class="str">"openfeint"</span>)
+  <span class="skw">type</span>(Key.ENTER)
+  <span class="skw">wait</span>(adminFlag, <span class="dig">20</span>)
+
+<span class="cmt">#Admin logout
+</span><span class="kw">def</span> adminLogout():
+  <span class="skw">click</span>(accountMenu)
+  <span class="skw">wait</span>(logoutItem, <span class="dig">20</span>)
+  <span class="skw">click</span>(logoutItem)
+  <span class="skw">wait</span>(loginPageTitle, <span class="dig">20</span>)
+  closeBrowser()
+
+<span class="cmt"># Admin login withought check remember me
+</span><span class="kw">def</span> adminLoginWithoughtCheckRememberMe():
+  adminLoginWithRightEmailAndPassword()
+  closeBrowser()
+  loginInit()
+  <span class="skw">wait</span>(loginPageTitle, <span class="dig">20</span>)
+  closeBrowser()
+
+<span class="cmt"># Admin login and check remember me
+</span><span class="kw">def</span> adminLoginAndCheckRememberMe():
+  loginInit()
+  <span class="skw">type</span>(emailField, adminEmail)
+  <span class="skw">type</span>(passwordField, <span class="str">"openfeint"</span>)
+  <span class="skw">click</span>(rememberMeCheckbox)
+  <span class="skw">click</span>(singinButton)
+  <span class="skw">wait</span>(adminFlag, <span class="dig">20</span>)
+  closeBrowser()
+  loginInit()
+  <span class="skw">wait</span>(adminFlag, <span class="dig">20</span>)
+  adminLogout()
+
+<span class="cmt"># User login and can't see MOD menu
+</span>
+<span class="cmt"># User logout
+</span>
+
+
+<span class="cmt"># test steps
+</span>loginWithoughtEmailAndPassword()
+loginWithEmailAndEmptyPassword()
+loginWithWrongEmailAndPassword()
+adminLoginWithRightEmailAndPassword()
+adminLogout()
+adminLoginWithoughtCheckRememberMe()
+adminLoginAndCheckRememberMe()
+</pre>
+</body>
+</html>
