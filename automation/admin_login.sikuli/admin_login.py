@@ -1,54 +1,64 @@
-loginPageTitle = "OGREJ.png"
+browserName = "Google Chrome Canary"
+homeurl = "http://tuantuanfan.herokuapp.com/"
+adminEmail = "xingkui.wang@gree.co.jp"
+adminPassword = "openfeint"
+userEmail = "fred.liang@gree.co.jp"
+userPassword = "openfeint"
+dummyPassword = "iwjknslvdf*&*(&@#)$&^*&^@)#(&$(^(!)&$(*#^(*hjnajlrng<?><(+_)!(_~*)($#''';'_+__~@#4u8o92045890234905435"
+shortWaitTime = 5
+longWaitTime = 40
+browserPattern = "borwserPattern.png"
+browserNavigationBar = "browserNavigationBar.png"
+loginPageTitle = "loginPageTitle.png"
+# elements in login page
+singinButton = "signinButton.png"
+emailLabel = "emailLabel.png"
+passwordLabel = "passwordLabel.png"
+textField = "textField.png"
+emailField = None
+passwordField = None
+rememberMeCheckbox = "rememberMeCheckbox.png"
+wrongEmailOrPassword = "wrongEmailOrPassword.png"
+# elements in home page
+adminFlag = "adminFlag.png"
+accountMenu = "accountMenu.png"
+logoutItem = "logoutItem.png"
+userFlag = "1330483299063.png"
 
 
 # open browser
 def openBrowser():
-  browser = App("Google Chrome Canary")
+  browser = App(browserName)
   browser.open()
-  browserPattern = "Chrome.png"
-  wait(browserPattern, 20)
+  wait(browserPattern, longWaitTime)
 
 # close browser
 def closeBrowser():
-  browser = App("Google Chrome Canary")
+  browser = App(browserName)
   browser.focus()
   browser.close()
 
 # navigate to site
 def openHomePage():
-  homeurl = "http://tuantuanfan.herokuapp.com/"
-  browserNavigationBar = "1330415953990.png"
   type(browserNavigationBar, homeurl + Key.ENTER)
-  wait(loginPageTitle, 20)
+  wait(loginPageTitle, longWaitTime)
 
 # initial step of login
 def loginInit():
-  wait(5)
+  wait(shortWaitTime)
   openBrowser()
   openHomePage()  
-
-loginInit()
-adminEmail = "xingkui.wang@gree.co.jp"
-# elements in login page
-singinButton = "1330416320591.png"
-emailLabel = "IfTIBlI.png"
-passwordLabel = "Password.png"
-textField = "1330420667189.png"
-# you can use highlight to debug the region is what you want
-emailField = find(emailLabel).below(60).find(textField) 
-passwordField = find(passwordLabel).below(60).find(textField)
-rememberMeCheckbox = "1330417595269.png"
-wrongEmailOrPassword = "AlertInvalid.png"
-# elements in admin home page
-adminFlag = "homeMOD.png"
-accountMenu = "Account.png"
-logoutItem = "Logout.png"
-
+  global emailField, passwordField
+  if emailField is None:
+    emailField = find(emailLabel).below(70).find(textField)
+  if passwordField is None:
+    passwordField = find(passwordLabel).below(70).find(textField)
 
 # login withought email and password
 def loginWithoughtEmailAndPassword():
+  loginInit()
   click(singinButton)
-  wait(wrongEmailOrPassword, 20)
+  wait(wrongEmailOrPassword, longWaitTime)
   closeBrowser()
 
 
@@ -58,7 +68,7 @@ def loginWithEmailAndEmptyPassword():
   loginInit()
   type(emailField, adminEmail)
   click(singinButton)
-  wait(wrongEmailOrPassword, 20)
+  wait(wrongEmailOrPassword, longWaitTime)
   closeBrowser()
 
 
@@ -66,25 +76,25 @@ def loginWithEmailAndEmptyPassword():
 def loginWithWrongEmailAndPassword():
   loginInit()
   type(emailField, adminEmail)
-  type(passwordField, "123456")
+  type(passwordField, dummyPassword)
   click(singinButton)
-  wait(wrongEmailOrPassword, 20)
+  wait(wrongEmailOrPassword, longWaitTime)
   closeBrowser()
 
 # Admin login with right email and password and see MOD menu
 def adminLoginWithRightEmailAndPassword():
   loginInit()
   type(emailField, adminEmail)
-  type(passwordField, "openfeint")
+  type(passwordField, adminPassword)
   type(Key.ENTER)
-  wait(adminFlag, 20)
+  wait(adminFlag, longWaitTime)
 
 #Admin logout
 def adminLogout():
   click(accountMenu)
-  wait(logoutItem, 20)
+  wait(logoutItem, longWaitTime)
   click(logoutItem)
-  wait(loginPageTitle, 20)
+  wait(loginPageTitle, longWaitTime)
   closeBrowser()
 
 # Admin login withought check remember me
@@ -92,27 +102,37 @@ def adminLoginWithoughtCheckRememberMe():
   adminLoginWithRightEmailAndPassword()
   closeBrowser()
   loginInit()
-  wait(loginPageTitle, 20)
+  wait(loginPageTitle, longWaitTime)
   closeBrowser()
 
 # Admin login and check remember me
 def adminLoginAndCheckRememberMe():
   loginInit()
   type(emailField, adminEmail)
-  type(passwordField, "openfeint")
+  type(passwordField, adminPassword)
   click(rememberMeCheckbox)
   click(singinButton)
-  wait(adminFlag, 20)
+  wait(adminFlag, longWaitTime)
   closeBrowser()
   loginInit()
-  wait(adminFlag, 20)
+  wait(adminFlag, longWaitTime)
   adminLogout()
 
 # User login and can't see MOD menu
-
+def userLoginWithRightEmailAndPassword():
+  loginInit()
+  type(emailField, userEmail)
+  type(passwordField, userPassword)
+  type(Key.ENTER)
+  wait(userFlag, longWaitTime)
+    
 # User logout
-
-
+def userLogout():
+  click(accountMenu)
+  wait(logoutItem, longWaitTime)
+  click(logoutItem)
+  wait(loginPageTitle, longWaitTime)
+  closeBrowser()  
 
 # test steps
 loginWithoughtEmailAndPassword()
@@ -122,3 +142,5 @@ adminLoginWithRightEmailAndPassword()
 adminLogout()
 adminLoginWithoughtCheckRememberMe()
 adminLoginAndCheckRememberMe()
+userLoginWithRightEmailAndPassword()
+userLogout()
