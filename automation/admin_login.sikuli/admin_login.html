@@ -70,57 +70,67 @@
 <h2>admin_login.sikuli</h2> <a href="admin_login.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-loginPageTitle = <img src="OGREJ.png" />
+browserName = <span class="str">"Google Chrome Canary"</span>
+homeurl = <span class="str">"http://tuantuanfan.herokuapp.com/"</span>
+adminEmail = <span class="str">"xingkui.wang@gree.co.jp"</span>
+adminPassword = <span class="str">"openfeint"</span>
+userEmail = <span class="str">"fred.liang@gree.co.jp"</span>
+userPassword = <span class="str">"openfeint"</span>
+dummyPassword = <span class="str">"iwjknslvdf*&amp;*(&amp;@#)$&amp;^*&amp;^@)#(&amp;$(^(!)&amp;$(*#^(*hjnajlrng&lt;?&gt;&lt;(+_)!(_~*)($#''';'_+__~@#4u8o92045890234905435"</span>
+shortWaitTime = <span class="dig">5</span>
+longWaitTime = <span class="dig">40</span>
+browserPattern = <img src="borwserPattern.png" />
+browserNavigationBar = <img src="browserNavigationBar.png" />
+loginPageTitle = <img src="loginPageTitle.png" />
+<span class="cmt"># elements in login page
+</span>singinButton = <img src="signinButton.png" />
+emailLabel = <img src="emailLabel.png" />
+passwordLabel = <img src="passwordLabel.png" />
+textField = <img src="textField.png" />
+emailField = None
+passwordField = None
+rememberMeCheckbox = <img src="rememberMeCheckbox.png" />
+wrongEmailOrPassword = <img src="wrongEmailOrPassword.png" />
+<span class="cmt"># elements in home page
+</span>adminFlag = <img src="adminFlag.png" />
+accountMenu = <img src="accountMenu.png" />
+logoutItem = <img src="logoutItem.png" />
+userFlag = <img src="1330483299063.png" />
 
 
 <span class="cmt"># open browser
 </span><span class="kw">def</span> openBrowser():
-  browser = App(<span class="str">"Google Chrome Canary"</span>)
+  browser = App(browserName)
   browser.open()
-  browserPattern = <img src="Chrome.png" />
-  <span class="skw">wait</span>(browserPattern, <span class="dig">20</span>)
+  <span class="skw">wait</span>(browserPattern, longWaitTime)
 
 <span class="cmt"># close browser
 </span><span class="kw">def</span> closeBrowser():
-  browser = App(<span class="str">"Google Chrome Canary"</span>)
+  browser = App(browserName)
   browser.focus()
   browser.close()
 
 <span class="cmt"># navigate to site
 </span><span class="kw">def</span> openHomePage():
-  homeurl = <span class="str">"http://tuantuanfan.herokuapp.com/"</span>
-  browserNavigationBar = <img src="1330415953990.png" />
   <span class="skw">type</span>(browserNavigationBar, homeurl + Key.ENTER)
-  <span class="skw">wait</span>(loginPageTitle, <span class="dig">20</span>)
+  <span class="skw">wait</span>(loginPageTitle, longWaitTime)
 
 <span class="cmt"># initial step of login
 </span><span class="kw">def</span> loginInit():
-  <span class="skw">wait</span>(<span class="dig">5</span>)
+  <span class="skw">wait</span>(shortWaitTime)
   openBrowser()
   openHomePage()
-
-loginInit()
-adminEmail = <span class="str">"xingkui.wang@gree.co.jp"</span>
-<span class="cmt"># elements in login page
-</span>singinButton = <img src="1330416320591.png" />
-emailLabel = <img src="IfTIBlI.png" />
-passwordLabel = <img src="Password.png" />
-textField = <img src="1330420667189.png" />
-<span class="cmt"># you can use highlight to debug the region is what you want
-</span>emailField = <span class="skw">find</span>(emailLabel).below(<span class="dig">60</span>).<span class="skw">find</span>(textField)
-passwordField = <span class="skw">find</span>(passwordLabel).below(<span class="dig">60</span>).<span class="skw">find</span>(textField)
-rememberMeCheckbox = <img src="1330417595269.png" />
-wrongEmailOrPassword = <img src="AlertInvalid.png" />
-<span class="cmt"># elements in admin home page
-</span>adminFlag = <img src="homeMOD.png" />
-accountMenu = <img src="Account.png" />
-logoutItem = <img src="Logout.png" />
-
+  <span class="kw">global</span> emailField, passwordField
+  <span class="kw">if</span> emailField <span class="kw">is</span> None:
+    emailField = <span class="skw">find</span>(emailLabel).below(<span class="dig">70</span>).<span class="skw">find</span>(textField)
+  <span class="kw">if</span> passwordField <span class="kw">is</span> None:
+    passwordField = <span class="skw">find</span>(passwordLabel).below(<span class="dig">70</span>).<span class="skw">find</span>(textField)
 
 <span class="cmt"># login withought email and password
 </span><span class="kw">def</span> loginWithoughtEmailAndPassword():
+  loginInit()
   <span class="skw">click</span>(singinButton)
-  <span class="skw">wait</span>(wrongEmailOrPassword, <span class="dig">20</span>)
+  <span class="skw">wait</span>(wrongEmailOrPassword, longWaitTime)
   closeBrowser()
 
 
@@ -130,7 +140,7 @@ logoutItem = <img src="Logout.png" />
   loginInit()
   <span class="skw">type</span>(emailField, adminEmail)
   <span class="skw">click</span>(singinButton)
-  <span class="skw">wait</span>(wrongEmailOrPassword, <span class="dig">20</span>)
+  <span class="skw">wait</span>(wrongEmailOrPassword, longWaitTime)
   closeBrowser()
 
 
@@ -138,25 +148,25 @@ logoutItem = <img src="Logout.png" />
 </span><span class="kw">def</span> loginWithWrongEmailAndPassword():
   loginInit()
   <span class="skw">type</span>(emailField, adminEmail)
-  <span class="skw">type</span>(passwordField, <span class="str">"123456"</span>)
+  <span class="skw">type</span>(passwordField, dummyPassword)
   <span class="skw">click</span>(singinButton)
-  <span class="skw">wait</span>(wrongEmailOrPassword, <span class="dig">20</span>)
+  <span class="skw">wait</span>(wrongEmailOrPassword, longWaitTime)
   closeBrowser()
 
 <span class="cmt"># Admin login with right email and password and see MOD menu
 </span><span class="kw">def</span> adminLoginWithRightEmailAndPassword():
   loginInit()
   <span class="skw">type</span>(emailField, adminEmail)
-  <span class="skw">type</span>(passwordField, <span class="str">"openfeint"</span>)
+  <span class="skw">type</span>(passwordField, adminPassword)
   <span class="skw">type</span>(Key.ENTER)
-  <span class="skw">wait</span>(adminFlag, <span class="dig">20</span>)
+  <span class="skw">wait</span>(adminFlag, longWaitTime)
 
 <span class="cmt">#Admin logout
 </span><span class="kw">def</span> adminLogout():
   <span class="skw">click</span>(accountMenu)
-  <span class="skw">wait</span>(logoutItem, <span class="dig">20</span>)
+  <span class="skw">wait</span>(logoutItem, longWaitTime)
   <span class="skw">click</span>(logoutItem)
-  <span class="skw">wait</span>(loginPageTitle, <span class="dig">20</span>)
+  <span class="skw">wait</span>(loginPageTitle, longWaitTime)
   closeBrowser()
 
 <span class="cmt"># Admin login withought check remember me
@@ -164,27 +174,37 @@ logoutItem = <img src="Logout.png" />
   adminLoginWithRightEmailAndPassword()
   closeBrowser()
   loginInit()
-  <span class="skw">wait</span>(loginPageTitle, <span class="dig">20</span>)
+  <span class="skw">wait</span>(loginPageTitle, longWaitTime)
   closeBrowser()
 
 <span class="cmt"># Admin login and check remember me
 </span><span class="kw">def</span> adminLoginAndCheckRememberMe():
   loginInit()
   <span class="skw">type</span>(emailField, adminEmail)
-  <span class="skw">type</span>(passwordField, <span class="str">"openfeint"</span>)
+  <span class="skw">type</span>(passwordField, adminPassword)
   <span class="skw">click</span>(rememberMeCheckbox)
   <span class="skw">click</span>(singinButton)
-  <span class="skw">wait</span>(adminFlag, <span class="dig">20</span>)
+  <span class="skw">wait</span>(adminFlag, longWaitTime)
   closeBrowser()
   loginInit()
-  <span class="skw">wait</span>(adminFlag, <span class="dig">20</span>)
+  <span class="skw">wait</span>(adminFlag, longWaitTime)
   adminLogout()
 
 <span class="cmt"># User login and can't see MOD menu
-</span>
-<span class="cmt"># User logout
-</span>
+</span><span class="kw">def</span> userLoginWithRightEmailAndPassword():
+  loginInit()
+  <span class="skw">type</span>(emailField, userEmail)
+  <span class="skw">type</span>(passwordField, userPassword)
+  <span class="skw">type</span>(Key.ENTER)
+  <span class="skw">wait</span>(userFlag, longWaitTime)
 
+<span class="cmt"># User logout
+</span><span class="kw">def</span> userLogout():
+  <span class="skw">click</span>(accountMenu)
+  <span class="skw">wait</span>(logoutItem, longWaitTime)
+  <span class="skw">click</span>(logoutItem)
+  <span class="skw">wait</span>(loginPageTitle, longWaitTime)
+  closeBrowser()
 
 <span class="cmt"># test steps
 </span>loginWithoughtEmailAndPassword()
@@ -194,6 +214,8 @@ adminLoginWithRightEmailAndPassword()
 adminLogout()
 adminLoginWithoughtCheckRememberMe()
 adminLoginAndCheckRememberMe()
+userLoginWithRightEmailAndPassword()
+userLogout()
 </pre>
 </body>
 </html>
