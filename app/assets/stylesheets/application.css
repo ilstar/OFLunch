@@ -11,3 +11,10 @@
  *= require_self
  *= require_tree .
 */
+
+.form-inputs label {
+  display: inline;
+}
+.form-inputs span {
+  display: block;
+}
