@@ -1,3 +1,15 @@
 <% if @today_meal_time.nil? %>
-  <%= link_to 'Choose MOD', meal_times_path, method: 'post' %>
+  No mod select, 
+  <%= link_to "choose today's MOD", new_meal_time_path %>
+<% else %>
+  <div>
+  Menu of <%= @today_meal_time.created_at.to_date %>
+  </div>
+  <% @today_meal_time.vendors.each do |vendor| %>
+    <div>
+      <%= vendor.name %>
+    </div>
+  <% end %>
 <% end %>
+
+
