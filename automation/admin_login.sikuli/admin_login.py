@@ -134,6 +134,48 @@ def userLogout():
   wait(loginPageTitle, longWaitTime)
   closeBrowser()  
 
+# Admin create new MOM of today
+  # admin login
+  # admin click MOM
+  # admin see create link
+  # go to create page
+  # select three vendor
+  # got error
+  # click MOM
+  # still see creat link
+  # go to create page
+  # select two vendor
+  # click cancel
+  # still see creat link
+  # go to create page
+  # select two vendor
+  # click ok
+  # back to MOM page and can't see creat link
+  # can see order info in this page
+  # admin logout
+  # admin login again
+  # admin can see order info in MOM page
+  # admin logouot
+
+# Admin browse MOM
+  # admin login
+  # admin can see order link
+  # admin go to order page
+  # admin can see two vendor
+  # admin can see menu item name and price
+  # admin logout
+
+# User browse MOM
+  # user login
+  # user can see order link
+  # user go to order page
+  # user can see two verndor
+  # user can see menu item name and price
+  # user logout
+
+
+  
+
 # test steps
 loginWithoughtEmailAndPassword()
 loginWithEmailAndEmptyPassword()
