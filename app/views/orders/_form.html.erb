@@ -1,0 +1,21 @@
+<%= render :partial => "application/errors", :locals => {:target => @order}  %>
+<%= simple_form_for(@order) do |f| %>
+
+  <% MealTime.today.vendors.each do |vendor| %>
+    <h2><%= vendor.name %></h2>
+    <div class="form-inputs">
+      <% vendor.menu_items.each do |menu_item| %>
+        <div>
+          <%= check_box_tag "order[menu_item_id][]", menu_item.id %>
+          <%= menu_item.name %>
+          <%= menu_item.price %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+    <%= link_to 'Back', orders_url, :class => "btn" %>
+  </div>
+<% end %>
