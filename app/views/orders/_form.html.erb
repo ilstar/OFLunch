@@ -6,9 +6,11 @@
     <div class="form-inputs">
       <% vendor.menu_items.each do |menu_item| %>
         <div>
-          <%= check_box_tag "order[menu_item_id][]", menu_item.id %>
-          <%= menu_item.name %>
-          <%= menu_item.price %>
+          <%= check_box_tag "order[menu_item_id][]", menu_item.id, false, id: "menu_item_#{menu_item.id}" %>
+          <%= content_tag :label, for: "menu_item_#{menu_item.id}" do %>
+            <%= menu_item.name %>
+            <%= menu_item.price %>
+          <% end %>
         </div>
       <% end %>
     </div>
