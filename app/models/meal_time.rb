@@ -25,11 +25,11 @@ class MealTime < ActiveRecord::Base
   protected
 
   def less_than_two_vendors_choosed
-    self.errors.add :vendor_ids, "no more than 2 vendors." if self.vendors.size > 2
-    self.errors.add :vendor_ids, "no vendor selected" if self.vendors.size == 0
+    self.errors.add :vendor_ids, I18n.t('meal_time.no_more_than_2_vendors') if self.vendors.size > 2
+    self.errors.add :vendor_ids, I18n.t('meal_time.no_vendor_selected') if self.vendors.size == 0
   end
 
   def no_more_than_one_meal_per_day
-    self.errors.add :base, "no more than one meal per day" if self.class.today 
+    self.errors.add :base, I18n.t('meal_time.exists_today') if self.class.today
   end
 end

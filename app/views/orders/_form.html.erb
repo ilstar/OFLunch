@@ -16,7 +16,7 @@
   <% end %>
 
   <div class="form-actions">
-    <%= f.button :submit, "确认", :class => "btn btn-success" %>
-    <%= link_to '取消', orders_url, :class => "btn btn-danger" %>
+    <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
+    <%= link_to t('cancel'), orders_url, :class => "btn btn-danger" %>
   </div>
 <% end %>

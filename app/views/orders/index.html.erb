@@ -1,9 +1,9 @@
-<% if @today_meal_time  %>
+<% if @today_meal_time %>
   <% if @today_order.blank? %>
-    <%= link_to "我要点餐", new_order_path %>
+    <%= link_to t('.order'), new_order_path %>
   <% else %>
-    <%= link_to "我点的餐", edit_order_path(@today_order) %>
+    <%= link_to t('.my_order'), edit_order_path(@today_order) %>
   <% end %>
 <% else %>
-  还没有选择今日菜单。
+  <%= t '.no_mom' %>
 <% end %>

@@ -1,8 +1,9 @@
 <% if @today_meal_time.nil? %>
-  <%= link_to "选择今日菜单", new_meal_time_path %>
+  <%= t '.no_mom_selected' %>
+  <%= link_to t('.choose_mom'), new_meal_time_path %>
 <% else %>
   <div>
-   <%= @today_meal_time.created_at.to_date %> 的菜单
+    <%= t '.today_menu', :date => l(@today_meal_time.created_at, format: :short) %>
   </div>
   <% @today_meal_time.vendors.each do |vendor| %>
     <div>
