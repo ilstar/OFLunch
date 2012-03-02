@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MealTimesController < ApplicationController
   def index
     @today_meal_time = MealTime.today

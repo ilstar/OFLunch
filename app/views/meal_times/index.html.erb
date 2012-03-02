@@ -1,9 +1,8 @@
 <% if @today_meal_time.nil? %>
-  No mod select, 
-  <%= link_to "choose today's MOD", new_meal_time_path %>
+  <%= link_to "选择今日菜单", new_meal_time_path %>
 <% else %>
   <div>
-  Menu of <%= @today_meal_time.created_at.to_date %>
+   <%= @today_meal_time.created_at.to_date %> 的菜单
   </div>
   <% @today_meal_time.vendors.each do |vendor| %>
     <div>

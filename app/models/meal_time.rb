@@ -1,6 +1,8 @@
+# -*- encoding : utf-8 -*-
 class MealTime < ActiveRecord::Base
   has_many :menu_of_meals, :dependent => :destroy
   has_many :vendors, :through => :menu_of_meals
+  has_many :orders
 
 
   attr_accessor :vendor_ids

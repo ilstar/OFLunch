@@ -4,16 +4,16 @@
 
       <img class="brand" src="http://openfeint.com/images/footer/of_footer_logo.png" style="padding: 0px 10px"/>
       <ul class="nav">
-        <li><%= link_to 'home', root_path  %></li>
+        <li><%= link_to '首页', root_path  %></li>
         <% if current_user.admin? %>
-          <li><%= link_to 'MOD', meal_times_url  %></li>
+          <li><%= link_to '今日菜单', meal_times_url  %></li>
         <% end %>
       </ul>
       <ul class="nav pull-right">
         <li id="fat-menu" class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户&nbsp;<b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><%= link_to "Logout", destroy_user_session_path, method: 'delete' %></li>
+          <li><%= link_to "退出系统", destroy_user_session_path, method: 'delete' %></li>
         </ul>
         </li>
       </ul>

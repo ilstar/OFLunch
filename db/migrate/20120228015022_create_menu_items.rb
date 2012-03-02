@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateMenuItems < ActiveRecord::Migration
   def change
     create_table :menu_items do |t|

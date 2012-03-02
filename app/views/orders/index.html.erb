@@ -1,5 +1,9 @@
-<% if @today_meal_time %>
-  <%= link_to "Order", new_order_path %>
+<% if @today_meal_time  %>
+  <% if @today_order.blank? %>
+    <%= link_to "我要点餐", new_order_path %>
+  <% else %>
+    <%= link_to "我点的餐", edit_order_path(@today_order) %>
+  <% end %>
 <% else %>
-  No MOD for today.
+  还没有选择今日菜单。
 <% end %>

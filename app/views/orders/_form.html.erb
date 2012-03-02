@@ -1,23 +1,22 @@
 <%= render :partial => "application/errors", :locals => {:target => @order}  %>
-<%= simple_form_for(@order) do |f| %>
+<%= simple_form_for(@order, :url => confirm_orders_path) do |f| %>
 
   <% MealTime.today.vendors.each do |vendor| %>
     <h2><%= vendor.name %></h2>
     <div class="form-inputs">
       <% vendor.menu_items.each do |menu_item| %>
         <div>
-          <%= check_box_tag "order[menu_item_id][]", menu_item.id, false, id: "menu_item_#{menu_item.id}" %>
-          <%= content_tag :label, for: "menu_item_#{menu_item.id}" do %>
-            <%= menu_item.name %>
-            <%= menu_item.price %>
-          <% end %>
+          <%= hidden_field_tag "menu_items[][id]", menu_item.id%>
+          <%= menu_item.name %>
+          <%= menu_item.price %>
+          <%= text_field_tag "menu_items[][count]", 0%>
         </div>
       <% end %>
     </div>
   <% end %>
 
   <div class="form-actions">
-    <%= f.button :submit %>
-    <%= link_to 'Back', orders_url, :class => "btn" %>
+    <%= f.button :submit, "确认", :class => "btn btn-success" %>
+    <%= link_to '取消', orders_url, :class => "btn btn-danger" %>
   </div>
 <% end %>

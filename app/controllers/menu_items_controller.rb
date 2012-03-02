@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MenuItemsController < ApplicationController
   # GET /menu_items
   # GET /menu_items.json
