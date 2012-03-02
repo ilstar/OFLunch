@@ -86,16 +86,16 @@ loginPageTitle = <img src="loginPageTitle.png" />
 </span>singinButton = <img src="signinButton.png" />
 emailLabel = <img src="emailLabel.png" />
 passwordLabel = <img src="passwordLabel.png" />
-textField = <img src="textField.png" />
+textField = <img src="1330680917864.png" />
 emailField = None
 passwordField = None
 rememberMeCheckbox = <img src="rememberMeCheckbox.png" />
 wrongEmailOrPassword = <img src="wrongEmailOrPassword.png" />
 <span class="cmt"># elements in home page
-</span>adminFlag = <img src="adminFlag.png" />
-accountMenu = <img src="accountMenu.png" />
-logoutItem = <img src="logoutItem.png" />
-userFlag = <img src="1330483299063.png" />
+</span>adminFlag = <img src="iiEl.png" />
+accountMenu = <img src="1330681373261.png" />
+logoutItem = <img src="EEE.png" />
+userFlag = <img src="1330681602981.png" />
 
 
 <span class="cmt"># open browser
@@ -120,11 +120,13 @@ userFlag = <img src="1330483299063.png" />
   <span class="skw">wait</span>(shortWaitTime)
   openBrowser()
   openHomePage()
+  <span class="cmt"># make email field lose focus to make sure we can find email and password field
+</span>  <span class="skw">click</span>(loginPageTitle)
   <span class="kw">global</span> emailField, passwordField
   <span class="kw">if</span> emailField <span class="kw">is</span> None:
-    emailField = <span class="skw">find</span>(emailLabel).below(<span class="dig">70</span>).<span class="skw">find</span>(textField)
+    emailField = <span class="skw">find</span>(emailLabel).below(<span class="dig">50</span>).right(<span class="dig">300</span>).<span class="skw">find</span>(textField)
   <span class="kw">if</span> passwordField <span class="kw">is</span> None:
-    passwordField = <span class="skw">find</span>(passwordLabel).below(<span class="dig">70</span>).<span class="skw">find</span>(textField)
+    passwordField = <span class="skw">find</span>(passwordLabel).below(<span class="dig">50</span>).right(<span class="dig">300</span>).<span class="skw">find</span>(textField)
 
 <span class="cmt"># login withought email and password
 </span><span class="kw">def</span> loginWithoughtEmailAndPassword():

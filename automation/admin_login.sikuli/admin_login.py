@@ -14,16 +14,16 @@ loginPageTitle = "loginPageTitle.png"
 singinButton = "signinButton.png"
 emailLabel = "emailLabel.png"
 passwordLabel = "passwordLabel.png"
-textField = "textField.png"
+textField = "1330680917864.png"
 emailField = None
 passwordField = None
 rememberMeCheckbox = "rememberMeCheckbox.png"
 wrongEmailOrPassword = "wrongEmailOrPassword.png"
 # elements in home page
-adminFlag = "adminFlag.png"
-accountMenu = "accountMenu.png"
-logoutItem = "logoutItem.png"
-userFlag = "1330483299063.png"
+adminFlag = "iiEl.png"
+accountMenu = "1330681373261.png"
+logoutItem = "EEE.png"
+userFlag = "1330681602981.png"
 
 
 # open browser
@@ -47,12 +47,14 @@ def openHomePage():
 def loginInit():
   wait(shortWaitTime)
   openBrowser()
-  openHomePage()  
+  openHomePage() 
+  # make email field lose focus to make sure we can find email and password field
+  click(loginPageTitle)
   global emailField, passwordField
   if emailField is None:
-    emailField = find(emailLabel).below(70).find(textField)
+    emailField = find(emailLabel).below(50).right(300).find(textField)
   if passwordField is None:
-    passwordField = find(passwordLabel).below(70).find(textField)
+    passwordField = find(passwordLabel).below(50).right(300).find(textField)
 
 # login withought email and password
 def loginWithoughtEmailAndPassword():
