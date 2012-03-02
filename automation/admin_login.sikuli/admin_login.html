@@ -93,6 +93,19 @@ rememberMeCheckbox = <img src="rememberMeCheckbox.png" />
 wrongEmailOrPassword = <img src="wrongEmailOrPassword.png" />
 <span class="cmt"># elements in home page
 </span>adminFlag = <img src="iiEl.png" />
+todayMenu = <img src="1330682431729.png" />
+createTodayMenu = <img src="54.png" />
+createMenuFlag = <img src="FJiEE.png" />
+venders = <img src="IIEa.png" />
+venderCheckbox = <img src="1330682992319.png" />
+nanajia = <img src="IIE.png" />
+macdonald = <img src="a.png" />
+kfc = <img src="1330683076962.png" />
+todayVenders = []
+confirmMom = <img src="1330683086355.png" />
+cancelMom = <img src="1330683097817.png" />
+atMostTwoVenders = <img src="iREi4WliE.png" />
+hasMomToday = None
 accountMenu = <img src="1330681373261.png" />
 logoutItem = <img src="EEE.png" />
 userFlag = <img src="1330681602981.png" />
@@ -208,29 +221,56 @@ userFlag = <img src="1330681602981.png" />
   <span class="skw">wait</span>(loginPageTitle, longWaitTime)
   closeBrowser()
 
+<span class="kw">def</span> goToCreateMomPage():
+  <span class="cmt"># admin see create link
+</span>  <span class="skw">wait</span>(createTodayMenu, longWaitTime)
+  <span class="skw">click</span>(createTodayMenu)
+  <span class="cmt"># go to create page
+</span>  <span class="skw">wait</span>(createMenuFlag, longWaitTime)
+<span class="kw">def</span> selectVender(num):
+  current = <span class="dig">0</span>
+  vendersFinder = Finder(venders)
+  vendersFinder.<span class="skw">find</span>(vernderCheckbox)
+  <span class="kw">while</span> vendersFinder.hasNext() <span class="kw">and</span> current &lt; num:
+    <span class="skw">click</span>(vendersFinder.next())
+    current = current + <span class="dig">1</span>
+  vendersFinder.destory()
+<span class="kw">def</span> addTodayVenders():
+  <span class="kw">if</span> exists(nanajia):
+    todayVenders.append(nanajia)
+  <span class="kw">if</span> exists(macdonald):
+    todayVenders.append(macdonald)
+  <span class="kw">if</span> exists(kfc):
+    todayVenders.append(kfc)
 <span class="cmt"># Admin create new MOM of today
-</span>  <span class="cmt"># admin login
-</span>  <span class="cmt"># admin click MOM
-</span>  <span class="cmt"># admin see create link
-</span>  <span class="cmt"># go to create page
-</span>  <span class="cmt"># select three vendor
-</span>  <span class="cmt"># got error
-</span>  <span class="cmt"># click MOM
-</span>  <span class="cmt"># still see creat link
-</span>  <span class="cmt"># go to create page
-</span>  <span class="cmt"># select two vendor
-</span>  <span class="cmt"># click cancel
-</span>  <span class="cmt"># still see creat link
-</span>  <span class="cmt"># go to create page
-</span>  <span class="cmt"># select two vendor
-</span>  <span class="cmt"># click ok
-</span>  <span class="cmt"># back to MOM page and can't see creat link
-</span>  <span class="cmt"># can see order info in this page
-</span>  <span class="cmt"># admin logout
-</span>  <span class="cmt"># admin login again
-</span>  <span class="cmt"># admin can see order info in MOM page
-</span>  <span class="cmt"># admin logouot
-</span>
+</span><span class="kw">def</span> adminCreateNewMOM():
+  <span class="cmt"># admin login
+</span>  adminLoginWithRightEmailAndPassword()
+  <span class="cmt"># admin click MOM
+</span>  <span class="skw">wait</span>(todayMenu, longWaitTime)
+  <span class="skw">click</span>(todayMenu)
+  <span class="cmt"># go to Create MOM Page
+</span>  goToCreateMomPage()
+  <span class="cmt"># select three vendor
+</span>  selectVender(<span class="dig">3</span>)
+  <span class="skw">click</span>(confirmMom)
+  <span class="cmt"># got error
+</span>  <span class="skw">wait</span>(atMostTwoVenders, longWaitTime)
+  <span class="cmt"># click cancel
+</span>  <span class="skw">click</span>(cancelMom)
+  <span class="cmt"># still see creat link and go to that page again
+</span>  goToCreateMomPage()
+  <span class="cmt"># select two vendor
+</span>  selectVender(<span class="dig">2</span>)
+  <span class="cmt"># click ok
+</span>  <span class="skw">click</span>(confirmMom)
+  <span class="cmt"># can see order info in this page
+</span>  addTodayVenders()
+  <span class="kw">if</span> todayVenders.length != <span class="dig">2</span>:
+    exit()
+  <span class="cmt"># admin logout
+</span>  adminLogout()
+
 <span class="cmt"># Admin browse MOM
 </span>  <span class="cmt"># admin login
 </span>  <span class="cmt"># admin can see order link

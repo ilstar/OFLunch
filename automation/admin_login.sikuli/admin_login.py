@@ -21,6 +21,19 @@ rememberMeCheckbox = "rememberMeCheckbox.png"
 wrongEmailOrPassword = "wrongEmailOrPassword.png"
 # elements in home page
 adminFlag = "iiEl.png"
+todayMenu = "1330682431729.png"
+createTodayMenu = "54.png"
+createMenuFlag = "FJiEE.png"
+venders = "IIEa.png"
+venderCheckbox = "1330682992319.png"
+nanajia = "IIE.png"
+macdonald = "a.png"
+kfc = "1330683076962.png"
+todayVenders = []
+confirmMom = "1330683086355.png"
+cancelMom = "1330683097817.png"
+atMostTwoVenders = "iREi4WliE.png"
+hasMomToday = None
 accountMenu = "1330681373261.png"
 logoutItem = "EEE.png"
 userFlag = "1330681602981.png"
@@ -136,28 +149,55 @@ def userLogout():
   wait(loginPageTitle, longWaitTime)
   closeBrowser()  
 
-# Admin create new MOM of today
-  # admin login
-  # admin click MOM
+def goToCreateMomPage():
   # admin see create link
+  wait(createTodayMenu, longWaitTime)
+  click(createTodayMenu)
   # go to create page
+  wait(createMenuFlag, longWaitTime)
+def selectVender(num):
+  current = 0
+  vendersFinder = Finder(venders)
+  vendersFinder.find(vernderCheckbox)
+  while vendersFinder.hasNext() and current < num:
+    click(vendersFinder.next())
+    current = current + 1
+  vendersFinder.destory()
+def addTodayVenders():
+  if exists(nanajia):
+    todayVenders.append(nanajia)
+  if exists(macdonald):
+    todayVenders.append(macdonald)
+  if exists(kfc):
+    todayVenders.append(kfc)
+# Admin create new MOM of today
+def adminCreateNewMOM():
+  # admin login
+  adminLoginWithRightEmailAndPassword()
+  # admin click MOM
+  wait(todayMenu, longWaitTime)
+  click(todayMenu)
+  # go to Create MOM Page
+  goToCreateMomPage()
   # select three vendor
+  selectVender(3)
+  click(confirmMom)
   # got error
-  # click MOM
-  # still see creat link
-  # go to create page
-  # select two vendor
+  wait(atMostTwoVenders, longWaitTime)
   # click cancel
-  # still see creat link
-  # go to create page
+  click(cancelMom)
+  # still see creat link and go to that page again
+  goToCreateMomPage()
   # select two vendor
+  selectVender(2)  
   # click ok
-  # back to MOM page and can't see creat link
+  click(confirmMom)
   # can see order info in this page
+  addTodayVenders()
+  if todayVenders.length != 2:
+    exit()
   # admin logout
-  # admin login again
-  # admin can see order info in MOM page
-  # admin logouot
+  adminLogout()  
 
 # Admin browse MOM
   # admin login
