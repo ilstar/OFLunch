@@ -29,6 +29,7 @@ group :test do
   gem "rspec-rails", "2.8.1"
   gem "factory_girl_rails"
   gem 'shoulda-matchers', '1.0.0'
+  gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 group :development do
@@ -53,6 +54,3 @@ gem 'magic_encoding'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
