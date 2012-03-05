@@ -12,7 +12,7 @@ browserNavigationBar = "browserNavigationBar.png"
 loginPageTitle = "loginPageTitle.png"
 # elements in login page
 singinButton = "signinButton.png"
-emailLabel = "emailLabel.png"
+emailLabel = "Email.png"
 passwordLabel = "passwordLabel.png"
 textField = "1330680917864.png"
 emailField = None
@@ -22,21 +22,32 @@ wrongEmailOrPassword = "wrongEmailOrPassword.png"
 # elements in home page
 adminFlag = "iiEl.png"
 todayMenu = "1330682431729.png"
-createTodayMenu = "54.png"
+createTodayMenu = "ti4.png"
 createMenuFlag = "FJiEE.png"
-venders = "IIEa.png"
-venderCheckbox = "1330682992319.png"
+venderCheckbox = "1330916453814.png"
 nanajia = "IIE.png"
 macdonald = "a.png"
 kfc = "1330683076962.png"
-todayVenders = []
+todayVendorNames = [nanajia, macdonald]
+nanajiaOrder = "52.png"
+macdonaldOrder = "iiixlrO0.png"
+kfcOrder = "1330918292673.png"
+todayVendorOrders = [nanajiaOrder, macdonaldOrder]
 confirmMom = "1330683086355.png"
-cancelMom = "1330683097817.png"
-atMostTwoVenders = "iREi4WliE.png"
+cancelMom = "1330919594115.png"
+atMostTwoVendors = "iREi4WliE.png"
 hasMomToday = None
 accountMenu = "1330681373261.png"
 logoutItem = "EEE.png"
 userFlag = "1330681602981.png"
+orderLink = "2i.png"
+itemOne = "1330919492354.png"
+itemTwo = "1iE.png"
+pleaseSelectItem = "ilE.png"
+defaulAmountInputField = "1330926418053.png"
+orderSummary = "QQQQEEZHBHGT.png"
+orderTotalPrice = "Mk6100.png"
+orderSuccess = "FIE117J.png"
 
 
 # open browser
@@ -155,21 +166,45 @@ def goToCreateMomPage():
   click(createTodayMenu)
   # go to create page
   wait(createMenuFlag, longWaitTime)
+  
 def selectVender(num):
   current = 0
-  vendersFinder = Finder(venders)
-  vendersFinder.find(vernderCheckbox)
-  while vendersFinder.hasNext() and current < num:
-    click(vendersFinder.next())
-    current = current + 1
-  vendersFinder.destory()
-def addTodayVenders():
+  vCheckboxes = findAll(venderCheckbox)
+  for vCheckbox in vCheckboxes:
+    if (current < num):
+      click(vCheckbox)
+      current = current + 1
+def selectSpecifiedVender(vender1, vender2):
+  vCheckbox1 = find(vender1).left(10)
+  click(vCheckbox1)
+  vCheckbox2 = find(vender2).left(10)
+  click(vCheckbox2)
+
+#def addTodayVendors():
+#  if exists(nanajia):
+#    print "nanajia exists"
+#    todayVendors.append(nanajiaOrder)
+#  if exists(macdonald):
+#    print "macdonald exists"
+#    todayVendors.append(macdonaldOrder)
+#  if exists(kfc):
+#    print "kfc exists"
+#   todayVendors.append(kfcOrder)
+def checkTodayVendors():
+  sum = 0
   if exists(nanajia):
-    todayVenders.append(nanajia)
+    print "nanajia exists"
+    sum = sum + 1
   if exists(macdonald):
-    todayVenders.append(macdonald)
+    print "macdonald exists"
+    sum = sum + 1
   if exists(kfc):
-    todayVenders.append(kfc)
+    print "kfc exists"
+    sum = sum +1
+  if sum != 2:
+    exit()
+  
+
 # Admin create new MOM of today
 def adminCreateNewMOM():
   # admin login
@@ -183,48 +218,193 @@ def adminCreateNewMOM():
   selectVender(3)
   click(confirmMom)
   # got error
-  wait(atMostTwoVenders, longWaitTime)
+  wait(atMostTwoVendors, longWaitTime)
   # click cancel
   click(cancelMom)
   # still see creat link and go to that page again
   goToCreateMomPage()
   # select two vendor
-  selectVender(2)  
+  selectSpecifiedVender(todayVendorNames[0], todayVendorNames[1])  
   # click ok
   click(confirmMom)
   # can see order info in this page
-  addTodayVenders()
-  if todayVenders.length != 2:
-    exit()
+  wait(shortWaitTime)
+  checkTodayVendors()
+  #print todayVendors
   # admin logout
   adminLogout()  
 
+# check order link
+def checkOrderLink():
+  wait(orderLink, longWaitTime)  
+# go to order page
+def goToOrderPage():
+  click(orderLink)  
+# check vendors
+def checkVendors():
+  wait(todayVendorOrders[0], longWaitTime)
+  wheel(todayVendorOrders[0], WHEEL_DOWN, 60)
+  wait(todayVendorOrders[1], longWaitTime) 
+# check menu items:
+def checkMenuItems():
+  wait(itemOne, longWaitTime)
+  wait(itemTwo, longWaitTime)
+# check confirm and cancel buttons
+def checkConfirmAndCancelButtons():
+  wheel(todayVendorOrders[1], WHEEL_DOWN, 60)
+  wait(confirmMom, longWaitTime)
+  wait(cancelMom, longWaitTime)  
+  
 # Admin browse MOM
+def adminBrowseMOM():
   # admin login
+  adminLoginWithRightEmailAndPassword()
   # admin can see order link
+  checkOrderLink()  
   # admin go to order page
-  # admin can see two vendor
+  goToOrderPage()
+  # admin can see two vendors
+  checkVendors()
   # admin can see menu item name and price
+  checkMenuItems()
+  # admin can see confirm and cancel buttons
+  checkConfirmAndCancelButtons()
   # admin logout
+  adminLogout()
+  
+# set amount of item
+def setAmount(itemPattern, amount):
+  #find(itemPattern).nearby(10).right(120).highlight(5)
+  inputField = find(itemPattern).nearby(10).right(120).find(defaulAmountInputField)
+  doubleClick(inputField)
+  type(Key.DELETE)
+  type(inputField, amount)
 
 # User browse MOM
+def userSubmitWrongOrder():
   # user login
+  userLoginWithRightEmailAndPassword()
   # user can see order link
+  checkOrderLink()  
   # user go to order page
-  # user can see two verndor
+  goToOrderPage()
+  # user can see two vendors
+  checkVendors()
   # user can see menu item name and price
-  # user logout
-
-
+  checkMenuItems()
+  # user see confirm and cancel buttons
+  checkConfirmAndCancelButtons()
+  # click confirm button
+  click(confirmMom)
+  # see notification
+  wait(pleaseSelectItem, longWaitTime)
   
+  # check venders again
+  checkVendors()
+  # set wrong amount
+  setAmount(itemOne, "-100")
+  # check buttons
+  checkConfirmAndCancelButtons()
+  # click confirm
+  click(confirmMom)
+  # check error message
+  wait(pleaseSelectItem, longWaitTime)
+
+  # user can see two vendors
+  checkVendors()
+  # user can see menu item name and price
+  checkMenuItems()
+  # check buttons
+  checkConfirmAndCancelButtons()  
+  # user cancel confirm order
+  click(cancelMom)
+  
+  # user can see order link
+  checkOrderLink()
+  # user logout
+  userLogout()
+
+# User order
+def userOrder():
+  # user login
+  userLoginWithRightEmailAndPassword()
+  # user can see order link
+  checkOrderLink()  
+  # user go to order page
+  goToOrderPage()
+  # user can see two vendors
+  checkVendors()
+  # user can see menu item name and price
+  checkMenuItems()
+  # set amount
+  setAmount(itemOne, "1")
+  setAmount(itemTwo, "2")  
+  # user see confirm and cancel buttons
+  checkConfirmAndCancelButtons()
+  # click confirm button
+  click(confirmMom)
+  # see summary
+  wait(orderSummary, longWaitTime)
+  wait(orderTotalPrice, longWaitTime)
+  # click cancel button
+  click(cancelMom) 
+  # user can see order link
+  checkOrderLink()  
+  # user go to order page
+  goToOrderPage()
+  # user can see two vendors
+  checkVendors()
+  # user can see menu item name and price
+  checkMenuItems()
+  # set amount
+  setAmount(itemOne, "1")
+  setAmount(itemTwo, "2")  
+  # user see confirm and cancel buttons
+  checkConfirmAndCancelButtons()
+  # click confirm button
+  click(confirmMom)
+  # see summary
+  wait(orderSummary, longWaitTime)
+  wait(orderTotalPrice, longWaitTime)
+  # click confirm button
+  click(confirmButton)
+  # see notification
+  wait(orderSuccess)
+  # see order summary
+  wait(orderSummary, longWaitTime)
+  wait(orderTotalPrice, longWaitTime)
+  # user can't see order link
+  click(userFlag)
+  if exists(orderLink):
+    exit()
+  # user logout
+  userLogout()  
+
+# user dashboard page
+def userDashboardPage():
+  # user login
+  userLoginWithRightEmailAndPassword()
+  # see order summary
+  wait(orderSummary, longWaitTime)
+  wait(orderTotalPrice, longWaitTime)
+  # user can't see order link
+  if exists(orderLink):
+    exit()
+  # user logout
+    userLogout()
 
 # test steps
-loginWithoughtEmailAndPassword()
-loginWithEmailAndEmptyPassword()
-loginWithWrongEmailAndPassword()
-adminLoginWithRightEmailAndPassword()
-adminLogout()
-adminLoginWithoughtCheckRememberMe()
-adminLoginAndCheckRememberMe()
-userLoginWithRightEmailAndPassword()
-userLogout()
+#loginWithoughtEmailAndPassword()
+#loginWithEmailAndEmptyPassword()
+#loginWithWrongEmailAndPassword()
+#adminLoginWithRightEmailAndPassword()
+#adminLogout()
+#adminLoginWithoughtCheckRememberMe()
+#adminLoginAndCheckRememberMe()
+#userLoginWithRightEmailAndPassword()
+#userLogout()
+#adminCreateNewMOM()
+#adminBrowseMOM()
+userSubmitWrongOrder()
+userOrder()
+userDashboardPage()

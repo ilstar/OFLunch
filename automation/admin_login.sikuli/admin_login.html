@@ -84,7 +84,7 @@ browserNavigationBar = <img src="browserNavigationBar.png" />
 loginPageTitle = <img src="loginPageTitle.png" />
 <span class="cmt"># elements in login page
 </span>singinButton = <img src="signinButton.png" />
-emailLabel = <img src="emailLabel.png" />
+emailLabel = <img src="Email.png" />
 passwordLabel = <img src="passwordLabel.png" />
 textField = <img src="1330680917864.png" />
 emailField = None
@@ -94,21 +94,32 @@ wrongEmailOrPassword = <img src="wrongEmailOrPassword.png" />
 <span class="cmt"># elements in home page
 </span>adminFlag = <img src="iiEl.png" />
 todayMenu = <img src="1330682431729.png" />
-createTodayMenu = <img src="54.png" />
+createTodayMenu = <img src="ti4.png" />
 createMenuFlag = <img src="FJiEE.png" />
-venders = <img src="IIEa.png" />
-venderCheckbox = <img src="1330682992319.png" />
+venderCheckbox = <img src="1330916453814.png" />
 nanajia = <img src="IIE.png" />
 macdonald = <img src="a.png" />
 kfc = <img src="1330683076962.png" />
-todayVenders = []
+todayVendorNames = [nanajia, macdonald]
+nanajiaOrder = <img src="52.png" />
+macdonaldOrder = <img src="iiixlrO0.png" />
+kfcOrder = <img src="1330918292673.png" />
+todayVendorOrders = [nanajiaOrder, macdonaldOrder]
 confirmMom = <img src="1330683086355.png" />
-cancelMom = <img src="1330683097817.png" />
-atMostTwoVenders = <img src="iREi4WliE.png" />
+cancelMom = <img src="1330919594115.png" />
+atMostTwoVendors = <img src="iREi4WliE.png" />
 hasMomToday = None
 accountMenu = <img src="1330681373261.png" />
 logoutItem = <img src="EEE.png" />
 userFlag = <img src="1330681602981.png" />
+orderLink = <img src="2i.png" />
+itemOne = <img src="1330919492354.png" />
+itemTwo = <img src="1iE.png" />
+pleaseSelectItem = <img src="ilE.png" />
+defaulAmountInputField = <img src="1330926418053.png" />
+orderSummary = <img src="QQQQEEZHBHGT.png" />
+orderTotalPrice = <img src="Mk6100.png" />
+orderSuccess = <img src="FIE117J.png" />
 
 
 <span class="cmt"># open browser
@@ -227,21 +238,45 @@ userFlag = <img src="1330681602981.png" />
   <span class="skw">click</span>(createTodayMenu)
   <span class="cmt"># go to create page
 </span>  <span class="skw">wait</span>(createMenuFlag, longWaitTime)
+
 <span class="kw">def</span> selectVender(num):
   current = <span class="dig">0</span>
-  vendersFinder = Finder(venders)
-  vendersFinder.<span class="skw">find</span>(vernderCheckbox)
-  <span class="kw">while</span> vendersFinder.hasNext() <span class="kw">and</span> current &lt; num:
-    <span class="skw">click</span>(vendersFinder.next())
-    current = current + <span class="dig">1</span>
-  vendersFinder.destory()
-<span class="kw">def</span> addTodayVenders():
+  vCheckboxes = findAll(venderCheckbox)
+  <span class="kw">for</span> vCheckbox <span class="kw">in</span> vCheckboxes:
+    <span class="kw">if</span> (current &lt; num):
+      <span class="skw">click</span>(vCheckbox)
+      current = current + <span class="dig">1</span>
+<span class="kw">def</span> selectSpecifiedVender(vender1, vender2):
+  vCheckbox1 = <span class="skw">find</span>(vender1).left(<span class="dig">10</span>)
+  <span class="skw">click</span>(vCheckbox1)
+  vCheckbox2 = <span class="skw">find</span>(vender2).left(<span class="dig">10</span>)
+  <span class="skw">click</span>(vCheckbox2)
+
+<span class="cmt">#def addTodayVendors():
+</span><span class="cmt">#  if exists(nanajia):
+</span><span class="cmt">#    print "nanajia exists"
+</span><span class="cmt">#    todayVendors.append(nanajiaOrder)
+</span><span class="cmt">#  if exists(macdonald):
+</span><span class="cmt">#    print "macdonald exists"
+</span><span class="cmt">#    todayVendors.append(macdonaldOrder)
+</span><span class="cmt">#  if exists(kfc):
+</span><span class="cmt">#    print "kfc exists"
+</span><span class="cmt">#   todayVendors.append(kfcOrder)
+</span><span class="kw">def</span> checkTodayVendors():
+  sum = <span class="dig">0</span>
   <span class="kw">if</span> exists(nanajia):
-    todayVenders.append(nanajia)
+    <span class="kw">print</span> <span class="str">"nanajia exists"</span>
+    sum = sum + <span class="dig">1</span>
   <span class="kw">if</span> exists(macdonald):
-    todayVenders.append(macdonald)
+    <span class="kw">print</span> <span class="str">"macdonald exists"</span>
+    sum = sum + <span class="dig">1</span>
   <span class="kw">if</span> exists(kfc):
-    todayVenders.append(kfc)
+    <span class="kw">print</span> <span class="str">"kfc exists"</span>
+    sum = sum +<span class="dig">1</span>
+  <span class="kw">if</span> sum != <span class="dig">2</span>:
+    exit()
+
+
 <span class="cmt"># Admin create new MOM of today
 </span><span class="kw">def</span> adminCreateNewMOM():
   <span class="cmt"># admin login
@@ -255,51 +290,196 @@ userFlag = <img src="1330681602981.png" />
 </span>  selectVender(<span class="dig">3</span>)
   <span class="skw">click</span>(confirmMom)
   <span class="cmt"># got error
-</span>  <span class="skw">wait</span>(atMostTwoVenders, longWaitTime)
+</span>  <span class="skw">wait</span>(atMostTwoVendors, longWaitTime)
   <span class="cmt"># click cancel
 </span>  <span class="skw">click</span>(cancelMom)
   <span class="cmt"># still see creat link and go to that page again
 </span>  goToCreateMomPage()
   <span class="cmt"># select two vendor
-</span>  selectVender(<span class="dig">2</span>)
+</span>  selectSpecifiedVender(todayVendorNames[<span class="dig">0</span>], todayVendorNames[<span class="dig">1</span>])
   <span class="cmt"># click ok
 </span>  <span class="skw">click</span>(confirmMom)
   <span class="cmt"># can see order info in this page
-</span>  addTodayVenders()
-  <span class="kw">if</span> todayVenders.length != <span class="dig">2</span>:
-    exit()
+</span>  <span class="skw">wait</span>(shortWaitTime)
+  checkTodayVendors()
+  <span class="cmt">#print todayVendors
+</span>  <span class="cmt"># admin logout
+</span>  adminLogout()
+
+<span class="cmt"># check order link
+</span><span class="kw">def</span> checkOrderLink():
+  <span class="skw">wait</span>(orderLink, longWaitTime)
+<span class="cmt"># go to order page
+</span><span class="kw">def</span> goToOrderPage():
+  <span class="skw">click</span>(orderLink)
+<span class="cmt"># check vendors
+</span><span class="kw">def</span> checkVendors():
+  <span class="skw">wait</span>(todayVendorOrders[<span class="dig">0</span>], longWaitTime)
+  wheel(todayVendorOrders[<span class="dig">0</span>], WHEEL_DOWN, <span class="dig">60</span>)
+  <span class="skw">wait</span>(todayVendorOrders[<span class="dig">1</span>], longWaitTime)
+<span class="cmt"># check menu items:
+</span><span class="kw">def</span> checkMenuItems():
+  <span class="skw">wait</span>(itemOne, longWaitTime)
+  <span class="skw">wait</span>(itemTwo, longWaitTime)
+<span class="cmt"># check confirm and cancel buttons
+</span><span class="kw">def</span> checkConfirmAndCancelButtons():
+  wheel(todayVendorOrders[<span class="dig">1</span>], WHEEL_DOWN, <span class="dig">60</span>)
+  <span class="skw">wait</span>(confirmMom, longWaitTime)
+  <span class="skw">wait</span>(cancelMom, longWaitTime)
+
+<span class="cmt"># Admin browse MOM
+</span><span class="kw">def</span> adminBrowseMOM():
+  <span class="cmt"># admin login
+</span>  adminLoginWithRightEmailAndPassword()
+  <span class="cmt"># admin can see order link
+</span>  checkOrderLink()
+  <span class="cmt"># admin go to order page
+</span>  goToOrderPage()
+  <span class="cmt"># admin can see two vendors
+</span>  checkVendors()
+  <span class="cmt"># admin can see menu item name and price
+</span>  checkMenuItems()
+  <span class="cmt"># admin can see confirm and cancel buttons
+</span>  checkConfirmAndCancelButtons()
   <span class="cmt"># admin logout
 </span>  adminLogout()
 
-<span class="cmt"># Admin browse MOM
-</span>  <span class="cmt"># admin login
-</span>  <span class="cmt"># admin can see order link
-</span>  <span class="cmt"># admin go to order page
-</span>  <span class="cmt"># admin can see two vendor
-</span>  <span class="cmt"># admin can see menu item name and price
-</span>  <span class="cmt"># admin logout
-</span>
+<span class="cmt"># set amount of item
+</span><span class="kw">def</span> setAmount(itemPattern, amount):
+  <span class="cmt">#find(itemPattern).nearby(10).right(120).highlight(5)
+</span>  inputField = <span class="skw">find</span>(itemPattern).nearby(<span class="dig">10</span>).right(<span class="dig">120</span>).<span class="skw">find</span>(defaulAmountInputField)
+  <span class="skw">doubleClick</span>(inputField)
+  <span class="skw">type</span>(Key.DELETE)
+  <span class="skw">type</span>(inputField, amount)
+
 <span class="cmt"># User browse MOM
-</span>  <span class="cmt"># user login
-</span>  <span class="cmt"># user can see order link
-</span>  <span class="cmt"># user go to order page
-</span>  <span class="cmt"># user can see two verndor
-</span>  <span class="cmt"># user can see menu item name and price
-</span>  <span class="cmt"># user logout
-</span>
+</span><span class="kw">def</span> userSubmitWrongOrder():
+  <span class="cmt"># user login
+</span>  userLoginWithRightEmailAndPassword()
+  <span class="cmt"># user can see order link
+</span>  checkOrderLink()
+  <span class="cmt"># user go to order page
+</span>  goToOrderPage()
+  <span class="cmt"># user can see two vendors
+</span>  checkVendors()
+  <span class="cmt"># user can see menu item name and price
+</span>  checkMenuItems()
+  <span class="cmt"># user see confirm and cancel buttons
+</span>  checkConfirmAndCancelButtons()
+  <span class="cmt"># click confirm button
+</span>  <span class="skw">click</span>(confirmMom)
+  <span class="cmt"># see notification
+</span>  <span class="skw">wait</span>(pleaseSelectItem, longWaitTime)
 
+  <span class="cmt"># check venders again
+</span>  checkVendors()
+  <span class="cmt"># set wrong amount
+</span>  setAmount(itemOne, <span class="str">"-100"</span>)
+  <span class="cmt"># check buttons
+</span>  checkConfirmAndCancelButtons()
+  <span class="cmt"># click confirm
+</span>  <span class="skw">click</span>(confirmMom)
+  <span class="cmt"># check error message
+</span>  <span class="skw">wait</span>(pleaseSelectItem, longWaitTime)
 
+  <span class="cmt"># user can see two vendors
+</span>  checkVendors()
+  <span class="cmt"># user can see menu item name and price
+</span>  checkMenuItems()
+  <span class="cmt"># check buttons
+</span>  checkConfirmAndCancelButtons()
+  <span class="cmt"># user cancel confirm order
+</span>  <span class="skw">click</span>(cancelMom)
+
+  <span class="cmt"># user can see order link
+</span>  checkOrderLink()
+  <span class="cmt"># user logout
+</span>  userLogout()
+
+<span class="cmt"># User order
+</span><span class="kw">def</span> userOrder():
+  <span class="cmt"># user login
+</span>  userLoginWithRightEmailAndPassword()
+  <span class="cmt"># user can see order link
+</span>  checkOrderLink()
+  <span class="cmt"># user go to order page
+</span>  goToOrderPage()
+  <span class="cmt"># user can see two vendors
+</span>  checkVendors()
+  <span class="cmt"># user can see menu item name and price
+</span>  checkMenuItems()
+  <span class="cmt"># set amount
+</span>  setAmount(itemOne, <span class="str">"1"</span>)
+  setAmount(itemTwo, <span class="str">"2"</span>)
+  <span class="cmt"># user see confirm and cancel buttons
+</span>  checkConfirmAndCancelButtons()
+  <span class="cmt"># click confirm button
+</span>  <span class="skw">click</span>(confirmMom)
+  <span class="cmt"># see summary
+</span>  <span class="skw">wait</span>(orderSummary, longWaitTime)
+  <span class="skw">wait</span>(orderTotalPrice, longWaitTime)
+  <span class="cmt"># click cancel button
+</span>  <span class="skw">click</span>(cancelMom)
+  <span class="cmt"># user can see order link
+</span>  checkOrderLink()
+  <span class="cmt"># user go to order page
+</span>  goToOrderPage()
+  <span class="cmt"># user can see two vendors
+</span>  checkVendors()
+  <span class="cmt"># user can see menu item name and price
+</span>  checkMenuItems()
+  <span class="cmt"># set amount
+</span>  setAmount(itemOne, <span class="str">"1"</span>)
+  setAmount(itemTwo, <span class="str">"2"</span>)
+  <span class="cmt"># user see confirm and cancel buttons
+</span>  checkConfirmAndCancelButtons()
+  <span class="cmt"># click confirm button
+</span>  <span class="skw">click</span>(confirmMom)
+  <span class="cmt"># see summary
+</span>  <span class="skw">wait</span>(orderSummary, longWaitTime)
+  <span class="skw">wait</span>(orderTotalPrice, longWaitTime)
+  <span class="cmt"># click confirm button
+</span>  <span class="skw">click</span>(confirmButton)
+  <span class="cmt"># see notification
+</span>  <span class="skw">wait</span>(orderSuccess)
+  <span class="cmt"># see order summary
+</span>  <span class="skw">wait</span>(orderSummary, longWaitTime)
+  <span class="skw">wait</span>(orderTotalPrice, longWaitTime)
+  <span class="cmt"># user can't see order link
+</span>  <span class="skw">click</span>(userFlag)
+  <span class="kw">if</span> exists(orderLink):
+    exit()
+  <span class="cmt"># user logout
+</span>  userLogout()
+
+<span class="cmt"># user dashboard page
+</span><span class="kw">def</span> userDashboardPage():
+  <span class="cmt"># user login
+</span>  userLoginWithRightEmailAndPassword()
+  <span class="cmt"># see order summary
+</span>  <span class="skw">wait</span>(orderSummary, longWaitTime)
+  <span class="skw">wait</span>(orderTotalPrice, longWaitTime)
+  <span class="cmt"># user can't see order link
+</span>  <span class="kw">if</span> exists(orderLink):
+    exit()
+  <span class="cmt"># user logout
+</span>    userLogout()
 
 <span class="cmt"># test steps
-</span>loginWithoughtEmailAndPassword()
-loginWithEmailAndEmptyPassword()
-loginWithWrongEmailAndPassword()
-adminLoginWithRightEmailAndPassword()
-adminLogout()
-adminLoginWithoughtCheckRememberMe()
-adminLoginAndCheckRememberMe()
-userLoginWithRightEmailAndPassword()
-userLogout()
+</span><span class="cmt">#loginWithoughtEmailAndPassword()
+</span><span class="cmt">#loginWithEmailAndEmptyPassword()
+</span><span class="cmt">#loginWithWrongEmailAndPassword()
+</span><span class="cmt">#adminLoginWithRightEmailAndPassword()
+</span><span class="cmt">#adminLogout()
+</span><span class="cmt">#adminLoginWithoughtCheckRememberMe()
+</span><span class="cmt">#adminLoginAndCheckRememberMe()
+</span><span class="cmt">#userLoginWithRightEmailAndPassword()
+</span><span class="cmt">#userLogout()
+</span><span class="cmt">#adminCreateNewMOM()
+</span><span class="cmt">#adminBrowseMOM()
+</span>userSubmitWrongOrder()
+userOrder()
+userDashboardPage()
 </pre>
 </body>
 </html>
