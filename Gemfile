@@ -9,7 +9,6 @@ gem 'jquery-rails', '2.0.0'
 
 gem 'devise', '2.0.4'
 gem 'simple_form', '2.0.0'
-gem 'twitter-bootstrap-rails', '2.0.3'
 
 
 # Gems used only for assets and not required
@@ -22,6 +21,7 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'twitter-bootstrap-rails', '2.0.3'
 end
 
 
@@ -29,6 +29,7 @@ group :test do
   gem "rspec-rails", "2.8.1"
   gem "factory_girl_rails"
   gem 'shoulda-matchers', '1.0.0'
+  gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 group :development do
@@ -53,6 +54,3 @@ gem 'magic_encoding'
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'

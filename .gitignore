@@ -16,5 +16,4 @@
 
 config/database.yml
 *.swp
-
-/public/assets/*
+public/assets/
