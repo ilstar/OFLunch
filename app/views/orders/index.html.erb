@@ -2,7 +2,26 @@
   <% if @today_order.blank? %>
     <%= link_to t('.order'), new_order_path %>
   <% else %>
-    <%= link_to t('.my_order'), edit_order_path(@today_order) %>
+    <%= link_to raw("<i class='icon-edit icon-white'> </i>  ") + t('.my_order'), edit_order_path(@today_order), :class => "btn btn-success" %>
+    <p class='pull-right highlight'>总价:<%= number_to_currency(@today_order.total_price, :unit => "￥") %></p>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr> <th> 编号 </th> <th>供应商</th> <th> 名称 </th> <th> 价格 </th> <th> 数量 </th> <th> 小计 </th> </tr>
+
+      </thead>
+      <tbody>
+        <%- @today_order.order_items.each do |object| %>
+          <tr> 
+            <td> <%= object.serial_num %></td>
+            <td> <%= object.vendor.name %></td>
+            <td> <%= object.name %></td>
+            <td> <%= object.price %></td>
+            <td> <%= object.amount %></td>
+            <td> <%= object.total_price %></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
   <% end %>
 <% else %>
   <%= t '.no_mom' %>

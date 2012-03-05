@@ -12,17 +12,13 @@
         <%= ff.hidden_field :menu_item_id %>
         <%= ff.hidden_field :price %>
         <%= ff.hidden_field :amount %>
-
-
         <tr> 
-
           <td> <%= ff.object.menu_item.serial_num %></td>
           <td> <%= ff.object.menu_item.vendor.name %></td>
           <td> <%= ff.object.menu_item.name %></td>
           <td> <%= ff.object.price %></td>
           <td><%= ff.object.amount %></td>
           <td><%= ff.object.total_price %></td>
-
         </tr>
       <%end%>
 
