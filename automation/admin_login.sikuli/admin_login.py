@@ -348,10 +348,6 @@ def userOrder():
   wait(orderTotalPrice, longWaitTime)
   # click cancel button
   click(cancelMom) 
-  # user can see order link
-  checkOrderLink()  
-  # user go to order page
-  goToOrderPage()
   # user can see two vendors
   checkVendors()
   # user can see menu item name and price
@@ -367,7 +363,7 @@ def userOrder():
   wait(orderSummary, longWaitTime)
   wait(orderTotalPrice, longWaitTime)
   # click confirm button
-  click(confirmButton)
+  click(confirmMom)
   # see notification
   wait(orderSuccess)
   # see order summary
@@ -391,7 +387,7 @@ def userDashboardPage():
   if exists(orderLink):
     exit()
   # user logout
-    userLogout()
+  userLogout()
 
 # test steps
 #loginWithoughtEmailAndPassword()

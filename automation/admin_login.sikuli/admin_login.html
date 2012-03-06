@@ -420,10 +420,6 @@ orderSuccess = <img src="FIE117J.png" />
   <span class="skw">wait</span>(orderTotalPrice, longWaitTime)
   <span class="cmt"># click cancel button
 </span>  <span class="skw">click</span>(cancelMom)
-  <span class="cmt"># user can see order link
-</span>  checkOrderLink()
-  <span class="cmt"># user go to order page
-</span>  goToOrderPage()
   <span class="cmt"># user can see two vendors
 </span>  checkVendors()
   <span class="cmt"># user can see menu item name and price
@@ -439,7 +435,7 @@ orderSuccess = <img src="FIE117J.png" />
 </span>  <span class="skw">wait</span>(orderSummary, longWaitTime)
   <span class="skw">wait</span>(orderTotalPrice, longWaitTime)
   <span class="cmt"># click confirm button
-</span>  <span class="skw">click</span>(confirmButton)
+</span>  <span class="skw">click</span>(confirmMom)
   <span class="cmt"># see notification
 </span>  <span class="skw">wait</span>(orderSuccess)
   <span class="cmt"># see order summary
@@ -463,7 +459,7 @@ orderSuccess = <img src="FIE117J.png" />
 </span>  <span class="kw">if</span> exists(orderLink):
     exit()
   <span class="cmt"># user logout
-</span>    userLogout()
+</span>  userLogout()
 
 <span class="cmt"># test steps
 </span><span class="cmt">#loginWithoughtEmailAndPassword()
