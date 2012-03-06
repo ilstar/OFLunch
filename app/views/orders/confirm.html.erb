@@ -2,7 +2,7 @@
 <%= form_for @order do |f| %>
   <h2>下面是我点的餐</h2>
   <%= f.hidden_field :user_id %>
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered">
     <thead>
       <tr> <th> 编号 </th> <th>供应商</th> <th> 名称 </th> <th> 价格 </th> <th> 数量 </th> <th> 小计 </th> </tr>
 
@@ -25,7 +25,7 @@
     </tbody>
   </table>
 
-  总价: <%= @order.total_price %>
+  总价: <%= number_to_currency @order.total_price, unit: '￥' %>
   <%= f.submit "确认", :class => "btn-success btn"%>
   <%= link_to "取消", new_order_path, :class => "btn-danger btn" %>
 <% end %>

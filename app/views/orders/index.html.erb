@@ -4,7 +4,7 @@
   <% else %>
     <%= link_to raw("<i class='icon-edit icon-white'> </i>  ") + t('.my_order'), edit_order_path(@today_order), :class => "btn btn-success" %>
     <p class='pull-right highlight'>总价:<%= number_to_currency(@today_order.total_price, :unit => "￥") %></p>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered">
       <thead>
         <tr> <th> 编号 </th> <th>供应商</th> <th> 名称 </th> <th> 价格 </th> <th> 数量 </th> <th> 小计 </th> </tr>
 
