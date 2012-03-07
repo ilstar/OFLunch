@@ -9,7 +9,11 @@ class ApplicationController < ActionController::Base
     if devise_controller?
       'users'
     else
-     'application'
+      'application'
     end
+  end
+
+  def admin_required
+    redirect_to root_path, :notice => "无权访问" unless current_user.try(:admin?)
   end
 end

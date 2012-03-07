@@ -1,4 +1,6 @@
 class BalancesController < ApplicationController
+  before_filter :admin_required
+
   # GET /balances
   # GET /balances.json
   def index
