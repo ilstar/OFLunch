@@ -11,22 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120307024458) do
+ActiveRecord::Schema.define(:version => 20120307074746) do
 
   create_table "balance_logs", :force => true do |t|
     t.integer  "balance_id"
-    t.float    "amount"
+    t.decimal  "amount",     :precision => 10, :scale => 2
     t.integer  "order_id"
     t.string   "operation"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "balances", :force => true do |t|
     t.integer  "user_id"
-    t.float    "amount"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.decimal  "amount",     :precision => 10, :scale => 2
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "meal_times", :force => true do |t|
