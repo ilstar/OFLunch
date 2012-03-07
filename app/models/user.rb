@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   has_many :orders
+  has_one :balance, :dependent => :destroy
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
 

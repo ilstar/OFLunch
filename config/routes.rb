@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 OFLunch::Application.routes.draw do
 
+  resources :balances
+  resources :balance_logs, :only => [:create]
+
   resources :orders do
     collection do
       post 'confirm'
