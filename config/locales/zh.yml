@@ -5,6 +5,7 @@ zh:
     balances: 余额管理
     account: 账号
     logout: 退出
+    user_edit: 设置
 
   # controllers views
   meal_times:

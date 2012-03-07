@@ -1,7 +1,7 @@
-<%- if notice %>
+<%- if flash.notice %>
   <div class="alert">
     <a class="close" data-dismiss="alert">×</a>
-    <strong>Notice!</strong> <%= notice %>
+    <%= flash.notice %>
   </div>
 
 <%- end %>
