@@ -1,7 +1,10 @@
 # -*- encoding : utf-8 -*-
 OFLunch::Application.routes.draw do
 
+  get "order_items/index"
+
   resources :balances
+  resources :order_items, :only => [:index]
   resources :balance_logs, :only => [:create]
 
   resources :orders do

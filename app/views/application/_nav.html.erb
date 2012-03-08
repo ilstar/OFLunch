@@ -12,20 +12,24 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li><%= link_to t('nav.home'), root_path  %></li>
-          <% if current_user.admin? %>
+          <% if current_user && current_user.admin? %>
             <li><%= link_to t('nav.mom'), meal_times_url  %></li>
             <li><%= link_to t('nav.balances'),balances_url  %></li>
           <% end %>
+          <li><%= link_to t('nav.order_items'), order_items_url  %></li>
         </ul>
-        <ul class="nav pull-right">
-          <li id="fat-menu" class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t 'nav.account' %><b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to t('nav.user_edit'), account_path %></li>
-            <li><%= link_to t('nav.logout'), destroy_user_session_path, method: 'delete' %></li>
+
+        <% if current_user%>
+          <ul class="nav pull-right">
+            <li id="fat-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t 'nav.account' %><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t('nav.user_edit'), account_path %></li>
+              <li><%= link_to t('nav.logout'), destroy_user_session_path, method: 'delete' %></li>
+            </ul>
+            </li>
           </ul>
-          </li>
-        </ul>
+        <% end%>
       </div>
 
     </div>
