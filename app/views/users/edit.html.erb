@@ -1,0 +1,8 @@
+<h3> EMAIL: </h3> <%= @user.email %>
+<h3> 姓名: </h3>
+
+<%= form_for @user , :html => {:class => "form-inline"} do |f|%>
+  <%= hidden_field_tag "user_id", @user.id%>
+  <%= f.text_field :name, :placeholder => @user.name || "Name", :class => "input-small" %>
+  <%= f.submit "修改", :class => "btn" %>
+<%end%>

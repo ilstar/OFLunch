@@ -2,8 +2,11 @@ zh:
   nav:
     home: 主页
     mom: 今日菜单
+    order_items: 今日订单
+    balances: 余额管理
     account: 账号
     logout: 退出
+    user_edit: 设置
 
   # controllers views
   meal_times:

@@ -1,6 +1,12 @@
 # -*- encoding : utf-8 -*-
 OFLunch::Application.routes.draw do
 
+  get "order_items/index"
+
+  resources :balances
+  resources :order_items, :only => [:index]
+  resources :balance_logs, :only => [:create]
+
   resources :orders do
     collection do
       post 'confirm'
@@ -16,6 +22,9 @@ OFLunch::Application.routes.draw do
   resources :vendors
 
   devise_for :users
+
+  resources :users
+  match 'account' => "users#edit"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

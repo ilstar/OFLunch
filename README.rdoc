@@ -4,7 +4,7 @@ This is an ordering lunch system for us!
 
 == Requirement
 
-Ruby 1.9
+Ruby 1.9.2
 
 PostgreSQL for production, MySQL for develoment.
 
@@ -14,9 +14,17 @@ PostgreSQL for production, MySQL for develoment.
   bundle install
   cp config/database.yml.example config/database.yml
 
-edit config/database.yml according your envinorment
+edit config/database.yml according to your envinorment
 
   rake db:create
   rake db:migrate
   rake db:seed
   rails s
+
+== If you want to push code into this repository
+
+send your github account name to Fred, he will add you as member of this app, then you can push code.
+
+== If you want deploy this app
+
+send your heroku account to Fred.

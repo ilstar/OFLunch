@@ -1,0 +1,30 @@
+<% if @today_order_items.blank? %>
+  今天还没有用户订餐
+<%else%>
+
+  <% @mom.vendors.each do |vendor| %>
+    <% order_items_by_vendor = @today_order_items.select{|oi| oi.menu_item.vendor_id == vendor.id } %>
+    <span class='btn disabled btn-primary'><%= vendor.name %>&nbsp;&nbsp; <span style=";"><%= number_to_currency(order_items_by_vendor.sum(&:total_price), :unit => "￥") %></span></span>
+
+    <div style='margin-bottom: 3px;'></div>
+
+    <table class='table table-striped table-bordered table-condensed'>
+      <thead>
+        <tr> <th> 菜品名称 x 数量  </th> <th> 单价 </th> <th> 小计</th> <th> 订餐人 </th> </tr>
+      </thead>
+      <tbody>
+        <%- order_items_by_vendor.group_by(&:menu_item_id).each do |menu_item_id, objects| %>
+          <%- object = objects.first %>
+          <tr> 
+            <td> <%= object.menu_item.name %> x <%= objects.sum(&:amount) %>  </td>
+            <td> <%= object.menu_item.price %></td>
+            <td> <%= number_to_currency(objects.sum(&:total_price), :unit => "￥") %></td>
+            <td> <%= raw objects.map{ |oi| oi.order.user.name +  (oi.amount > 1 ? "（#{oi.amount}）" : "") }.join("</br>" )%></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  <%end%>
+
+  <span class='pull-right btn disabled btn-primary'> 总计: <%= number_to_currency(@today_order_items.sum(&:total_price), :unit => "￥")%> </span>
+<%end%>

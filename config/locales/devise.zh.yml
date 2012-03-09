@@ -23,6 +23,13 @@ zh:
     sessions:
       signed_in: '登录成功.'
       signed_out: '退出成功.'
+      user: 
+        signed_in: "登陆成功"
+      new:
+        sign_in: 登陆
+        email: Email
+        password: 密码
+        remember_me: 记住我
     passwords:
       send_instructions: '几分钟后，您将收到重置密码的电子邮件.'
       updated: '您的密码已修改成功，您现在已登录.'
@@ -41,12 +48,6 @@ zh:
         inactive: '未激活'
         unconfirmed: '未确认'
         locked: '已锁定'
-    sessions:
-      new:
-        sign_in: 登陆
-        email: Email
-        password: 密码
-        remember_me: 记住我
     unlocks:
       send_instructions: '几分钟后，您将收到一封解锁帐号的邮件.'
       unlocked: '您的帐号已成功解锁，您现在已登录.'
