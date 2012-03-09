@@ -21,4 +21,25 @@ class MealTimesController < ApplicationController
     end
   end
 
+  def lock
+    @mom = MealTime.find params[:id]
+    if @mom.lock
+      flash.notice = "菜单已锁定，用户无法继续点餐"
+    else
+      flash.notice = "菜单锁定失败"
+    end
+    redirect_to order_items_path
+  end
+
+
+  def close
+    @mom = MealTime.find params[:id]
+    if @mom.close
+      flash.notice = "菜单已关闭，扣钱成功"
+    else
+      flash.notice = "菜单关闭失败"
+    end
+    redirect_to order_items_path
+  end
+
 end

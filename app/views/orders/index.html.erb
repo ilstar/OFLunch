@@ -1,6 +1,12 @@
 <% if @today_meal_time %>
+
   <% if @today_order.blank? %>
-    <%= link_to t('.order'), new_order_path %>
+    <% if @today_meal_time.can_not_order_now? %>
+      <span class='alert alert-warning'> 点餐时间已过，如有疑问或想继续点餐请联系管理员</span>
+    <%else%>
+      <%= link_to t('.order'), new_order_path %>
+    <%end%>
+
   <% else %>
     <%= link_to raw("<i class='icon-edit icon-white'> </i>  ") + t('.my_order'), edit_order_path(@today_order), :class => "btn btn-success" %>
     <p class='pull-right highlight'>总价:<%= number_to_currency(@today_order.total_price, :unit => "￥") %></p>
@@ -23,6 +29,7 @@
       </tbody>
     </table>
   <% end %>
+
 <% else %>
   <%= t '.no_mom' %>
 <% end %>

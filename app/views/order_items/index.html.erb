@@ -28,3 +28,51 @@
 
   <span class='pull-right btn disabled btn-primary'> 总计: <%= number_to_currency(@today_order_items.sum(&:total_price), :unit => "￥")%> </span>
 <%end%>
+
+
+<% if current_user && current_user.admin? %>
+  <% if @mom.closed? %>
+    <span class="alert alert-warning">菜单已关闭</span>
+  <%end%>
+  <% if @mom.locked? %>
+    <%= link_to "关闭", "#myModalClose", :class => "btn btn-primary" , "data-toggle" => "modal"%>
+    <span class="alert alert-warning">菜单已锁定，点击关闭进行结算</span>
+
+    <div class="modal hide" id="myModalClose">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <p>&nbsp;</p>
+      </div>
+
+      <div class="modal-body input-append">
+        请确保今天的订餐已经成功完成，点击确定后，任何人将无法修改今日数据，要继续吗？
+      </div>
+
+      <div class="modal-footer">
+        <%= link_to "取消", "#", :class => "btn btn-danger", "data-dismiss" => "modal" %>
+        <%= link_to "确认", close_meal_time_path(@mom), :class => "btn btn-success", :method => :put %>
+      </div>
+    </div>
+  <%end%>
+
+  <% if @mom.unlock? %>
+    <%= link_to "锁定", "#myModal", :class => "btn btn-primary" , "data-toggle" => "modal"%>
+    <span class="alert alert-warning">菜单未锁定，点击锁定菜单</span>
+
+    <div class="modal hide" id="myModal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <p>&nbsp;</p>
+      </div>
+
+      <div class="modal-body input-append">
+        锁定今日菜单后，所有用户将不能继续点餐，确定要执行该操作吗？
+      </div>
+
+      <div class="modal-footer">
+        <%= link_to "取消", "#", :class => "btn btn-danger", "data-dismiss" => "modal" %>
+        <%= link_to "确认", lock_meal_time_path(@mom), :class => "btn btn-success", :method => :put %>
+      </div>
+    </div>
+  <%end%>
+<% end %>

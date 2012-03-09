@@ -15,6 +15,11 @@ OFLunch::Application.routes.draw do
 
   resources :meal_times do
     resources :menu_of_meals, only: %w{create destroy index}
+
+    member do
+      put :lock
+      put :close
+    end
   end
 
   resources :menu_items

@@ -17,4 +17,8 @@ class Order < ActiveRecord::Base
   def user_could_order_once
     self.errors.add(:base, "只能定一次") if self.meal_time.orders.for_user_id(self.user_id).count >= 1
   end
+
+  def pay
+    self.user.balance.deduct(self.total_price)
+  end
 end

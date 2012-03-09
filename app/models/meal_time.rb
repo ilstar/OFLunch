@@ -5,13 +5,12 @@ class MealTime < ActiveRecord::Base
   has_many :orders
   has_many :order_items, :through => :orders
 
-
   attr_accessor :vendor_ids
-
 
   def self.today
     where(["created_at > ? AND created_at < ?", Time.current.beginning_of_day, Time.current.end_of_day]).first
   end
+
 
   def vendor_ids
     self.vendors.map &:id
@@ -23,6 +22,39 @@ class MealTime < ActiveRecord::Base
   validate :less_than_two_vendors_choosed 
   validate :no_more_than_one_meal_per_day
 
+  def lock
+    self.update_attribute(:status, "locked")
+  end
+
+  def locked?
+    self.status == "locked"
+  end
+
+  def unlock?
+    self.status.nil?
+  end
+
+  def close
+    begin
+      self.transaction do
+        self.status = "closed"
+        self.orders.map(&:pay) 
+        self.save!
+      end
+    rescue ActiveRecord::RecordInvalid
+     return false
+    end
+    true
+  end
+
+  def closed?
+    self.status == "closed"
+  end
+
+  def can_not_order_now?
+    self.closed? || self.locked?
+  end
+
   protected
 
   def less_than_two_vendors_choosed
@@ -31,6 +63,6 @@ class MealTime < ActiveRecord::Base
   end
 
   def no_more_than_one_meal_per_day
-    self.errors.add :base, I18n.t('meal_time.exists_today') if self.class.today
+    self.errors.add :base, I18n.t('meal_time.exists_today') if self.new_record? && self.class.today
   end
 end
