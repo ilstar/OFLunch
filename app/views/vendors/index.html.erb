@@ -12,6 +12,7 @@
   <tr>
     <td><%= vendor.name %></td>
     <td><%= link_to 'Show', vendor %></td>
+    <td><%= link_to 'Menus', vendor_menu_items_path(vendor) %></td>
     <td><%= link_to 'Edit', edit_vendor_path(vendor) %></td>
     <td><%= link_to 'Destroy', vendor, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
