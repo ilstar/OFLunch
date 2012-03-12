@@ -30,7 +30,7 @@
 <%end%>
 
 
-<% if current_user && current_user.admin? %>
+<% if current_user && current_user.admin? && @mom %>
   <% if @mom.closed? %>
     <span class="alert alert-warning">菜单已关闭</span>
   <%end%>
