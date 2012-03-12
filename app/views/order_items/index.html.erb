@@ -15,7 +15,7 @@
       <tbody>
         <%- order_items_by_vendor.group_by(&:menu_item_id).each do |menu_item_id, objects| %>
           <%- object = objects.first %>
-          <tr> 
+          <tr>
             <td> <%= object.menu_item.name %> x <%= objects.sum(&:amount) %>  </td>
             <td> <%= object.menu_item.price %></td>
             <td> <%= number_to_currency(objects.sum(&:total_price), :unit => "￥") %></td>
