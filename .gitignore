@@ -20,3 +20,4 @@ public/assets/
 
 # Ignore .rvmrc
 .rvmrc
+.DS_Store
