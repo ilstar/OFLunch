@@ -17,6 +17,7 @@ task :import_vendors => :environment do
     end
 
     CSV.foreach(Rails.root.join('data', 'vendors', file)) do |row|
+      next unless row[1].present?
       vendor.menu_items.create(:serial_num => row[0], :name => row[1], :price => row[2])
     end
     puts "imported #{vendor_name}"
