@@ -15,13 +15,12 @@
     <td><%= menu_item.name %></td>
     <td><%= menu_item.price %></td>
     <td><%= menu_item.serial_num %></td>
-    <td><%= link_to 'Show', menu_item %></td>
-    <td><%= link_to 'Edit', edit_menu_item_path(menu_item) %></td>
-    <td><%= link_to 'Destroy', menu_item, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Edit', edit_vendor_menu_item_path(@vendor, menu_item) %></td>
+    <td><%= link_to 'Destroy', vendor_menu_item_path(@vendor, menu_item),  confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Menu item', new_menu_item_path %>
+<%= link_to 'New Menu item', new_vendor_menu_item_path(@vendor) %>

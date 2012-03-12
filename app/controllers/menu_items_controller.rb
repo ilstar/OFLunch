@@ -1,9 +1,10 @@
 # -*- encoding : utf-8 -*-
 class MenuItemsController < ApplicationController
+  before_filter :get_vendor
   # GET /menu_items
   # GET /menu_items.json
   def index
-    @menu_items = MenuItem.all
+    @menu_items = @vendor.menu_items
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,42 +15,38 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1
   # GET /menu_items/1.json
   def show
-    @menu_item = MenuItem.find(params[:id])
+    @menu_item = @vendor.menu_items.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @menu_item }
     end
   end
 
   # GET /menu_items/new
   # GET /menu_items/new.json
   def new
-    @menu_item = MenuItem.new
+    @menu_item = @vendor.menu_items.build(params[:menu_item])
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @menu_item }
     end
   end
 
   # GET /menu_items/1/edit
   def edit
-    @menu_item = MenuItem.find(params[:id])
+    @menu_item = @vendor.menu_items.find(params[:id])
   end
 
   # POST /menu_items
   # POST /menu_items.json
   def create
-    @menu_item = MenuItem.new(params[:menu_item])
+    @menu_item = @vendor.menu_items.build(params[:menu_item])
 
     respond_to do |format|
       if @menu_item.save
         format.html { redirect_to @menu_item, notice: 'Menu item was successfully created.' }
-        format.json { render json: @menu_item, status: :created, location: @menu_item }
       else
         format.html { render action: "new" }
-        format.json { render json: @menu_item.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,11 +58,9 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       if @menu_item.update_attributes(params[:menu_item])
-        format.html { redirect_to @menu_item, notice: 'Menu item was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to vendor_menu_items_path(@vendor), notice: 'Menu item was successfully updated.' }
       else
         format.html { render action: "edit" }
-        format.json { render json: @menu_item.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,5 +75,10 @@ class MenuItemsController < ApplicationController
       format.html { redirect_to menu_items_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def get_vendor
+    @vendor = Vendor.find(params[:vendor_id])
   end
 end
