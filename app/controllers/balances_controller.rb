@@ -4,7 +4,7 @@ class BalancesController < ApplicationController
   # GET /balances
   # GET /balances.json
   def index
-    @balances = Balance.all
+    @balances = Balance.includes(:user).order('users.name ASC')
 
     respond_to do |format|
       format.html # index.html.erb

@@ -7,7 +7,4 @@ class Balance < ActiveRecord::Base
    self.save!
   end
 
-  #validate do |o|
-  #  self.errors.add(:base, "") if o.user.email == "kevin.xu@gree.co.jp"
-  #end
 end
