@@ -1,22 +1,34 @@
 <%= render :partial => "application/errors", :locals => {:target => @order}  %>
 <%= simple_form_for(@order, :url => confirm_orders_path) do |f| %>
-
+<table class='table table-striped table-bordered table-condensed'>
   <% MealTime.today.vendors.each do |vendor| %>
-    <h2><%= vendor.name %></h2>
-    <div class="form-inputs">
-      <% vendor.menu_items.each do |menu_item| %>
-        <div>
+    <tr>
+      <td colspan="3"><h2><%= vendor.name %></h2></td>
+    </tr>
+    <% vendor.menu_items.each do |menu_item| %>
+    <tr>
+      <td>
           <%= hidden_field_tag "menu_items[][id]", menu_item.id%>
-          <%= menu_item.name %>
+          <h5><%= menu_item.name %></h5>
+      </td>
+      <td>
           <%= menu_item.price %>
+      </td>
+      <td>
+        <div class="form-inputs">
           <%= text_field_tag "menu_items[][count]", 0%>
         </div>
-      <% end %>
-    </div>
+      </td>
+    </tr>
+    <% end %>
   <% end %>
-
-  <div class="form-actions">
-    <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
-    <%= link_to t('cancel'), orders_url, :class => "btn btn-danger" %>
-  </div>
+  <tr>
+    <td colspan="3">
+      <div class="form-actions">
+        <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
+        <%= link_to t('cancel'), orders_url, :class => "btn btn-danger" %>
+     </div>
+    </td>
+  </tr>
 <% end %>
+</table>
