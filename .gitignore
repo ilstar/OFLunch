@@ -17,3 +17,6 @@
 config/database.yml
 *.swp
 public/assets/
+
+# Ignore .rvmrc
+.rvmrc
