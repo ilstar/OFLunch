@@ -43,11 +43,7 @@ zh:
       signed_up: '欢迎您！您已注册成功.'
       updated: '帐号资料更新成功.'
       destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您.'
-      inactive_signed_up: '虽然您已经注册成功,但因为%{reason},所以您依然无法登录.'
-      reasons:
-        inactive: '未激活'
-        unconfirmed: '未确认'
-        locked: '已锁定'
+      signed_up_but_REASON: '虽然您已经注册成功,但因为%{reason},所以您依然无法登录.'
     unlocks:
       send_instructions: '几分钟后，您将收到一封解锁帐号的邮件.'
       unlocked: '您的帐号已成功解锁，您现在已登录.'
@@ -56,7 +52,7 @@ zh:
       success: '成功地从%{kind}获得授权.'
       failure: '因为%{reason}，所以您无法从%{kind}获得授权.'
     mailer:
-      confirmation_instructions:
+      igned_up_but_REASONonfirmation_instructions:
         subject: '确认信息'
       reset_password_instructions:
         subject: '重置密码信息'
