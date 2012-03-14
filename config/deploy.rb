@@ -1,7 +1,8 @@
 # RVM bootstrap
-$:.unshift(File.expand_path("~/.rvm/lib"))
+$:.unshift(File.expand_path("./lib", ENV['rvm_path']))
 require 'rvm/capistrano'
-set :rvm_ruby_string, 'ruby-1.9.2@oflunch'
+require "bundler/capistrano"
+set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :user
 
 # main details
@@ -15,36 +16,33 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 set :deploy_to, "/opt/www/oflunch"
 set :deploy_via, :remote_cache
-set :user, "_www"
+set :user, "luke"
 set :use_sudo, false
 
 # repo details
 set :scm, :git
-set :repository, "git@gitserver:mywebsite.git"
+set :repository, "git://github.com/ilstar/OFLunch.git"
 set :branch, "release"
 set :git_enable_submodules, 1
-
-# runtime dependencies
-depend :remote, :gem, "bundler", ">=1.0.0.rc.2"
 
 # tasks
 namespace :deploy do
   task :start, :roles => :app do
-    run "touch #{current_path}/tmp/restart.txt"
+    run "thin start -C #{release_path}/config/thin.yml"
   end
 
   task :stop, :roles => :app do
-    # Do nothing.
+    run "thin stop -C #{release_path}/config/thin.yml"
   end
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "touch #{current_path}/tmp/restart.txt"
+    run "thin restart -C #{release_path}/config/thin.yml"
   end
 
   desc "Symlink shared resources on each release"
   task :symlink_shared, :roles => :app do
-    #run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
 end
 
