@@ -9,7 +9,7 @@ gem 'jquery-rails', '2.0.0'
 
 gem 'devise', '2.0.4'
 gem 'simple_form', '2.0.0'
-
+gem 'mysql2', '0.3.11'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,7 +34,6 @@ end
 
 group :development do
   gem "rspec-rails", "2.8.1"
-  gem 'mysql2', '0.3.11'
 end
 
 group :production do
