@@ -21,6 +21,7 @@ zh:
       no_mom: 今日菜单尚未公布，敬请期待！
       order: 开始点餐
       my_order: 我的订单
+      delete_order: 删除订单
     new:
       all_vendors: 所有餐馆
 
@@ -31,3 +32,5 @@ zh:
 
   confirm: 确认
   cancel: 取消
+  delete: 删除
+  delete_confirm: 确定要删除吗？

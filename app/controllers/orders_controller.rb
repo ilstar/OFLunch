@@ -35,6 +35,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    @order = current_user.orders.find(params[:id])
+    @order.destroy if @order.meal_time.unlock?
+
+    redirect_to orders_url
+  end
+
   private
 
   def selected_items
