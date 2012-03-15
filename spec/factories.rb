@@ -7,4 +7,21 @@ FactoryGirl.define do
     password "itissecret"
   end
 
+  factory :vendor do
+    sequence :name do |i|
+      "vendor name #{i}"
+    end
+  end
+
+  factory :meal_time do
+    after_build do |meal_time|
+      meal_time.vendors << Factory(:vendor)
+    end
+  end
+
+  factory :order do
+    association :user
+    association :meal_time
+  end
+
 end
