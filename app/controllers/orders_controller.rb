@@ -37,9 +37,14 @@ class OrdersController < ApplicationController
 
   def destroy
     @order = current_user.orders.find(params[:id])
-    @order.destroy if @order.meal_time.unlock?
+    if @order.meal_time.unlock?
+      @order.destroy
+      message = t('delete_successfully')
+    else
+      message = t('order.cannot_delete_locked_order')
+    end
 
-    redirect_to orders_url
+    redirect_to orders_url, :alert => message
   end
 
   private
