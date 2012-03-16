@@ -38,7 +38,8 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "thin restart -C #{release_path}/config/thin.yml"
+    stop
+    start
   end
 
   desc "Symlink shared resources on each release"
