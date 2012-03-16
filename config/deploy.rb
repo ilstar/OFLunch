@@ -59,7 +59,7 @@ namespace :bundler do
 
   desc "Install for production"
   task :install, :roles => :app do
-    run "cd #{release_path} && bundle install --production"
+    run "cd #{release_path} && bundle install"
   end
 
 end
