@@ -23,7 +23,7 @@ set :use_sudo, false
 # repo details
 set :scm, :git
 set :repository, "git://github.com/ilstar/OFLunch.git"
-set :branch, "release"
+set :branch, "master"
 set :git_enable_submodules, 1
 
 # tasks
