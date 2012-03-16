@@ -11,7 +11,7 @@ task :init_users => :environment do
   User.create! name: "Jian Fu", email: "jian.fu@gree.co.jp", password: pwd
   User.create! name: "Bo Fu", email: "bo.fu@gree.co.jp", password: pwd
   User.create! name: "Vincent Xie", email: "vincent.xie@gree.co.jp", password: pwd
-  User.create! name: "Lay Zhu", email: "lay.zhu@gree.co.jp", password: pwd, role: 'admin'
+  User.create! name: "Lay Zhu", email: "lay.zhu@gree.co.jp", password: pwd
   User.create! name: "Xingkui Wang", email: "xingkui.wang@gree.co.jp", password: pwd
   User.create! name: "Yue Tian", email: "yue.tian@gree.co.jp", password: pwd
   User.create! name: "Tiancong Pang", email: "tiancong.pang@gree.co.jp", password: pwd
