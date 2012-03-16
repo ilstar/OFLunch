@@ -11,6 +11,8 @@ gem 'devise', '2.0.4'
 gem 'simple_form', '2.0.0'
 gem 'mysql2', '0.3.11'
 
+gem 'rails-i18n', '0.5.1'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
