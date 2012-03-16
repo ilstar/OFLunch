@@ -1,0 +1,14 @@
+<span class="label <%= current_user.account_balance > 20 ? 'label-info' : 'label-warning' %>">
+  <%= t '.current_account_balance' %><%= number_to_currency current_user.account_balance, unit: '￥' %>
+</span>
+
+<br/>
+<br/>
+
+<table class="table">
+  <% @balance_logs.each do |log| %>
+    <tr>
+      <td>在<%= l log.created_at, format: :long %> 充值 <%= number_to_currency(log.amount, :unit => "￥") %></td>
+    </tr>
+  <% end %>
+</table>

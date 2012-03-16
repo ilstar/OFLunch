@@ -1,6 +1,10 @@
 # -*- encoding : utf-8 -*-
 
 class BalanceLogsController < ApplicationController
+  def index
+    @balance_logs = current_user.balance.balance_logs.order('id DESC')
+  end
+
   def create
     @balance_log = BalanceLog.new(params[:balance_log])
     @balance = @balance_log.balance

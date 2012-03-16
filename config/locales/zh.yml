@@ -7,6 +7,7 @@ zh-CN:
     account: 账号
     logout: 退出
     user_edit: 设置
+    balance_history: 充值记录
 
   # controllers views
   meal_times:
@@ -24,6 +25,9 @@ zh-CN:
       delete_order: 删除订单
     new:
       all_vendors: 所有餐馆
+  balance_logs:
+    index:
+      current_account_balance: 账户余额
 
   meal_time:
     no_more_than_2_vendors: 最多只能选择两家餐馆
