@@ -1,4 +1,7 @@
 zh-CN:
+  time:
+    formats:
+      date: "%Y年%m月%d日"
   nav:
     home: 主页
     mom: 今日菜单
