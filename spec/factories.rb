@@ -29,4 +29,9 @@ FactoryGirl.define do
     amount 0
   end
 
+  factory :balance_log do
+    association :balance
+    amount 100
+  end
+
 end

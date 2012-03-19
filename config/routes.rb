@@ -5,7 +5,7 @@ OFLunch::Application.routes.draw do
 
   resources :balances
   resources :order_items, :only => [:index]
-  resources :balance_logs, :only => [:create]
+  resources :balance_logs, :only => [:create, :index]
 
   resources :orders do
     collection do
