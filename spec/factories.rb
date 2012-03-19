@@ -24,4 +24,9 @@ FactoryGirl.define do
     association :meal_time
   end
 
+  factory :balance do
+    association :user
+    amount 0
+  end
+
 end
