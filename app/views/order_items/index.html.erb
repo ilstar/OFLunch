@@ -1,4 +1,4 @@
-<h2><%= Time.now.strftime("%a %m/%d/%Y") %></h2>
+<h2><%= l @mom.created_at, format: :date %></h2>
 <br/>
 <% if @today_order_items.blank? %>
   今天还没有用户订餐
