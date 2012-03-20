@@ -5,12 +5,17 @@ FactoryGirl.define do
       "user#{i}@example.com"
     end
     password "itissecret"
+    name "user"
   end
 
   factory :vendor do
     sequence :name do |i|
       "vendor name #{i}"
     end
+  end
+
+  factory :menu_item do
+    association :vendor
   end
 
   factory :meal_time do
@@ -22,6 +27,13 @@ FactoryGirl.define do
   factory :order do
     association :user
     association :meal_time
+  end
+
+  factory :order_item do
+    association :order
+    association :menu_item
+    price 3
+    amount 1
   end
 
   factory :balance do

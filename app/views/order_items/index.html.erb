@@ -1,9 +1,8 @@
-<h2><%= l @mom.created_at, format: :date %></h2>
-<br/>
 <% if @today_order_items.blank? %>
   今天还没有用户订餐
 <%else%>
-
+  <h2><%= l @mom.created_at, format: :date %></h2>
+  <br/>
   <% @mom.vendors.each do |vendor| %>
     <% order_items_by_vendor = @today_order_items.select{|oi| oi.menu_item.vendor_id == vendor.id } %>
     <span class='btn disabled btn-primary'><%= vendor.name %>&nbsp;&nbsp; <span style=";"><%= number_to_currency(order_items_by_vendor.sum(&:total_price), :unit => "￥") %></span></span>
