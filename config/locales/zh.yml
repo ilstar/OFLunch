@@ -26,6 +26,8 @@ zh-CN:
       order: 开始点餐
       my_order: 我的订单
       delete_order: 删除订单
+      balance_is_less: 您的余额只剩下%{n}元，请及时充值。
+      balance_is_too_less: 亲啊，您已经欠账%{n}元，赶紧充值吧亲！
     new:
       all_vendors: 所有餐馆
   balances:

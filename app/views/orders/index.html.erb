@@ -1,3 +1,9 @@
+<% if current_user.account_balance < 0 %>
+  <%= error_alert t('.balance_is_too_less', n: current_user.account_balance) %>
+<% elsif current_user.account_balance < Balance::REMIND_AMOUNT %>
+  <%= warning_alert t('.balance_is_less', n: current_user.account_balance) %>
+<% end %>
+
 <% if @today_meal_time %>
 
   <% if @today_order.blank? %>

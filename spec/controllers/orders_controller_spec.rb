@@ -2,6 +2,8 @@
 require 'spec_helper'
 
 describe OrdersController do
+  render_views
+
   before do
     @user = Factory(:user)
     @meal_time = Factory(:meal_time)
@@ -17,10 +19,33 @@ describe OrdersController do
     end
   end
 
-  describe "GET 'index'" do
-    it "returns http success" do
-      get 'index'
+  describe "GET index" do
+    it "success when no mom" do
+      MealTime.destroy_all
+
+      get :index
+
       response.should be_success
+      assigns(:today_meal_time).should be_nil
+    end
+
+    it "successful render when mom created" do
+      get :index
+
+      response.should be_success
+      assigns(:today_meal_time).should_not be_nil
+    end
+
+    it "successful render when order is created" do
+      vendor = Factory(:vendor)
+      menu_item = Factory(:menu_item, vendor: vendor)
+      @meal_time.vendors << vendor
+      order_item = Factory(:order_item, order: @order, menu_item: menu_item)
+
+      get :index
+
+      response.should be_success
+      assigns(:today_order).should_not be_nil
     end
   end
 
