@@ -27,6 +27,7 @@
             <ul class="dropdown-menu">
               <li><%= link_to t('nav.user_edit'), account_path %></li>
               <li><%= link_to t('nav.balance_history'), balance_logs_path %></li>
+              <li><%= link_to '订单历史', mine_orders_path %></li>
               <li><%= link_to t('nav.logout'), destroy_user_session_path, method: 'delete' %></li>
             </ul>
             </li>

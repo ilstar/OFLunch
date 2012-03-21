@@ -10,6 +10,7 @@ OFLunch::Application.routes.draw do
   resources :orders do
     collection do
       post 'confirm'
+      get :mine
     end
   end
 

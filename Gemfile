@@ -13,6 +13,8 @@ gem 'mysql2', '0.3.11'
 
 gem 'rails-i18n', '0.5.1'
 
+gem 'will_paginate', '3.0.3'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
