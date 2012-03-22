@@ -1,34 +1,44 @@
 <%= render :partial => "application/errors", :locals => {:target => @order}  %>
+
 <%= simple_form_for(@order, :url => confirm_orders_path) do |f| %>
-<table class='table table-striped table-bordered table-condensed'>
   <% MealTime.today.vendors.each do |vendor| %>
-    <tr>
-      <td colspan="3"><h2><%= vendor.name %></h2></td>
-    </tr>
-    <% vendor.menu_items.each do |menu_item| %>
-    <tr>
-      <td>
-          <%= hidden_field_tag "menu_items[][id]", menu_item.id%>
-          <h5><%= menu_item.name %></h5>
-      </td>
-      <td>
-          <%= menu_item.price %>
-      </td>
-      <td>
-        <div class="form-inputs">
-          <%= text_field_tag "menu_items[][count]", 0, type: 'number', min: 0 %>
-        </div>
-      </td>
-    </tr>
-    <% end %>
+    <table class='table table-striped table-bordered table-condensed' id="<%= dom_id vendor %>">
+      <tr>
+        <th colspan="3">
+          <h2 id="22<%= dom_id(vendor) %>"><%= vendor.name %></h2>
+        </th>
+      </tr>
+      <% vendor.menu_items.each do |menu_item| %>
+        <tr>
+          <td>
+            <%= hidden_field_tag "menu_items[][id]", menu_item.id%>
+            <h5><%= menu_item.name %></h5>
+          </td>
+          <td>
+            <%= menu_item.price %>
+          </td>
+          <td>
+            <div class="form-inputs">
+              <%= text_field_tag "menu_items[][count]", 0, type: 'number', min: 0 %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </table>
   <% end %>
-  <tr>
-    <td colspan="3">
-      <div class="form-actions">
-        <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
-        <%= link_to t('cancel'), orders_url, :class => "btn btn-danger" %>
-     </div>
-    </td>
-  </tr>
+  <div class="form-actions">
+    <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
+    <%= link_to t('cancel'), orders_url, :class => "btn btn-danger" %>
+  </div>
 <% end %>
-</table>
+
+<%= content_for :head do %>
+  <%= javascript_include_tag 'jquery.scrollTo-min' %>
+<% end %>
+
+<ul class="nav nav-tabs nav-stacked" style="position:fixed;top: 200px; left: 0px;">
+  <% MealTime.today.vendors.each do |vendor| %>
+    <!--li><%= link_to vendor.name, "##{dom_id(vendor)}" %></li-->
+    <li><%= link_to vendor.name, "javascript:$('body').scrollTo($('##{dom_id(vendor)}').offset().top - 41, 0, {queue: true})" %></li>
+  <% end %>
+</ul>
