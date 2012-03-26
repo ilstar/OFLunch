@@ -25,14 +25,20 @@ class MealTime < ActiveRecord::Base
   def lock
     self.update_attribute(:status, "locked")
   end
+  alias lock! lock
+
+  def unlock!
+    self.update_attribute(:status, nil)
+  end
 
   def locked?
     self.status == "locked"
   end
 
   def unlock?
-    self.status.nil?
+    self.status.nil? or self.status == 'unlocked'
   end
+  alias unlocked? unlock?
 
   def close
     begin

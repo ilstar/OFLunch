@@ -19,6 +19,7 @@ OFLunch::Application.routes.draw do
 
     member do
       put :lock
+      put :unlock
       put :close
     end
   end

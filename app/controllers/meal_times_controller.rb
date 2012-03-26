@@ -31,6 +31,14 @@ class MealTimesController < ApplicationController
     redirect_to order_items_path
   end
 
+  def unlock
+    @meal_time = MealTime.find params[:id]
+    @meal_time.unlock!
+
+    flash.notice = "解锁成功"
+    redirect_to order_items_url
+  end
+
 
   def close
     @mom = MealTime.find params[:id]
