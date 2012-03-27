@@ -34,6 +34,7 @@ group :test do
   gem "factory_girl_rails"
   gem 'shoulda-matchers', '1.0.0'
   gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'timecop', '0.3.5'
 end
 
 group :development do

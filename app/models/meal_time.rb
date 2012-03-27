@@ -11,6 +11,11 @@ class MealTime < ActiveRecord::Base
     where(["created_at > ? AND created_at < ?", Time.current.beginning_of_day, Time.current.end_of_day]).first
   end
 
+  def self.by_date(date)
+    date = Time.parse(date)
+    where(["created_at > ? AND created_at < ?", date.beginning_of_day, date.end_of_day]).first
+  end
+
 
   def vendor_ids
     self.vendors.map &:id
@@ -52,6 +57,7 @@ class MealTime < ActiveRecord::Base
     end
     true
   end
+  alias close! close
 
   def closed?
     self.status == "closed"

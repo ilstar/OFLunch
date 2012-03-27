@@ -3,7 +3,11 @@ class OrderItemsController < ApplicationController
   layout :determine_layout
 
   def index
-    @mom = MealTime.today
+    if params.key?(:date)
+      @mom = MealTime.by_date(params[:date])
+    else
+      @mom = MealTime.today
+    end
     @today_order_items = @mom.try(:order_items) || []
   end
 

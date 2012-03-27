@@ -9,6 +9,20 @@ describe MealTime do
     @meal_time = Factory(:meal_time)
   end
 
+  describe ".by_date" do
+    it "be nil when have no meal_time at that date" do
+      MealTime.by_date('2019-01-01').should be_nil
+    end
+
+    it "get one by date" do
+      d = Time.parse('2012-03-03 12:00:00')
+      Timecop.freeze(d) do
+        Factory(:meal_time)
+      end
+      MealTime.by_date('2012-03-03').should_not be_nil
+    end
+  end
+
   describe "unlocked?" do
     it "be true after meal_time created" do
       @meal_time.unlocked?.should be_true

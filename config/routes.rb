@@ -5,6 +5,8 @@ OFLunch::Application.routes.draw do
 
   resources :balances
   resources :order_items, :only => [:index]
+  get 'order_items/:date' => 'order_items#index'
+
   resources :balance_logs, :only => [:create, :index]
 
   resources :orders do

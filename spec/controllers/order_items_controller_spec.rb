@@ -29,7 +29,7 @@ describe OrderItemsController do
       response.should be_success
     end
 
-    it "success when some orders created" do
+    it "success when meal_time have't locked" do
       get :index
 
       response.should be_success
@@ -37,7 +37,7 @@ describe OrderItemsController do
     end
 
     it "render when meal_time is locked" do
-      @meal_time.lock
+      @meal_time.lock!
 
       get :index
 
@@ -45,11 +45,24 @@ describe OrderItemsController do
     end
 
     it "render when meal_time is close" do
-      @meal_time.close
+      @meal_time.close!
 
       get :index
 
       response.should be_success
+    end
+
+    it "successful render when visit old meal_time by date" do
+      t = Time.parse('2012-03-03 12:00:00')
+      meal_time = nil
+      Timecop.freeze(t) do
+        meal_time = Factory(:meal_time)
+      end
+
+      get :index, date: '2012-03-03'
+
+      response.should be_success
+      assigns(:mom).should == meal_time
     end
   end
 
