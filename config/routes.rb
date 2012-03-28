@@ -26,6 +26,7 @@ OFLunch::Application.routes.draw do
     end
   end
 
+  resources :menu_items
   resources :vendors do
     resources :menu_items
   end
