@@ -1,24 +1,24 @@
-<h1>Listing vendors</h1>
+<h1>商家列表</h1>
+<br/>
 
-<table>
+<table class="table table-striped table-bordered">
   <tr>
     <th>Name</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
 <% @vendors.each do |vendor| %>
   <tr>
-    <td><%= vendor.name %></td>
-    <td><%= link_to 'Show', vendor %></td>
-    <td><%= link_to 'Menus', vendor_menu_items_path(vendor) %></td>
-    <td><%= link_to 'Edit', edit_vendor_path(vendor) %></td>
-    <td><%= link_to 'Destroy', vendor, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= best_in_place vendor, :name, activator: "#edit_#{dom_id(vendor)}" %></td>
+    <td>
+      <%= link_to '编辑', '#', id: "edit_#{dom_id(vendor)}" %>
+      <%= link_to '菜单', vendor_menu_items_path(vendor) %>
+      <%= link_to '删除', vendor, confirm: 'Are you sure?', method: :delete %>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Vendor', new_vendor_path %>
+<%= link_to '添加新的商家', new_vendor_path, class: 'btn' %>

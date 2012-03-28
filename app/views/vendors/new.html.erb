@@ -1,5 +1,15 @@
-<h1>New vendor</h1>
+<h1>添加新商家</h1>
 
-<%= render 'form' %>
+<%= simple_form_for(@vendor) do |f| %>
+  <%= f.error_notification %>
 
-<%= link_to 'Back', vendors_path %>
+  <div class="form-inputs">
+    <%= f.input :name %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+    <%= link_to 'Back', vendors_path, class: 'btn' %>
+  </div>
+<% end %>
+

@@ -11,17 +11,6 @@ class VendorsController < ApplicationController
     end
   end
 
-  # GET /vendors/1
-  # GET /vendors/1.json
-  def show
-    @vendor = Vendor.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @vendor }
-    end
-  end
-
   # GET /vendors/new
   # GET /vendors/new.json
   def new
@@ -33,11 +22,6 @@ class VendorsController < ApplicationController
     end
   end
 
-  # GET /vendors/1/edit
-  def edit
-    @vendor = Vendor.find(params[:id])
-  end
-
   # POST /vendors
   # POST /vendors.json
   def create
@@ -45,7 +29,7 @@ class VendorsController < ApplicationController
 
     respond_to do |format|
       if @vendor.save
-        format.html { redirect_to @vendor, notice: 'Vendor was successfully created.' }
+        format.html { redirect_to vendors_url, notice: 'Vendor was successfully created.' }
         format.json { render json: @vendor, status: :created, location: @vendor }
       else
         format.html { render action: "new" }
