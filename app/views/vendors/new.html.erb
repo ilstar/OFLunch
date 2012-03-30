@@ -1,4 +1,5 @@
 <h1>添加新商家</h1>
+<br/>
 
 <%= simple_form_for(@vendor) do |f| %>
   <%= f.error_notification %>
@@ -8,8 +9,8 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
-    <%= link_to 'Back', vendors_path, class: 'btn' %>
+    <%= f.button :submit, t('confirm'), class: 'btn btn-primary' %>
+    <%= link_to t('cancel'), vendors_path, class: 'btn' %>
   </div>
 <% end %>
 

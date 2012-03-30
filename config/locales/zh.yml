@@ -44,8 +44,14 @@ zh-CN:
   order:
     cannot_delete_locked_order: 菜单已经锁定，删除失败
 
+  activerecord:
+    attributes:
+      vendor:
+        name: 商家名称
+
   confirm: 确认
   cancel: 取消
   delete: 删除
+  back: 返回
   delete_confirm: 确定要删除吗？
   delete_successfully: 删除成功
