@@ -8,7 +8,7 @@
           <h2 id="22<%= dom_id(vendor) %>"><%= vendor.name %></h2>
         </th>
       </tr>
-      <% vendor.menu_items.each do |menu_item| %>
+      <% vendor.menu_items_order_by_popular.each do |menu_item| %>
         <tr>
           <td>
             <%= hidden_field_tag "menu_items[][id]", menu_item.id%>

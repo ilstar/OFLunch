@@ -16,6 +16,8 @@ FactoryGirl.define do
 
   factory :menu_item do
     association :vendor
+    name 'menu_item name'
+    price 4
   end
 
   factory :meal_time do
