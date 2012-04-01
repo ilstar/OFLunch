@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :orders
   has_one :balance, :dependent => :destroy
 
+  scope :admin, where(role: 'admin')
+
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
 
   after_create :create_balance_for_user

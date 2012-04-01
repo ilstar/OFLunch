@@ -67,6 +67,11 @@ class MealTime < ActiveRecord::Base
     self.closed? || self.locked?
   end
 
+  def self.notify_admin_if_today_meal_time_is_not_closed!
+    return if self.today.nil? or self.today.closed?
+    GmailNotifier.notify to: User.admin.map(&:email), subject: '[oflunch提醒]今日菜单尚未关闭', body: %{亲，今天的菜单还没有关闭哦，点击<a href="http://10.64.17.47/order_items/#{self.today.created_at.to_date.to_s(:db)}">这里</a>关闭}
+  end
+
   protected
 
   def less_than_two_vendors_choosed
