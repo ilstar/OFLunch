@@ -46,6 +46,7 @@ class MealTime < ActiveRecord::Base
   alias unlocked? unlock?
 
   def close
+    return true if self.closed?
     begin
       self.transaction do
         self.status = "closed"
