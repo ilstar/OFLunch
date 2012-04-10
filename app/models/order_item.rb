@@ -7,4 +7,8 @@ class OrderItem < ActiveRecord::Base
   def total_price
     self.price * self.amount
   end
+
+  def menu_item_with_deleted
+    MenuItem.with_deleted.find_by_id self.menu_item_id
+  end
 end

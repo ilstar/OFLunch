@@ -8,6 +8,7 @@ describe OrdersController do
     @user = Factory(:user)
     @meal_time = Factory(:meal_time)
     @order = Factory(:order, user: @user, meal_time: @meal_time)
+    @order_item = Factory(:order_item, order: @order)
 
     sign_in @user
   end
@@ -66,6 +67,14 @@ describe OrdersController do
 
       response.should be_success
       assigns(:orders).should == [@order]
+    end
+
+    it "render successfully when menu_item was deleted" do
+      @order_item.menu_item.destroy
+
+      get :mine
+
+      response.should be_success
     end
   end
 

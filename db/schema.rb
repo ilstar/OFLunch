@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120309064226) do
+ActiveRecord::Schema.define(:version => 20120410030758) do
 
   create_table "balance_logs", :force => true do |t|
     t.integer  "balance_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20120309064226) do
     t.integer  "vendor_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "deleted_at"
   end
 
   create_table "menu_of_days", :force => true do |t|
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20120309064226) do
     t.string   "phone_number"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.datetime "deleted_at"
   end
 
 end
