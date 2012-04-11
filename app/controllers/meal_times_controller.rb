@@ -42,12 +42,14 @@ class MealTimesController < ApplicationController
 
   def close
     @mom = MealTime.find params[:id]
-    if @mom.close
-      flash.notice = "菜单已关闭，扣钱成功"
+
+    if @mom.closed?
+      flash.notice = "菜单已经关闭，无需重复操作"
     else
-      flash.notice = "菜单关闭失败"
+      @mom.close!
+      flash.notice = "菜单已关闭，扣钱成功"
     end
-    redirect_to order_items_path
+    redirect_to order_items_url
   end
 
 end

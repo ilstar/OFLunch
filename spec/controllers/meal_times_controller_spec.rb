@@ -23,6 +23,24 @@ describe MealTimesController do
     end
   end
 
+  describe "close" do
+    it "close successfully" do
+      put :close, id: @meal_time.id.to_s
+
+      response.should redirect_to(order_items_url)
+      controller.flash.notice.should == '菜单已关闭，扣钱成功'
+    end
+
+    it "will not close because it already closed" do
+      @meal_time.close!
+
+      put :close, id: @meal_time.id.to_s
+
+      response.should redirect_to(order_items_url)
+      controller.flash.notice.should == '菜单已经关闭，无需重复操作'
+    end
+  end
+
   # # This should return the minimal set of attributes required to create a valid
   # # MealTime. As you add validations to MealTime, be sure to
   # # update the return value of this method accordingly.
