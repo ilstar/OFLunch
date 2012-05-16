@@ -2,9 +2,12 @@
 $:.unshift(File.expand_path("./lib", ENV['rvm_path']))
 require 'rvm/capistrano'
 require "bundler/capistrano"
+require "whenever/capistrano"
 load 'deploy/assets'
+
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :user
+set :whenever_command, "bundle exec whenever"
 
 # main details
 set :application, "oflunch"
