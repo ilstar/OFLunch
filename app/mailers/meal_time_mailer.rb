@@ -8,7 +8,7 @@ class MealTimeMailer < ActionMailer::Base
   #   en.meal_time_mailer.close_reminder.subject
   #
   def close_reminder(recipient)
-    @meal_time = MealTime.first
+    @meal_time = MealTime.today
 
     mail to: recipient, subject: "[oflunch提醒]今日菜单尚未关闭"
   end
