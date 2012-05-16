@@ -82,5 +82,6 @@ module OFLunch
       user_name: ENV["OFLUNCH_GMAIL_USERNAME"],
       password: ENV["OFLUNCH_GMAIL_PASSWORD"]
     }
+    config.action_mailer.default_url_options = { host: "10.64.17.47" }
   end
 end
