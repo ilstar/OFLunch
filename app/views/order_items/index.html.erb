@@ -5,6 +5,7 @@
   <br/>
   <% @mom.vendors.each do |vendor| %>
     <% order_items_by_vendor = @today_order_items.select{|oi| oi.menu_item.vendor_id == vendor.id } %>
+    <% next if order_items_by_vendor.empty? %>
     <span class='btn disabled btn-primary'><%= vendor.name %>&nbsp;&nbsp; <span style=";"><%= number_to_currency(order_items_by_vendor.sum(&:total_price), :unit => "￥") %></span></span>
 
     <div style='margin-bottom: 3px;'></div>
