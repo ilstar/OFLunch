@@ -2,23 +2,34 @@
 
 class UsersController < ApplicationController
   layout 'application'
-  before_filter :only_admin_and_user_himself_can_change_user, :except => :edit
+  before_filter :load_current_user
 
   def edit
-    @user = User.find_by_id(params[:user_id]) || current_user
+  end
+
+  def edit_password
   end
 
   def update
     if @user.update_attributes(params[:user])
-      redirect_to account_path(:user_id => @user.id), :notice => "修改成功"
+      redirect_to edit_user_path, :notice => "修改成功"
     else
-      render :action => "edit", :user_id => params[:user_id]
+      render :action => "edit"
     end
   end
 
-  private
-  def only_admin_and_user_himself_can_change_user
-    @user = User.find_by_id(params[:user_id])
-    redirect_to account_path(:user_id => @user.id), :notice => "不能编辑此账户信息" if not @user.can_access_by?(current_user)
+  def update_password
+    if @user.update_with_password(params[:user])
+      redirect_to edit_password_user_path, :notice => "修改成功"
+    else
+      render "edit_password"
+    end
   end
+
+  protected
+
+  def load_current_user
+    @user = current_user
+  end
+
 end

@@ -33,8 +33,10 @@ OFLunch::Application.routes.draw do
 
   devise_for :users
 
-  resources :users
-  match 'account' => "users#edit"
+  resource :user, only: [:edit, :update] do
+    get 'edit_password'
+    put 'update_password'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
