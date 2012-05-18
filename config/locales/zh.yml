@@ -49,6 +49,10 @@ zh-CN:
     attributes:
       vendor:
         name: 商家名称
+      user:
+        current_password: 当前密码
+        password: 密码
+        password_confirmation: 密码确认
 
   confirm: 确认
   cancel: 取消
