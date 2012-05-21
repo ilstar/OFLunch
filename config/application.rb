@@ -9,6 +9,10 @@ require "active_resource/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
+$config = {}
+config_file = "config/config.yml"
+$config = YAML.load_file(config_file)[Rails.env] if File.exists?(config_file)
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -79,8 +83,8 @@ module OFLunch
       port: 587,
       authentication: "plain",
       enable_starttls_auto: true,
-      user_name: ENV["OFLUNCH_GMAIL_USERNAME"],
-      password: ENV["OFLUNCH_GMAIL_PASSWORD"]
+      user_name: $config['mail_username'],
+      password: $config['mail_password'],
     }
     config.action_mailer.default_url_options = { host: "10.64.17.47" }
   end

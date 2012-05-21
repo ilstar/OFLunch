@@ -1,0 +1,8 @@
+common: &common
+  mail_username: hello
+  mail_password: world
+
+production:
+  <<: *common
+development:
+  <<: *common
