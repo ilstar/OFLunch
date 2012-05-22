@@ -6,11 +6,6 @@ class MealTimesController < ApplicationController
     @meal_time = MealTime.new if @today_meal_time.nil?
   end
 
-  def new
-    @meal_time = MealTime.new
-  end
-
-
   def create
     @meal_time = MealTime.new(params[:meal_time])
 
