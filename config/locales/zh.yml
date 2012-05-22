@@ -16,7 +16,7 @@ zh-CN:
   # controllers views
   meal_times:
     index:
-      no_mom_selected: 今日尚未选择菜单，
+      no_mom_selected: 今日菜单尚未出炉，请从下面选择今日菜单！
       choose_mom: 开始选择
       today_menu: 今日菜单(%{date})
     new:

@@ -2,6 +2,8 @@
 class MealTimesController < ApplicationController
   def index
     @today_meal_time = MealTime.today
+
+    @meal_time = MealTime.new if @today_meal_time.nil?
   end
 
   def new

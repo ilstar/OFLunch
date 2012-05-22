@@ -1,15 +1,15 @@
 <% if @today_meal_time.nil? %>
-  <%= t '.no_mom_selected' %>
-  <%= link_to t('.choose_mom'), new_meal_time_path %>
+  <legend><%= t '.no_mom_selected' %></legend>
+  <%= render 'form' %>
 <% else %>
   <div>
-    <%= t '.today_menu', :date => l(@today_meal_time.created_at, format: :short) %>
+    <h2><%= t '.today_menu', :date => l(@today_meal_time.created_at, format: :short) %></h2>
   </div>
-  <% @today_meal_time.vendors.each do |vendor| %>
-    <div>
-      <%= vendor.name %>
-    </div>
-  <% end %>
+  <ul>
+    <% @today_meal_time.vendors.each do |vendor| %>
+      <li><%= vendor.name %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 

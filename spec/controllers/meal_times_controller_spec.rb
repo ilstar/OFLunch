@@ -9,6 +9,24 @@ describe MealTimesController do
     sign_in @user
   end
 
+  describe "GET index" do
+    it "successfully rendered when no today meal time" do
+      MealTime.destroy_all
+
+      get :index
+
+      response.should be_success
+    end
+
+    it "successfully rendered when today meal time is created" do
+      MealTime.today.should_not be_nil
+
+      get :index
+
+      response.should be_success
+    end
+  end
+
   describe "PUT unlock" do
     before do
       @meal_time.lock!
