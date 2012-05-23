@@ -9,6 +9,8 @@ gem 'jquery-rails', '2.0.0'
 
 gem 'devise', '2.0.4'
 gem 'simple_form', '2.0.0'
+gem "tabs_on_rails", '2.1.1'
+
 gem 'mysql2', '0.3.11'
 
 gem 'rails-i18n', '0.5.1'

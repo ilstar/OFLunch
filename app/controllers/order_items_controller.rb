@@ -1,6 +1,7 @@
 class OrderItemsController < ApplicationController
   skip_before_filter :authenticate_user!
   layout :determine_layout
+  set_tab :order_items
 
   def index
     if params.key?(:date)

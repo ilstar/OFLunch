@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class OrdersController < ApplicationController
+  set_tab :home
+  
   def index
     @today_meal_time = MealTime.today
     @today_order = @today_meal_time.orders.for_user_id(current_user.id).last if @today_meal_time

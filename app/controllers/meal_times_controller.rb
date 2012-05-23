@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class MealTimesController < ApplicationController
+  set_tab :meal_times
+
   def index
     @today_meal_time = MealTime.today
 

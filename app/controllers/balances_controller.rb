@@ -1,5 +1,6 @@
 class BalancesController < ApplicationController
   before_filter :admin_required
+  set_tab :balances
 
   # GET /balances
   # GET /balances.json

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class VendorsController < ApplicationController
-  # GET /vendors
-  # GET /vendors.json
+  set_tab :vendors
+
   def index
     @vendors = Vendor.all
 
