@@ -14,13 +14,19 @@
     <%= link_to ">", year: @date.next_month.year, month: @date.next_month.month %>
   </h2>
 
-<%= calendar_for @balance_logs, year: @date.year, month: @date.month do |t| %>
+<%= calendar_for @bills, year: @date.year, month: @date.month do |t| %>
   <%= t.head 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' %>
-  <%= t.day day_method: :created_at do |day, balance_logs| %>
+  <%= t.day day_method: :created_at do |day, bills| %>
     <%= day.day %>
     <br/>
+    <% balance_logs = bills.select {|bill| bill.is_a?(BalanceLog)} %>
+    <% orders = bills.select {|bill| bill.is_a?(Order)} %>
     <% balance_logs.each do |log| %>
-      <span class="label label-info"><%= number_to_currency log.amount, :unit => "￥" %></span>
+      <span class="label label-important"><%= number_to_currency log.amount, :unit => "￥" %></span>
+      <br/>
+    <% end %>
+    <% orders.each do |order| %>
+      <span class="label label-success"><%= number_to_currency order.total_price, :unit => "￥" %></span>
       <br/>
     <% end %>
   <% end %>
