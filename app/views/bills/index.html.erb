@@ -1,4 +1,4 @@
-<h2 class="pull-left">充值记录</h2>
+<h2 class="pull-left">消费详情</h2>
 
 <span class="pull-right label <%= current_user.account_balance > 20 ? 'label-info' : 'label-warning' %>">
   <%= t '.current_account_balance' %><%= number_to_currency current_user.account_balance, unit: '￥' %>
