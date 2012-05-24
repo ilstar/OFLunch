@@ -37,6 +37,9 @@ zh-CN:
   balance_logs:
     index:
       current_account_balance: 账户余额
+  bills:
+    index:
+      current_account_balance: 账户余额
 
   meal_time:
     no_more_than_2_vendors: 最多只能选择两家餐馆
