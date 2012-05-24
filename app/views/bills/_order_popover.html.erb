@@ -1,0 +1,8 @@
+<% order.order_items.each do |item| %>
+  <%= item.menu_item_with_deleted.try(:name) || '-' %>
+  <%= number_to_currency item.price, unit: '￥' %>
+  <% if item.amount > 1 %>
+    x <%= item.amount %>
+  <% end %>
+  <br/>
+<% end %>
