@@ -28,8 +28,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t 'nav.account' %><b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><%= link_to t('nav.user_edit'), edit_user_path %></li>
-              <li><%= link_to t('nav.balance_history'), balance_logs_path %></li>
-              <li><%= link_to '订单历史', mine_orders_path %></li>
+              <li><%= link_to '消费详情', bills_path %></li>
               <li><%= link_to t('nav.logout'), destroy_user_session_path, method: 'delete' %></li>
             </ul>
             </li>
