@@ -22,7 +22,7 @@
     <% balance_logs = bills.select {|bill| bill.is_a?(BalanceLog)} %>
     <% orders = bills.select {|bill| bill.is_a?(Order)} %>
     <% balance_logs.each do |log| %>
-      <span class="label label-important" rel="tooltip" title="充值记录"><%= number_to_currency log.amount, :unit => "￥" %></span>
+      <span class="label label-important" rel="tooltip"><%= number_to_currency log.amount, :unit => "￥" %></span>
       <br/>
     <% end %>
     <% orders.each do |order| %>
@@ -32,3 +32,7 @@
   <% end %>
 <% end %>
 </div>
+
+<%= content_for :footer do %>
+  <%= javascript_include_tag "bills" %>
+<% end %>

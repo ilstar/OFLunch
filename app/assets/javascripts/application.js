@@ -16,7 +16,6 @@
 //= require jquery.scrollTo-min
 //= require jquery.purr
 //= require best_in_place
-//= require bootstrap
 
 $(document).ready(function() {
   jQuery('.best_in_place').best_in_place();

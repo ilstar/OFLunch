@@ -11,14 +11,15 @@
   <body>
     <%= render 'nav' %>
     <div class="container">
-    <%= render 'notice' %>
+      <%= render 'notice' %>
 
-    <%= yield %>
+      <%= yield %>
       <footer class="footer">
         <hr/>
         <p>@openfeint</p>
       </footer>
     </div>
 
+    <%= yield :footer %>
   </body>
 </html>
