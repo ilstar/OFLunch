@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 OFLunch::Application.routes.draw do
 
+  resources :bills, only: [:index]
+
   get "order_items/index"
 
   resources :balances
