@@ -10,6 +10,7 @@ gem 'jquery-rails', '2.0.0'
 gem 'devise', '2.0.4'
 gem 'simple_form', '2.0.0'
 gem "tabs_on_rails", '2.1.1'
+gem "watu_table_builder", :require => "table_builder"
 
 gem 'mysql2', '0.3.11'
 

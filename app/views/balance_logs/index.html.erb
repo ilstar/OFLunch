@@ -1,14 +1,27 @@
-<span class="label <%= current_user.account_balance > 20 ? 'label-info' : 'label-warning' %>">
+<h2 class="pull-left">充值记录</h2>
+
+<span class="pull-right label <%= current_user.account_balance > 20 ? 'label-info' : 'label-warning' %>">
   <%= t '.current_account_balance' %><%= number_to_currency current_user.account_balance, unit: '￥' %>
 </span>
 
 <br/>
-<br/>
 
-<table class="table">
-  <% @balance_logs.each do |log| %>
-    <tr>
-      <td>在<%= l log.created_at, format: :long %> 充值 <%= number_to_currency(log.amount, :unit => "￥") %></td>
-    </tr>
+<div id="calendar">
+  <h2 id="month">
+    <%= link_to "<", year: @date.prev_month.year, month: @date.prev_month.month %>
+    <%=h @date.strftime("%B %Y") %>
+    <%= link_to ">", year: @date.next_month.year, month: @date.next_month.month %>
+  </h2>
+
+<%= calendar_for @balance_logs, year: @date.year, month: @date.month do |t| %>
+  <%= t.head 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' %>
+  <%= t.day day_method: :created_at do |day, balance_logs| %>
+    <%= day.day %>
+    <br/>
+    <% balance_logs.each do |log| %>
+      <span class="label label-info"><%= number_to_currency log.amount, :unit => "￥" %></span>
+      <br/>
+    <% end %>
   <% end %>
-</table>
+<% end %>
+</div>
