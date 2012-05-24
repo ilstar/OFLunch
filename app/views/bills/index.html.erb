@@ -14,7 +14,7 @@
     <%= link_to ">", year: @date.next_month.year, month: @date.next_month.month %>
   </h2>
 
-<%= calendar_for @bills, year: @date.year, month: @date.month do |t| %>
+<%= calendar_for @bills, year: @date.year, month: @date.month, html: {class: 'table table-bordered'} do |t| %>
   <%= t.head 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' %>
   <%= t.day day_method: :created_at do |day, bills| %>
     <%= day.day %>
