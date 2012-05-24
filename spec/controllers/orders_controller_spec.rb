@@ -50,34 +50,6 @@ describe OrdersController do
     end
   end
 
-  describe "GET mine" do
-    it "render successfully when no any order" do
-      Order.destroy_all
-
-      get :mine
-
-      response.should be_success
-      assigns(:orders).should == []
-    end
-
-    it "only render current_user orders" do
-      others_order = Factory(:order, meal_time: @meal_time)
-
-      get :mine
-
-      response.should be_success
-      assigns(:orders).should == [@order]
-    end
-
-    it "render successfully when menu_item was deleted" do
-      @order_item.menu_item.destroy
-
-      get :mine
-
-      response.should be_success
-    end
-  end
-
   describe "DELETE destroy" do
     describe "when successfully" do
       it "delete it" do

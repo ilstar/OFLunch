@@ -7,10 +7,6 @@ class OrdersController < ApplicationController
     @today_order = @today_meal_time.orders.for_user_id(current_user.id).last if @today_meal_time
   end
 
-  def mine
-    @orders = current_user.orders.order('id DESC').paginate(per_page: 10, page: params[:page])
-  end
-
   def new
     @order = Order.new
   end
