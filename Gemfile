@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -48,10 +48,6 @@ end
 
 group :development do
   gem "rspec-rails", "2.8.1"
-end
-
-group :production do
-  gem 'pg'
 end
 
 gem 'magic_encoding'
