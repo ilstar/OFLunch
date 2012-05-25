@@ -4,14 +4,18 @@
   <%= t '.current_account_balance' %><%= number_to_currency current_user.account_balance, unit: '￥' %>
 </span>
 
+<div class="clearfix"></div>
 
 <br/>
 
 <div id="calendar">
   <h2 id="month">
-    <%= link_to "<", year: @date.prev_month.year, month: @date.prev_month.month %>
+    <div class="btn-group" style="display: inline">
+      <%= link_to "<", bills_path(year: @date.prev_month.year, month: @date.prev_month.month), class: 'btn' %>
+      <%= link_to ">", bills_path(year: @date.next_month.year, month: @date.next_month.month), class: 'btn' %>
+    </div>
+    <%= link_to "Today", bills_path, class: 'btn', style: "float: left; margin-left: 5px;" %>
     <%=h @date.strftime("%B %Y") %>
-    <%= link_to ">", year: @date.next_month.year, month: @date.next_month.month %>
   </h2>
 
 <%= calendar_for @bills, year: @date.year, month: @date.month, html: {class: 'table table-bordered'} do |t| %>

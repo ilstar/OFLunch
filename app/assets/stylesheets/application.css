@@ -56,10 +56,8 @@
   text-align: center;
 }
 
-#calendar #month a, #calendar #month a:hover {
-  text-decoration: none;
-  padding: 0 10px;
-  color: #999;
+#calendar #month a {
+  margin-top: 5px;
 }
 
 #calendar .today {
