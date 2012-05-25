@@ -19,14 +19,31 @@
   display: block;
 }
 
-#message-count {
+#unread-message-count {
   font-weight: bold;
   font-size: 14px;
   color: white;
 }
 
-#message-count span {
+#unread-message-count span {
   background-color: #BE4240;
   padding: 3px 6px 4px;
   border-radius: 5px;
+}
+
+#unread-message-count span:hover {
+  background-color: #DB403D;
+}
+
+#unread-message-content {
+  position: fixed;
+  top: 70;
+  right: 15px;
+  border-radius: 9px;
+  border: 1px solid #E1E1E9;
+  min-width: 200px;
+  min-height: 300px;
+  background-color: #F5F5F5;
+  padding: 15px;
+  display: none;
 }

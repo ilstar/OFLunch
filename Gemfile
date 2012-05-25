@@ -6,6 +6,7 @@ gem 'rails', '3.2.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'jquery-rails', '2.0.0'
+gem 'jquery-ui-rails', '0.4.0'
 
 gem 'devise', '2.0.4'
 gem 'simple_form', '2.0.0'

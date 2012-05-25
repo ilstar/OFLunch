@@ -25,7 +25,7 @@
           <ul class="nav pull-right">
             <li><%= link_to "Hi, #{current_user.identifier}", edit_user_path %></li>
             <% if not @messages.empty? %>
-              <li><a id="message-count"><span><%= @messages.count %></span></a></li>
+              <li><a id="unread-message-count" href="javascript:;"><span><%= @messages.count %></span></a></li>
             <% end %>
             <li id="fat-menu" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t 'nav.account' %><b class="caret"></b></a>
@@ -42,3 +42,15 @@
   </div>
 </div>
 
+<% if not @messages.empty? %>
+  <div id="unread-message-content">
+    <h3>通知中心</h3>
+    <div>
+      <ul>
+        <% @messages.each do |msg| %>
+          <li> <%= raw msg.content %> </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
