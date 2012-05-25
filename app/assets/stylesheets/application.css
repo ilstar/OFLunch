@@ -43,7 +43,9 @@
   border: 1px solid #E1E1E9;
   min-width: 200px;
   min-height: 300px;
-  background-color: #F5F5F5;
+  background-color: white;
   padding: 15px;
   display: none;
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
