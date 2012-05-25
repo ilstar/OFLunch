@@ -19,3 +19,14 @@
   display: block;
 }
 
+#message-count {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+}
+
+#message-count span {
+  background-color: #BE4240;
+  padding: 3px 6px 4px;
+  border-radius: 5px;
+}
