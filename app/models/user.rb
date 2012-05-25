@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
     :rememberable, :trackable, :validatable
 
   has_many :orders
-  has_many :messages, foreign_key: 'recipient_id'
+  has_many :unread_messages, foreign_key: 'recipient_id', class_name: 'Message', conditions: {read: false}
   has_one :balance, :dependent => :destroy
 
   scope :admin, where(role: 'admin')

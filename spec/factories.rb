@@ -21,7 +21,7 @@ FactoryGirl.define do
   end
 
   factory :meal_time do
-    after_build do |meal_time|
+    after :build do |meal_time|
       meal_time.vendors << Factory(:vendor)
     end
   end
@@ -46,6 +46,11 @@ FactoryGirl.define do
   factory :balance_log do
     association :balance
     amount 100
+  end
+
+  factory :message do
+    association :recipient, factory: :user
+    content 'blabla'
   end
 
 end

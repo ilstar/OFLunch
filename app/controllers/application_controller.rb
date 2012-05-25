@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def check_unread_messages
-    @messages = current_user ? current_user.messages : []
+    @messages = current_user ? current_user.unread_messages : []
   end
 end
