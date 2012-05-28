@@ -1,0 +1,12 @@
+<%# need a instance variable: @messages %>
+
+<div id="unread-message-content">
+  <h3>通知中心</h3>
+  <div>
+    <ul>
+      <% @messages.each do |msg| %>
+        <li><%= render partial: "/messages/#{msg.entity.class.to_s.underscore}", locals: {msg: msg} %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

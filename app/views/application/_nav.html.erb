@@ -42,13 +42,4 @@
   </div>
 </div>
 
-<% if not @messages.empty? %>
-  <div id="unread-message-content">
-    <h3>通知中心</h3>
-    <div>
-      <ul>
-        <%= messages_content @messages %>
-      </ul>
-    </div>
-  </div>
-<% end %>
+<%= render 'messages_center' if not @messages.empty? %>
