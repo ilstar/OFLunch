@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525055752) do
+ActiveRecord::Schema.define(:version => 20120528060609) do
 
   create_table "balance_logs", :force => true do |t|
     t.integer  "balance_id"
@@ -65,7 +65,11 @@ ActiveRecord::Schema.define(:version => 20120525055752) do
     t.boolean  "read",         :default => false
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.string   "entity_type",                     :null => false
+    t.integer  "entity_id",                       :null => false
   end
+
+  add_index "messages", ["entity_type", "entity_id"], :name => "index_messages_on_entity_type_and_entity_id"
 
   create_table "order_items", :force => true do |t|
     t.integer  "order_id"
