@@ -10,7 +10,6 @@ class BalanceLog < ActiveRecord::Base
   protected
 
   def notify_user
-    msg = Message.create recipient_id: self.balance.user_id
-    msg.update_attribute :content, "您的账户充值#{self.amount}元, <a href='/messages/#{msg.id}/redirect?redirect_to=%2Fbills' data-method='put'>点击查看</a>"
+    msg = Message.create recipient_id: self.balance.user_id, entity: self
   end
 end

@@ -47,9 +47,7 @@
     <h3>通知中心</h3>
     <div>
       <ul>
-        <% @messages.each do |msg| %>
-          <li> <%= raw msg.content %> </li>
-        <% end %>
+        <%= messages_content @messages %>
       </ul>
     </div>
   </div>
