@@ -1,1 +1,7 @@
-您的账户充值 <%= msg.entity.amount %>元, <%= link_to '点击查看', redirect_message_path(msg, redirect_to: bills_path), method: 'put' %>
+您的账户在
+<span title="<%= l msg.created_at, format: :long %>">
+  <i><%= time_ago_in_words msg.created_at %></i>
+</span>
+前充值
+<%= msg.entity.amount %>元,
+<%= link_to '点击查看', redirect_message_path(msg, redirect_to: bills_path), method: 'put' %>
