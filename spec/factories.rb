@@ -22,7 +22,7 @@ FactoryGirl.define do
 
   factory :meal_time do
     after :build do |meal_time|
-      meal_time.vendors << Factory(:vendor)
+      meal_time.vendors << FactoryGirl.create(:vendor)
     end
   end
 

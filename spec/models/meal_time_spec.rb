@@ -6,7 +6,7 @@ describe MealTime do
   it { should have_many(:vendors).through(:menu_of_meals) }
 
   before do
-    @meal_time = Factory(:meal_time)
+    @meal_time = FactoryGirl.create(:meal_time)
   end
 
   describe ".by_date" do
@@ -17,7 +17,7 @@ describe MealTime do
     it "get one by date" do
       d = Time.parse('2012-03-03 12:00:00')
       Timecop.freeze(d) do
-        Factory(:meal_time)
+        FactoryGirl.create(:meal_time)
       end
       MealTime.by_date('2012-03-03').should_not be_nil
     end

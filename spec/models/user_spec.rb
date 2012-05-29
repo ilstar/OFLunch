@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe User do
   before do
-    @user = Factory(:user)
+    @user = FactoryGirl.create(:user)
   end
 
   describe "#admin?" do
@@ -20,12 +20,12 @@ describe User do
   describe "balance" do
     it "auto create balance after user created" do
       lambda {
-        Factory(:user)
+        FactoryGirl.create(:user)
       }.should change{ Balance.count }.by(1)
     end
 
     it "balance is 0 default" do
-      user = Factory(:user)
+      user = FactoryGirl.create(:user)
 
       user.account_balance.should == 0
     end
