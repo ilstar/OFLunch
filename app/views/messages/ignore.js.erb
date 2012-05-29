@@ -1,0 +1,10 @@
+$msg_item = $('#<%= dom_id(@message) %>');
+
+if ($msg_item.parent().children().length == 1) {
+  // if the message is the last one, remove notification count.
+  $("#unread-message-count").remove();
+  $('#unread-message-content').hide('drop', {direction: 'right'}, 270);
+} else {
+  $("#unread-message-count span").text(parseInt($("#unread-message-count").text()) - 1);
+  $msg_item.remove();
+}

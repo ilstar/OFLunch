@@ -4,6 +4,7 @@ OFLunch::Application.routes.draw do
   resources :messages, only: [] do
     member do
       put :redirect
+      put :ignore
     end
   end
 

@@ -5,7 +5,10 @@
   <div>
     <ul>
       <% @messages.each do |msg| %>
-        <li><%= render partial: "/messages/#{msg.entity.class.to_s.underscore}", locals: {msg: msg} %></li>
+        <li id="<%= dom_id(msg) %>">
+          <%= render partial: "/messages/#{msg.entity.class.to_s.underscore}", locals: {msg: msg} %>
+          <%= link_to "标为已读", ignore_message_path(msg), method: :put, remote: true %>
+        </li>
       <% end %>
     </ul>
   </div>
