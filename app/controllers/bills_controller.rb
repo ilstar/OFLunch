@@ -6,8 +6,8 @@ class BillsController < ApplicationController
       @date = Date.today
     end
 
-    @balance_logs = current_user.balance.balance_logs.where(created_at: (@date.beginning_of_month..@date.end_of_month))
-    @orders = current_user.orders.where(created_at: (@date.beginning_of_month..@date.end_of_month))
+    @balance_logs = current_user.balance.balance_logs.where(created_at: (@date.beginning_of_month..@date.end_of_month + 1))
+    @orders = current_user.orders.where(created_at: (@date.beginning_of_month..@date.end_of_month + 1))
     @bills = @balance_logs + @orders
   end
 end
