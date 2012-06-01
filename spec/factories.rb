@@ -50,7 +50,7 @@ FactoryGirl.define do
 
   factory :message do
     association :recipient, factory: :user
-    content 'blabla'
+    association :entity, factory: :balance_log
   end
 
 end
