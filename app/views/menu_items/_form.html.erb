@@ -8,6 +8,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, '保存并继续' %>
+    <%= f.button :submit, '保存并继续', class: 'btn-primary' %>
+    <%= link_to 'Back', vendor_menu_items_path(@vendor), class: 'btn' %>
   </div>
 <% end %>

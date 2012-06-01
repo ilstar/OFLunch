@@ -4,7 +4,9 @@
   <%= @vendor.name %>的菜单
 </h2>
 
-<%= link_to 'New Menu item', new_vendor_menu_item_path(@vendor), class: 'btn', style: 'margin-bottom: 7px;' %>
+<% if @menu_items.size > 15 %>
+  <%= link_to '添加新菜单', new_vendor_menu_item_path(@vendor), class: 'btn', style: 'margin-bottom: 7px;' %>
+<% end %>
 
 <table class="table table-striped table-bordered">
   <tr>
@@ -26,4 +28,4 @@
 <% end %>
 </table>
 
-<%= link_to 'New Menu item', new_vendor_menu_item_path(@vendor), class: 'btn' %>
+<%= link_to '添加新菜单', new_vendor_menu_item_path(@vendor), class: 'btn' %>
