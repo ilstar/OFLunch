@@ -1,18 +1,16 @@
-<h3>
+<h2>
   <%= link_to '所有商家', vendors_path %>
   >
   <%= @vendor.name %>的菜单
-</h3>
+</h2>
 
-<%= link_to 'New Menu item', new_vendor_menu_item_path(@vendor) %>
-
-<br/>
+<%= link_to 'New Menu item', new_vendor_menu_item_path(@vendor), class: 'btn', style: 'margin-bottom: 7px;' %>
 
 <table class="table table-striped table-bordered">
   <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Serial num</th>
+    <th width="40%">Name</th>
+    <th width="20%">Price</th>
+    <th width="10%">Serial num</th>
     <th></th>
   </tr>
 
@@ -28,6 +26,4 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Menu item', new_vendor_menu_item_path(@vendor) %>
+<%= link_to 'New Menu item', new_vendor_menu_item_path(@vendor), class: 'btn' %>
