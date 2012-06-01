@@ -1,8 +1,7 @@
 # -*- encoding : utf-8 -*-
 class MenuItemsController < ApplicationController
   before_filter :get_vendor
-  # GET /menu_items
-  # GET /menu_items.json
+
   def index
     @menu_items = @vendor.menu_items
 
@@ -12,18 +11,6 @@ class MenuItemsController < ApplicationController
     end
   end
 
-  # GET /menu_items/1
-  # GET /menu_items/1.json
-  def show
-    @menu_item = @vendor.menu_items.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-    end
-  end
-
-  # GET /menu_items/new
-  # GET /menu_items/new.json
   def new
     @menu_item = @vendor.menu_items.build(params[:menu_item])
 
@@ -32,13 +19,6 @@ class MenuItemsController < ApplicationController
     end
   end
 
-  # GET /menu_items/1/edit
-  def edit
-    @menu_item = @vendor.menu_items.find(params[:id])
-  end
-
-  # POST /menu_items
-  # POST /menu_items.json
   def create
     @menu_item = @vendor.menu_items.build(params[:menu_item])
 
@@ -51,8 +31,6 @@ class MenuItemsController < ApplicationController
     end
   end
 
-  # PUT /menu_items/1
-  # PUT /menu_items/1.json
   def update
     @menu_item = MenuItem.find(params[:id])
 
@@ -66,8 +44,6 @@ class MenuItemsController < ApplicationController
     end
   end
 
-  # DELETE /menu_items/1
-  # DELETE /menu_items/1.json
   def destroy
     @menu_item = MenuItem.find(params[:id])
     @menu_item.destroy

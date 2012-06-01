@@ -36,7 +36,7 @@ OFLunch::Application.routes.draw do
 
   resources :menu_items
   resources :vendors do
-    resources :menu_items
+    resources :menu_items, except: %w{show edit}
   end
 
   devise_for :users

@@ -43,26 +43,10 @@ describe MenuItemsController do
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested menu_item as @menu_item" do
-      menu_item = MenuItem.create! valid_attributes
-      get :show, {:id => menu_item.to_param}, valid_session
-      assigns(:menu_item).should eq(menu_item)
-    end
-  end
-
   describe "GET new" do
     it "assigns a new menu_item as @menu_item" do
       get :new, {}, valid_session
       assigns(:menu_item).should be_a_new(MenuItem)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested menu_item as @menu_item" do
-      menu_item = MenuItem.create! valid_attributes
-      get :edit, {:id => menu_item.to_param}, valid_session
-      assigns(:menu_item).should eq(menu_item)
     end
   end
 
