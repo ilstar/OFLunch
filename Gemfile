@@ -51,6 +51,9 @@ end
 
 group :development do
   gem "rspec-rails", "2.8.1"
+
+  # security scanner
+  gem 'brakeman', '~> 1.6'
 end
 
 gem 'magic_encoding'
