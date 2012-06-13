@@ -4,18 +4,11 @@ class MenuItemsController < ApplicationController
 
   def index
     @menu_items = @vendor.menu_items
+    @menu_item = MenuItem.new
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @menu_items }
-    end
-  end
-
-  def new
-    @menu_item = @vendor.menu_items.build(params[:menu_item])
-
-    respond_to do |format|
-      format.html # new.html.erb
     end
   end
 
@@ -25,8 +18,10 @@ class MenuItemsController < ApplicationController
     respond_to do |format|
       if @menu_item.save
         format.html { redirect_to new_vendor_menu_item_url(@vendor), notice: 'Menu item was successfully created.' }
+        format.js
       else
         format.html { render action: "new" }
+        format.js { render 'new' }
       end
     end
   end
@@ -50,7 +45,7 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to vendor_menu_items_url(@menu_item.vendor_id) }
-      format.json { head :no_content }
+      format.js
     end
   end
 

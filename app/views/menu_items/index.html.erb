@@ -16,16 +16,14 @@
     <th></th>
   </tr>
 
-<% @menu_items.each do |menu_item| %>
-  <tr>
-    <td><%= best_in_place menu_item, :name %></td>
-    <td><%= best_in_place menu_item, :price %></td>
-    <td><%= best_in_place menu_item, :serial_num %></td>
-    <td>
-      <%= link_to 'Destroy', vendor_menu_item_path(@vendor, menu_item),  confirm: 'Are you sure?', method: :delete %>
-    </td>
-  </tr>
-<% end %>
+  <%= render partial: "tr_menu_item", collection: @menu_items, as: :menu_item %>
 </table>
 
-<%= link_to '添加新菜单', new_vendor_menu_item_path(@vendor), class: 'btn' %>
+<a class="btn" data-toggle="modal" href="#menu_item_modal_form" >
+  <i class="icon-plus-sign"></i>
+  添加新菜单
+</a>
+
+<div class="modal hide" id="menu_item_modal_form">
+  <%= render "modal_form" %>
+</div>

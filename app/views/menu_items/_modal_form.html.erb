@@ -1,19 +1,21 @@
-  <%= simple_form_for(@vendor, remote: true, html: {class: 'form-horizontal'}) do |f| %>
+<%= simple_form_for([@vendor, @menu_item], remote: true, html: {class: 'form-horizontal'}) do |f| %>
 
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>添加商家</h3>
+    <h3>添加新菜单</h3>
   </div>
 
   <div class="modal-body">
     <%= f.error_notification %>
     <div class="form-inputs">
       <%= f.input :name, autofocus: true %>
+      <%= f.input :price %>
+      <%= f.input :serial_num %>
     </div>
   </div>
 
   <div class="modal-footer">
-    <%= f.button :submit, t('confirm'), class: 'btn btn-primary' %>
+    <%= f.button :submit, '保存并继续', class: 'btn-primary' %>
   </div>
 
-  <% end %>
+<% end %>
