@@ -8,9 +8,8 @@
 
 <% @vendors.each do |vendor| %>
   <tr>
-    <td width="50%"><%= best_in_place vendor, :name, activator: "#edit_#{dom_id(vendor)}" %></td>
+    <td width="50%"><%= best_in_place vendor, :name %></td>
     <td>
-      <%= link_to '编辑', '#', id: "edit_#{dom_id(vendor)}" %>
       <%= link_to '菜单', vendor_menu_items_path(vendor) %>
       <%= link_to '删除', vendor, confirm: 'Are you sure?', method: :delete %>
     </td>
