@@ -52,6 +52,10 @@ zh-CN:
     attributes:
       vendor:
         name: 商家名称
+      menu_item:
+        name: 名称
+        price: 价格(￥)
+        serial_num: 编号
       user:
         current_password: 当前密码
         password: 密码
