@@ -7,8 +7,7 @@ class MenuItemsController < ApplicationController
     @menu_item = MenuItem.new
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @menu_items }
+      format.js
     end
   end
 

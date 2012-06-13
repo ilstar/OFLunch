@@ -1,0 +1,25 @@
+<h2>
+  <%= @vendor.name %>的菜单
+</h2>
+
+<a class="btn" data-toggle="modal" href="#menu_item_modal_form" >
+  <i class="icon-plus-sign"></i>
+  添加新菜单
+</a>
+
+<br/><br/>
+
+<table class="table table-striped table-bordered" id="menu_items_table">
+  <tr>
+    <th width="40%">Name</th>
+    <th width="20%">Price</th>
+    <th width="20%">Serial num</th>
+    <th></th>
+  </tr>
+
+  <%= render partial: "tr_menu_item", collection: @menu_items, as: :menu_item %>
+</table>
+
+<div class="modal hide" id="menu_item_modal_form">
+  <%= render "modal_form" %>
+</div>

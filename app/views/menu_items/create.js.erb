@@ -1,4 +1,4 @@
-$("table").append("<%= escape_javascript(render(partial: 'tr_menu_item', locals: {menu_item: @menu_item})) %>");
+$("#menu_items_table").append("<%= escape_javascript(render(partial: 'tr_menu_item', locals: {menu_item: @menu_item})) %>");
 
 // reset form and inputs.
 <% @menu_item = MenuItem.new %>
