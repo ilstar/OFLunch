@@ -1,2 +1,5 @@
-$("table").append("<%= escape_javascript(render(partial: 'tr_vendor', locals: {vendor: @vendor})) %>");
+$("#vendors_table").append("<%= escape_javascript(render(partial: 'tr_vendor', locals: {vendor: @vendor})) %>");
 $("#modal_form").modal('hide');
+
+jQuery('.best_in_place').best_in_place();
+

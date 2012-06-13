@@ -3,3 +3,6 @@ $("#menu_items_table").append("<%= escape_javascript(render(partial: 'tr_menu_it
 // reset form and inputs.
 <% @menu_item = MenuItem.new %>
 $("#menu_item_modal_form").html("<%= escape_javascript(render(partial: 'modal_form')) %>");
+
+jQuery('.best_in_place').best_in_place();
+
