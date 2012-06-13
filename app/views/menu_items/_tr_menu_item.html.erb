@@ -1,7 +1,7 @@
 <tr id="tr_<%= dom_id(menu_item) %>">
   <td><%= best_in_place menu_item, :name %></td>
-  <td><%= best_in_place menu_item, :price %></td>
-  <td><%= best_in_place menu_item, :serial_num %></td>
+  <td><%= best_in_place menu_item, :price, inner_class: "span1" %></td>
+  <td><%= best_in_place menu_item, :serial_num, inner_class: "span1" %></td>
   <td>
     <%= link_to '删除', vendor_menu_item_path(@vendor, menu_item),  confirm: "你确定要删除 #{menu_item.name} 吗?", method: :delete, remote: true %>
   </td>
