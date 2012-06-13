@@ -4,21 +4,11 @@ class VendorsController < ApplicationController
 
   def index
     @vendors = Vendor.all
+    @vendor = Vendor.new
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @vendors }
-    end
-  end
-
-  # GET /vendors/new
-  # GET /vendors/new.json
-  def new
-    @vendor = Vendor.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @vendor }
     end
   end
 
@@ -31,9 +21,10 @@ class VendorsController < ApplicationController
       if @vendor.save
         format.html { redirect_to vendors_url, notice: 'Vendor was successfully created.' }
         format.json { render json: @vendor, status: :created, location: @vendor }
+        format.js
       else
         format.html { render action: "new" }
-        format.json { render json: @vendor.errors, status: :unprocessable_entity }
+        format.js { render 'new' }
       end
     end
   end

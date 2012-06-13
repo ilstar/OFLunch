@@ -6,18 +6,14 @@
     <th>操作</th>
   </tr>
 
-<% @vendors.each do |vendor| %>
-  <tr id="tr_<%= dom_id(vendor) %>">
-    <td width="50%"><%= best_in_place vendor, :name %></td>
-    <td>
-      <%= link_to '菜单', vendor_menu_items_path(vendor) %>
-      <%= link_to '删除', vendor, confirm: "你确定要删除 #{vendor.name} 吗？", method: :delete, remote: true %>
-    </td>
-  </tr>
-<% end %>
+  <%= render partial: "tr_vendor", collection: @vendors, as: :vendor %>
 </table>
 
-<%= link_to new_vendor_path, class: 'btn' do %>
+<a class="btn" data-toggle="modal" href="#modal_form" >
   <i class="icon-plus-sign"></i>
   添加
-<% end %>
+</a>
+
+<div class="modal hide" id="modal_form">
+  <%= render "modal_form" %>
+</div>

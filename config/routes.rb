@@ -35,7 +35,7 @@ OFLunch::Application.routes.draw do
   end
 
   resources :menu_items
-  resources :vendors do
+  resources :vendors, only: %w{index create update destroy} do
     resources :menu_items, except: %w{show edit}
   end
 
