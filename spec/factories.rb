@@ -8,6 +8,10 @@ FactoryGirl.define do
     name "user"
   end
 
+  factory :admin, parent: :user do
+    role 'admin'
+  end
+
   factory :vendor do
     sequence :name do |i|
       "vendor name #{i}"

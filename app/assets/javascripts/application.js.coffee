@@ -16,4 +16,7 @@ jQuery ->
 
   $('#unread-message-count').click ->
     $('#unread-message-content').toggle('drop', {direction: 'right'}, 270)
+
+  $('#change_user_list').on 'show', ->
+    $("#change_user_form").load("/sessions")
   return

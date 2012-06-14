@@ -1,0 +1,8 @@
+<%= form_tag "/sessions/change", method: 'put' do %>
+  <p>
+    你将以
+  <%= select_tag "user_id", options_from_collection_for_select(@users, "id", "name") %>
+  的身份登陆
+  </p>
+  <%= button_tag "Submit", class: 'btn btn-primary' %>
+<% end %>

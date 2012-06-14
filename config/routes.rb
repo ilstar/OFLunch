@@ -46,6 +46,12 @@ OFLunch::Application.routes.draw do
     put 'update_password'
   end
 
+  resources :sessions, only: [:index] do
+    collection do
+      put :change
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
