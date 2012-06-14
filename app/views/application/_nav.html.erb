@@ -30,7 +30,7 @@
             <li id="fat-menu" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t 'nav.account' %><b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <% if current_user.admin? %>
+              <% if original_user.nil? and current_user.admin? %>
                 <li><%= link_to '切换用户', '#', data: {toggle: 'modal'}, href: '#change_user_list' %></li>
               <% end %>
               <li><%= link_to t('nav.user_edit'), edit_user_path %></li>
