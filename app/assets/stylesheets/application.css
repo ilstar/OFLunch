@@ -49,3 +49,12 @@
   z-index: 10;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
+
+#switch_account_bar {
+  min-width: 100px;
+  position: absolute;
+  top: 200px;
+  left: 10px;
+  background-color: rgba(217, 237, 247);
+  cursor: move;
+}

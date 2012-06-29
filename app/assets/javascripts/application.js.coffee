@@ -5,6 +5,7 @@
 //= require jquery.purr
 //= require best_in_place
 //= require jquery.effects.drop
+//= require jquery.ui.draggable
 
 jQuery ->
   jQuery('.best_in_place').best_in_place()
@@ -19,4 +20,6 @@ jQuery ->
 
   $('#change_user_list').on 'show', ->
     $("#change_user_form").load("/sessions")
+
+  $('#switch_account_bar').draggable({cursor: 'move'})
   return
