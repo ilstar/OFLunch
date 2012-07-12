@@ -31,18 +31,21 @@ set :git_enable_submodules, 1
 
 # tasks
 namespace :deploy do
+  def cmd_application_server(sign)
+    run "cd #{release_path} && bundle exec thin -C config/thin.yml #{sign}"
+  end
+
   task :start, :roles => :app do
-    run "thin start -C #{release_path}/config/thin.yml"
+    cmd_application_server('start')
   end
 
   task :stop, :roles => :app do
-    run "thin stop -C #{release_path}/config/thin.yml"
+    cmd_application_server('stop')
   end
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    stop
-    start
+    cmd_application_server('restart')
   end
 
   desc "Symlink shared resources on each release"
