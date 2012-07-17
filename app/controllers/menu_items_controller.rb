@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class MenuItemsController < ApplicationController
-  before_filter :get_vendor
+  before_filter :admin_required
+  before_filter :load_vendor
 
   def index
     @menu_items = @vendor.menu_items
@@ -16,10 +17,8 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       if @menu_item.save
-        format.html { redirect_to new_vendor_menu_item_url(@vendor), notice: 'Menu item was successfully created.' }
         format.js
       else
-        format.html { render action: "new" }
         format.js { render 'new' }
       end
     end
@@ -30,10 +29,9 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       if @menu_item.update_attributes(params[:menu_item])
-        format.html { redirect_to vendor_menu_items_path(@vendor), notice: 'Menu item was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.json { render json: @menu_item.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,13 +41,12 @@ class MenuItemsController < ApplicationController
     @menu_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to vendor_menu_items_url(@menu_item.vendor_id) }
       format.js
     end
   end
 
   private
-  def get_vendor
+  def load_vendor
     @vendor = Vendor.find(params[:vendor_id]) if params.key?(:vendor_id)
   end
 end

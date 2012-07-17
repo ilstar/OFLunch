@@ -34,9 +34,9 @@ OFLunch::Application.routes.draw do
     end
   end
 
-  resources :menu_items
+  resources :menu_items, only: %w{update}
   resources :vendors, only: %w{index create update destroy} do
-    resources :menu_items, except: %w{show edit}
+    resources :menu_items, only: %w{index create destroy}
   end
 
   devise_for :users
