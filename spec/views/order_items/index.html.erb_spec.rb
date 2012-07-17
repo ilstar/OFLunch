@@ -4,10 +4,10 @@ describe "order_items/index" do
 
 	describe "user login" do
 		before(:each) do
-			@user = Factory(:user)
-			@meal_time = Factory(:meal_time)
-			@order = Factory(:order, user: @user, meal_time: @meal_time)
-			@order_item = Factory(:order_item, order: @order)
+			@user = FactoryGirl.create(:user)
+			@meal_time = FactoryGirl.create(:meal_time)
+			@order = FactoryGirl.create(:order, user: @user, meal_time: @meal_time)
+			@order_item = FactoryGirl.create(:order_item, order: @order)
 
 			sign_in @user
 		end

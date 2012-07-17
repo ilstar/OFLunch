@@ -3,7 +3,7 @@ require 'spec_helper'
 describe BillsController do
 
   before do
-    @user = Factory(:user)
+    @user = FactoryGirl.create(:user)
 
     sign_in @user
   end
@@ -16,10 +16,10 @@ describe BillsController do
     end
 
     it "successfully rendered with balance_logs and orders" do
-      Factory(:balance_log, balance: @user.balance)
-      meal_time = Factory(:meal_time)
-      order = Factory(:order, meal_time: meal_time, user: @user)
-      order_item = Factory(:order_item, order: order)
+      FactoryGirl.create(:balance_log, balance: @user.balance)
+      meal_time = FactoryGirl.create(:meal_time)
+      order = FactoryGirl.create(:order, meal_time: meal_time, user: @user)
+      order_item = FactoryGirl.create(:order_item, order: order)
 
       get :index
 

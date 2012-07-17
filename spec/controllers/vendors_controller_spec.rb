@@ -5,8 +5,8 @@ describe VendorsController do
   render_views
 
   before do
-    @user = Factory(:user)
-    @vendor = Factory(:vendor)
+    @user = FactoryGirl.create(:user)
+    @vendor = FactoryGirl.create(:vendor)
 
     sign_in @user
   end

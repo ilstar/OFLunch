@@ -5,10 +5,10 @@ describe OrdersController do
   render_views
 
   before do
-    @user = Factory(:user)
-    @meal_time = Factory(:meal_time)
-    @order = Factory(:order, user: @user, meal_time: @meal_time)
-    @order_item = Factory(:order_item, order: @order)
+    @user = FactoryGirl.create(:user)
+    @meal_time = FactoryGirl.create(:meal_time)
+    @order = FactoryGirl.create(:order, user: @user, meal_time: @meal_time)
+    @order_item = FactoryGirl.create(:order_item, order: @order)
 
     sign_in @user
   end
@@ -38,10 +38,10 @@ describe OrdersController do
     end
 
     it "successful render when order is created" do
-      vendor = Factory(:vendor)
-      menu_item = Factory(:menu_item, vendor: vendor)
+      vendor = FactoryGirl.create(:vendor)
+      menu_item = FactoryGirl.create(:menu_item, vendor: vendor)
       @meal_time.vendors << vendor
-      order_item = Factory(:order_item, order: @order, menu_item: menu_item)
+      order_item = FactoryGirl.create(:order_item, order: @order, menu_item: menu_item)
 
       get :index
 
@@ -68,7 +68,7 @@ describe OrdersController do
 
     describe "when failing" do
       it "can't delete others order" do
-        other_order = Factory(:order, meal_time: @meal_time)
+        other_order = FactoryGirl.create(:order, meal_time: @meal_time)
 
         lambda {
           delete :destroy, id: other_order.id.to_s
