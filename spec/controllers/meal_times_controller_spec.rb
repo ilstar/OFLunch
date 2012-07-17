@@ -41,6 +41,37 @@ describe MealTimesController do
     end
   end
 
+  describe "POST create" do
+    before do
+      MealTime.destroy_all
+      @vendor1 = FactoryGirl.create :vendor
+    end
+
+    describe "with valid attributes" do
+      it "create a new MealTime" do
+        lambda {
+          post :create, meal_time: { vendor_ids: [@vendor1.to_param] }
+        }.should change{ MealTime.count }.by(1)
+      end
+
+      it "redirect to index" do
+        post :create, meal_time: { vendor_ids: [@vendor1.to_param] }
+        
+        response.should redirect_to(meal_times_url)
+      end
+    end
+
+    describe "with invalid attributes" do
+      it "can't create MealTime without vendor" do
+        lambda {
+          post :create, meal_time: { vendor_ids: [] }
+        }.should change{ MealTime.count }.by(0)
+
+        response.should render_template('index')
+      end
+    end
+  end
+
   describe "close" do
     it "close successfully" do
       put :close, id: @meal_time.id.to_s

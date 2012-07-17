@@ -15,7 +15,7 @@ class MealTimesController < ApplicationController
       if @meal_time.save
         format.html { redirect_to meal_times_url }
       else
-        format.html { render :action => "new" }
+        format.html { render 'index' }
       end
     end
   end

@@ -76,7 +76,6 @@ class MealTime < ActiveRecord::Base
   protected
 
   def less_than_two_vendors_choosed
-    self.errors.add :vendor_ids, I18n.t('meal_time.no_more_than_2_vendors') if self.vendors.size > 2
     self.errors.add :vendor_ids, I18n.t('meal_time.no_vendor_selected') if self.vendors.size == 0
   end
 
