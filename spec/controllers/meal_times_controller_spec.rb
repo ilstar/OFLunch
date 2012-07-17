@@ -3,8 +3,8 @@ require 'spec_helper'
 
 describe MealTimesController do
   before do
-    @user = Factory(:user)
-    @meal_time = Factory(:meal_time)
+    @user = FactoryGirl.create(:user)
+    @meal_time = FactoryGirl.create(:meal_time)
     
     sign_in @user
   end
