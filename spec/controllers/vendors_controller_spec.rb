@@ -20,15 +20,10 @@ describe VendorsController do
 
   describe "GET index" do
     it "assigns all vendors as @vendors" do
-      get :index, {}
-      assigns(:vendors).should eq([@vendor])
-    end
-  end
+      get :index
 
-  describe "GET new" do
-    it "assigns a new vendor as @vendor" do
-      get :new, {}
-      assigns(:vendor).should be_a_new(Vendor)
+      assigns(:vendors).should eq([@vendor])
+      response.should be_success
     end
   end
 
@@ -36,19 +31,19 @@ describe VendorsController do
     describe "with valid params" do
       it "creates a new Vendor" do
         expect {
-          post :create, {:vendor => valid_attributes}
+          post :create, {vendor: valid_attributes, format: 'js'}
         }.to change(Vendor, :count).by(1)
       end
 
       it "assigns a newly created vendor as @vendor" do
-        post :create, {:vendor => valid_attributes}
+        post :create, {vendor: valid_attributes, format: 'js'}
         assigns(:vendor).should be_a(Vendor)
         assigns(:vendor).should be_persisted
       end
 
-      it "redirects to the created vendor" do
-        post :create, {:vendor => valid_attributes}
-        response.should redirect_to(vendors_url)
+      it "render create.js.html" do
+        post :create, {vendor: valid_attributes, format: 'js'}
+        response.should render_template('create')
       end
     end
 
@@ -56,14 +51,14 @@ describe VendorsController do
       it "assigns a newly created but unsaved vendor as @vendor" do
         # Trigger the behavior that occurs when invalid params are submitted
         Vendor.any_instance.stub(:save).and_return(false)
-        post :create, {:vendor => {}}
+        post :create, {vendor: {}, format: 'js'}
         assigns(:vendor).should be_a_new(Vendor)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Vendor.any_instance.stub(:save).and_return(false)
-        post :create, {:vendor => {}}
+        post :create, {vendor: {}, format: 'js'}
         response.should render_template("new")
       end
     end
@@ -73,14 +68,14 @@ describe VendorsController do
     describe "with valid params" do
       it "assigns the requested vendor as @vendor" do
         vendor = Vendor.create! valid_attributes
-        put :update, {:id => vendor.to_param, :vendor => valid_attributes}
+        put :update, {id: vendor.to_param, vendor: valid_attributes, format: 'json'}
         assigns(:vendor).should eq(vendor)
       end
 
       it "redirects to the vendor" do
         vendor = Vendor.create! valid_attributes
-        put :update, {:id => vendor.to_param, :vendor => valid_attributes}
-        response.should redirect_to(vendor)
+        put :update, {id: vendor.to_param, vendor: valid_attributes, format: 'json'}
+        response.status.should == 204
       end
     end
   end
@@ -89,14 +84,14 @@ describe VendorsController do
     it "destroys the requested vendor" do
       vendor = Vendor.create! valid_attributes
       expect {
-        delete :destroy, {:id => vendor.to_param}
+        delete :destroy, {id: vendor.to_param, format: 'js'}
       }.to change(Vendor, :count).by(-1)
     end
 
     it "redirects to the vendors list" do
       vendor = Vendor.create! valid_attributes
-      delete :destroy, {:id => vendor.to_param}
-      response.should redirect_to(vendors_url)
+      delete :destroy, {id: vendor.to_param, format: 'js'}
+      response.should render_template('destroy')
     end
   end
 
