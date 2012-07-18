@@ -12,7 +12,7 @@ OFLunch::Application.routes.draw do
 
   get "order_items/index"
 
-  resources :balances
+  resources :balances, only: %w{index}
   resources :order_items, :only => [:index]
   get 'order_items/:date' => 'order_items#index', as: 'date_order_items'
 
