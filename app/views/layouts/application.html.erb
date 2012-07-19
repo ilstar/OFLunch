@@ -16,7 +16,10 @@
       <%= yield %>
       <footer class="footer">
         <hr/>
-        <p>@openfeint</p>
+        <p>
+          @openfeint
+          <%= mail_to 'fred.liang@gree.co.jp', '报告Bug' %>
+        </p>
       </footer>
     </div>
 
