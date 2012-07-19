@@ -2,7 +2,40 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-ul li:hover {
-  cursor: hand;
-  background-color: green;
+$background-hover-color: #00B1ED;
+ul#menu_items {
+  width: 670px;
+
+  li {
+    list-style: none;
+    padding: 3px 0px;
+    background: url('/assets/dash.gif') 175px 12px repeat-x;
+
+    span.name {
+      background: white;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    span.price {
+      float: right;
+      background: white;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+    span.count {
+      float: left;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: white;
+      border-radius: 4px;
+      background-color: $background-hover-color;
+      background-image: none;
+
+      span.name, span.price {
+        background-color: $background-hover-color;
+      }
+    }
+  }
 }
