@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(params[:order])
+    @order = current_user.orders.build(params[:order])
     @order.meal_time = MealTime.today
     if @order.save!
       redirect_to orders_path, :alert => "下单成功"

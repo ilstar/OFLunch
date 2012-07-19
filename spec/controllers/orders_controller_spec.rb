@@ -82,13 +82,13 @@ describe OrdersController do
           post :create, {
             :order => {
               :user_id => @user.to_param,
-              :order_items_attributes => {
-                '0' => {
+              :order_items_attributes => [
+                {
                   'menu_item_id' => menu_item.to_param,
                   'price' => menu_item.price.to_s,
                   'amount' => '1'
                 }
-              }
+              ]
             }
           }
 
@@ -97,6 +97,8 @@ describe OrdersController do
 
       response.should redirect_to(orders_url)
     end
+
+    it "can't create order when doesn't pass order_items_attributes"
   end
 
   describe "PUT update" do

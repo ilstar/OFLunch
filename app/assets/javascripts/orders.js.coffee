@@ -15,8 +15,9 @@ jQuery ->
       x
       <span class='price'>#{price}</span>
       <span class='count'>#{count}</span> = #{price * count}
-      <input name='menu_items[][id]' type='hidden' value='#{menuItemId}'>
-      <input name='menu_items[][count]' type='hidden' value='#{count}'>
+      <input name='order[order_items_attributes][][menu_item_id]' type='hidden' value='#{menuItemId}'>
+      <input name='order[order_items_attributes][][price]' type='hidden' value='#{price}'>
+      <input name='order[order_items_attributes][][amount]' type='hidden' value='#{count}'>
       <a>-----</a>
     "
     if $('#new_order ul').find("#order_item_#{menuItemId}").length is 0
@@ -25,7 +26,7 @@ jQuery ->
       $('#new_order ul').find("#order_item_#{menuItemId}").html str
     return
 
-  $("ul.menu_items li").click ->
+  $("ul#menu_items li").click ->
     $name = $(this).find "span.name"
     $price = $(this).find "span.price"
     $count = $(this).find "span.count"
@@ -36,8 +37,9 @@ jQuery ->
       $count.html parseInt($count.html()) + 1
 
     updateOrderItem $(this).data('menu-id'), $name.html(), $price.html(), $count.html()
+    $('#order_form_wrapper').show() if $('#order_items').children().length > 0
 
-  $('ul.order_items li a').live 'click', ->
+  $('ul#order_items li a').live 'click', ->
     $li = $(this).parent()
     $name = $($li).find "span.name"
     $price = $($li).find "span.price"
@@ -50,6 +52,8 @@ jQuery ->
       $("#menu_item_#{menuItemId} span.count").html null
     else
       $("#menu_item_#{menuItemId} span.count").html newCount
+
+    $('#order_form_wrapper').hide() if $('#order_items').children().length is 0
 
     return
 

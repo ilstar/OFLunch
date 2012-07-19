@@ -2,7 +2,7 @@
 
   <% MealTime.today.vendors.each do |vendor| %>
   <h3 id="<%= dom_id vendor %>"><%= vendor.name %></h3>
-  <ul class="menu_items">
+  <ul id="menu_items">
     <% vendor.menu_items_order_by_popular.each do |menu_item| %>
     <li id="<%= dom_id menu_item %>" data-menu-id="<%= menu_item.id %>">
       <span class="name"><%= menu_item.name %></span>
@@ -26,9 +26,10 @@
   <%= stylesheet_link_tag    "orders", :media => "all" %>
 <% end %>
 
-<div id="order_form" style="position: absolute; top: 50px; right: 50px; background-color: yellow;">
+<div id="order_form_wrapper" class="hide" style="position: absolute; top: 50px; right: 50px; background-color: yellow;">
 <%= simple_form_for(@order) do |f| %>
-<ul class="order_items">
+<ul id="order_items">
 </ul>
+    <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
 <% end %>
 </div>
