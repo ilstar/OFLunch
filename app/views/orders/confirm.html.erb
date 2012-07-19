@@ -27,5 +27,5 @@
 
   总价: <%= number_to_currency @order.total_price, unit: '￥' %>
   <%= f.submit "确认", :class => "btn-success btn"%>
-  <%= link_to "取消", new_order_path, :class => "btn-danger btn" %>
+  <%= link_to "取消", @order.new_record? ? new_order_path : edit_order_path(@order), :class => "btn-danger btn" %>
 <% end %>

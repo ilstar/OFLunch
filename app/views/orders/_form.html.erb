@@ -1,11 +1,11 @@
 <%= render :partial => "application/errors", :locals => {:target => @order}  %>
 
-<%= simple_form_for(@order, :url => confirm_orders_path) do |f| %>
+<%= simple_form_for(@order, url: confirm_orders_path, method: :post) do |f| %>
   <% MealTime.today.vendors.each do |vendor| %>
     <table class='table table-striped table-bordered table-condensed' id="<%= dom_id vendor %>">
       <tr>
         <th colspan="3">
-          <h2 id="22<%= dom_id(vendor) %>"><%= vendor.name %></h2>
+          <h2 id="<%= dom_id(vendor) %>"><%= vendor.name %></h2>
         </th>
       </tr>
       <% vendor.menu_items_order_by_popular.each do |menu_item| %>
@@ -19,12 +19,15 @@
           </td>
           <td>
             <div class="form-inputs">
-              <%= text_field_tag "menu_items[][count]", 0, type: 'number', min: 0 %>
+              <%= text_field_tag "menu_items[][count]", @order.order_items.detect {|order_item| order_item.menu_item == menu_item}.try(:amount).to_i, type: 'number', min: 0 %>
             </div>
           </td>
         </tr>
       <% end %>
     </table>
+  <% end %>
+  <% if not @order.new_record? %>
+    <%= hidden_field_tag 'id', @order.id %>
   <% end %>
   <div class="form-actions">
     <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>

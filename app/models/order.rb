@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
   scope :for_user_id, lambda { |user_id| where(:user_id => user_id) }
 
-  validate :user_could_order_once
+  validate :user_could_order_once, on: :create
 
 
   accepts_nested_attributes_for :order_items

@@ -18,7 +18,7 @@ OFLunch::Application.routes.draw do
 
   resources :balance_logs, :only => [:create]
 
-  resources :orders do
+  resources :orders, only: %w{index new edit create update destroy} do
     collection do
       post 'confirm'
     end

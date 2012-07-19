@@ -13,13 +13,6 @@ describe OrdersController do
     sign_in @user
   end
 
-  describe "GET 'new'" do
-    it "returns http success" do
-      get 'new'
-      response.should be_success
-    end
-  end
-
   describe "GET index" do
     it "success when no mom" do
       MealTime.destroy_all
@@ -47,6 +40,76 @@ describe OrdersController do
 
       response.should be_success
       assigns(:today_order).should_not be_nil
+    end
+  end
+
+  describe "GET 'new'" do
+    it "returns http success" do
+      get 'new'
+      response.should be_success
+    end
+  end
+
+  describe "POST confirm" do
+    it "redirect to back when have no item selected"
+
+    it "confirm an new order"
+
+    it "confirm an update order"
+  end
+
+  describe "GET edit" do
+    it "renders template" do
+      get :edit, id: @order.to_param
+
+      response.should be_success
+    end
+  end
+
+  describe "POST create" do
+    it "creates order and redirect to index" do
+      @order.destroy
+      menu_item = FactoryGirl.create :menu_item
+
+      lambda {
+        lambda {
+          post :create, {
+            :order => {
+              :user_id => @user.to_param,
+              :order_items_attributes => {
+                '0' => {
+                  'menu_item_id' => menu_item.to_param,
+                  'price' => menu_item.price.to_s,
+                  'amount' => '1'
+                }
+              }
+            }
+          }
+
+        }.should change{ OrderItem.count }.by(1)
+      }.should change{ Order.count }.by(1)
+
+      response.should redirect_to(orders_url)
+    end
+  end
+
+  describe "PUT update" do
+    it "have correct order items and redirect to index" do
+      @order_item2 = FactoryGirl.create :order_item, order: @order, amount: 2
+      @menu_item2 = @order_item2.menu_item
+      @new_menu_item = FactoryGirl.create :menu_item
+
+      put :update, :id => @order.to_param, :order => {
+        :order_items_attributes => {
+          '0' => {'menu_item_id' => @menu_item2.to_param, 'price' => @menu_item2.price.to_s, 'amount' => '3'},
+          '1' => {'menu_item_id' => @new_menu_item.to_param, 'price' => @new_menu_item.price.to_s, 'amount' => '2'}
+          }
+        }
+
+      assigns(:order).order_items.size.should == 2
+      assigns(:order).total_price.should == 3 * @menu_item2.price + 2 * @new_menu_item.price
+
+      response.should redirect_to(orders_url)
     end
   end
 

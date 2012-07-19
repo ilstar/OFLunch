@@ -16,6 +16,7 @@
   <% else %>
     <% if @today_order.meal_time.unlock? %>
       <%= link_to raw("<i class='icon-remove icon-white'> </i>  ") + t('.delete_order'), order_path(@today_order), class: 'btn btn-danger', confirm: t('delete_confirm'), method: 'delete' %>
+      <%= link_to raw("<i class='icon-edit icon-white'> </i>  编辑菜单"), edit_order_path(@today_order), class: 'btn' %>
     <% end %>
     <p class='pull-right highlight'>总价:<%= number_to_currency(@today_order.total_price, :unit => "￥") %></p>
     <table class="table table-bordered">
