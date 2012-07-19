@@ -20,10 +20,10 @@ jQuery ->
       <input name='order[order_items_attributes][][amount]' type='hidden' value='#{count}'>
       <a>-----</a>
     "
-    if $('#new_order ul').find("#order_item_#{menuItemId}").length is 0
-      $('#new_order ul').append $("<li id='order_item_#{menuItemId}' data-menu-id='#{menuItemId}'>#{str}</li>")
+    if $('#order_form ul').find("#order_item_#{menuItemId}").length is 0
+      $('#order_form ul').append $("<li id='order_item_#{menuItemId}' data-menu-id='#{menuItemId}'>#{str}</li>")
     else
-      $('#new_order ul').find("#order_item_#{menuItemId}").html str
+      $('#order_form ul').find("#order_item_#{menuItemId}").html str
     return
 
   $("ul#menu_items li").click ->

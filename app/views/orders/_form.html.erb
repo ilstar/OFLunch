@@ -7,7 +7,7 @@
     <li id="<%= dom_id menu_item %>" data-menu-id="<%= menu_item.id %>">
       <span class="name"><%= menu_item.name %></span>
       <span class="price"><%= menu_item.price %></span>
-      <span class="count"></span>
+      <span class="count"><%= @order.order_items.detect {|order_item| order_item.menu_item_id == menu_item.id }.try(:amount) %></span>
     </li>
     <% end %>
   </ul>
@@ -26,9 +26,22 @@
   <%= stylesheet_link_tag    "orders", :media => "all" %>
 <% end %>
 
-<div id="order_form_wrapper" class="hide" style="position: absolute; top: 50px; right: 50px; background-color: yellow;">
-<%= simple_form_for(@order) do |f| %>
+<div id="order_form_wrapper" class="<%= @order.new_record? ? 'hide' : '' %>" style="position: absolute; top: 50px; right: 50px; background-color: yellow;">
+<%= simple_form_for(@order, html: {id: 'order_form'}) do |f| %>
 <ul id="order_items">
+  <% @order.order_items.each do |order_item| %>
+  <% menu_item = order_item.menu_item %>
+  <li id="order_item_<%= menu_item.id %>" data-menu-id="<%= menu_item.id %>">
+    <span class="name"><%= menu_item.name %></span>
+    x      <span class="price"><%= order_item.price %></span>
+    <span class="count"><%= order_item.amount %></span>
+    = <%= order_item.total_price %>
+    <input name="order[order_items_attributes][][menu_item_id]" type="hidden" value="<%= menu_item.id %>">
+    <input name="order[order_items_attributes][][price]" type="hidden" value="<%= menu_item.price %>">
+    <input name="order[order_items_attributes][][amount]" type="hidden" value="<%= order_item.amount %>">
+    <a>-----</a>
+  </li>
+  <% end %>
 </ul>
     <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
 <% end %>

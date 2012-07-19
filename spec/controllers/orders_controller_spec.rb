@@ -108,10 +108,10 @@ describe OrdersController do
       @new_menu_item = FactoryGirl.create :menu_item
 
       put :update, :id => @order.to_param, :order => {
-        :order_items_attributes => {
-          '0' => {'menu_item_id' => @menu_item2.to_param, 'price' => @menu_item2.price.to_s, 'amount' => '3'},
-          '1' => {'menu_item_id' => @new_menu_item.to_param, 'price' => @new_menu_item.price.to_s, 'amount' => '2'}
-          }
+        :order_items_attributes => [
+            {'menu_item_id' => @menu_item2.to_param, 'price' => @menu_item2.price.to_s, 'amount' => '3'},
+            {'menu_item_id' => @new_menu_item.to_param, 'price' => @new_menu_item.price.to_s, 'amount' => '2'}
+          ]
         }
 
       assigns(:order).order_items.size.should == 2

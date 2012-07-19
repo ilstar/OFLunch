@@ -52,9 +52,6 @@ class OrdersController < ApplicationController
 
     Order.transaction do
       @order.order_items.destroy_all
-      params[:order][:order_items_attributes].each_value do |value|
-        value.delete('id')
-      end
       @order.order_items_attributes = params[:order][:order_items_attributes]
       @order.save
     end
