@@ -4,6 +4,14 @@ module ApplicationHelper
     content_tag(:i, :class => icon) 
   end
 
+  def edit_icon_tag(msg = '编辑')
+    raw("<i class='icon-edit icon-white'> </i>  #{msg}")
+  end
+
+  def delete_icon_tag(msg = '删除')
+    raw("<i class='icon-remove icon-white'> </i>  #{msg}")
+  end
+
   def warning_alert(msg)
     raw %{
     <div class="alert">
