@@ -14,11 +14,10 @@
     <%end%>
 
   <% else %>
-  <h2>我的订单</h2>
-  <table class="table table-bordered">
+    <h2>我的订单</h2>
+    <table class="table table-bordered">
       <thead>
         <tr> <th> 编号 </th> <th>供应商</th> <th> 名称 </th> <th> 价格 </th> <th> 数量 </th> <th> 小计 </th> </tr>
-
       </thead>
       <tbody>
         <%- @today_order.order_items.each do |object| %>
@@ -33,19 +32,20 @@
         <%end%>
       </tbody>
     </table>
-  <% end %>
 
-  <div>
-    <% if @today_order.meal_time.unlock? %>
-    <%= link_to edit_icon_tag, edit_order_path(@today_order), class: 'btn btn-info' %>
-    <%= link_to delete_icon_tag(t('.delete_order')), order_path(@today_order), class: 'btn btn-danger', confirm: t('delete_confirm'), method: 'delete' %>
-    <% end %>
-    <p class='pull-right highlight'>
-      <span class="label label-info">
-        总价:<%= number_to_currency(@today_order.total_price, :unit => "￥") %>
-      </span>
-    </p>
-  </div>
+    <div>
+      <% if @today_order.meal_time.unlock? %>
+        <%= link_to edit_icon_tag, edit_order_path(@today_order), class: 'btn btn-info' %>
+        <%= link_to delete_icon_tag(t('.delete_order')), order_path(@today_order), class: 'btn btn-danger', confirm: t('delete_confirm'), method: 'delete' %>
+      <% end %>
+      <p class='pull-right highlight'>
+        <span class="label label-info">
+          总价:<%= number_to_currency(@today_order.total_price, :unit => "￥") %>
+        </span>
+      </p>
+    </div>
+
+  <% end %>
 <% else %>
   <%= t '.no_mom' %>
 <% end %>

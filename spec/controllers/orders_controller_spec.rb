@@ -14,7 +14,7 @@ describe OrdersController do
   end
 
   describe "GET index" do
-    it "success when no mom" do
+    it "renders template when today meal time hasn't created" do
       MealTime.destroy_all
 
       get :index
@@ -23,23 +23,29 @@ describe OrdersController do
       assigns(:today_meal_time).should be_nil
     end
 
-    it "successful render when mom created" do
-      get :index
+    describe "when today meal time is created" do
+      it "renders template when today order hasn't created" do
+        @order.destroy
+        
+        get :index
 
-      response.should be_success
-      assigns(:today_meal_time).should_not be_nil
-    end
+        assigns(:today_meal_time).should_not be_nil
+        assigns(:today_order).should be_nil
+        response.should be_success
+      end
 
-    it "successful render when order is created" do
-      vendor = FactoryGirl.create(:vendor)
-      menu_item = FactoryGirl.create(:menu_item, vendor: vendor)
-      @meal_time.vendors << vendor
-      order_item = FactoryGirl.create(:order_item, order: @order, menu_item: menu_item)
+      it "renders template when today order is created" do
+        vendor = FactoryGirl.create(:vendor)
+        menu_item = FactoryGirl.create(:menu_item, vendor: vendor)
+        @meal_time.vendors << vendor
+        order_item = FactoryGirl.create(:order_item, order: @order, menu_item: menu_item)
 
-      get :index
+        get :index
 
-      response.should be_success
-      assigns(:today_order).should_not be_nil
+        response.should be_success
+        assigns(:today_order).should_not be_nil
+        assigns(:today_meal_time).should_not be_nil
+      end
     end
   end
 
