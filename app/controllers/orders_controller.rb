@@ -18,10 +18,10 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.build(params[:order])
     @order.meal_time = MealTime.today
-    if @order.save!
+    if @order.save
       redirect_to orders_path, :alert => "下单成功"
     else
-      redirect_to new_order_path, :alert => "订餐失败， 人品太差"
+      redirect_to new_order_path, :alert => @order.errors.to_a.join(', ')
     end
   end
 
