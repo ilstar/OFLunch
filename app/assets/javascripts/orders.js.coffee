@@ -3,35 +3,38 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  updateOrderItem = (menuItemId, name, price, count) ->
-    if count is 0
-      $("#order_item_#{menuItemId}").remove()
-
-    price = parseInt price
-    count = parseInt count
-    str = """
-      <span class='name'>#{name}</span>
-      <span class='right'>
-        <span class='price'>#{price}</span>
-        <span class="multiply">x</span>
-        <span class='count'>#{count}</span>
-        <a href="javascript:;" class="delete"><i class="icon-minus-sign icon-white"></i></a>
-        <input name='order[order_items_attributes][][menu_item_id]' type='hidden' value='#{menuItemId}'>
-        <input name='order[order_items_attributes][][price]' type='hidden' value='#{price}'>
-        <input name='order[order_items_attributes][][amount]' type='hidden' value='#{count}'>
-      </span>
-    """
-    if count isnt 0
-      if $('#order_form ul').find("#order_item_#{menuItemId}").length is 0
-        $('#order_form ul').append $("<li id='order_item_#{menuItemId}' data-menu-id='#{menuItemId}'>#{str}</li>")
-      else
-        $('#order_form ul').find("#order_item_#{menuItemId}").html str
-
+  updateTotalCost = ->
     total_cost = 0
     $('#order_items li').each ->
       total_cost += parseInt($("span.count", this).html()) * parseFloat($("span.price", this).html())
     $("#total_cost span").html total_cost
-    return
+
+  updateOrderItem = (menuItemId, name, price, count) ->
+    $orderItem = $("#order_item_#{menuItemId}")
+
+    if count is 0
+      $orderItem.remove()
+    else
+      price = parseFloat price
+      count = parseInt count
+      orderItemHtml = """
+        <span class='name'>#{name}</span>
+        <span class='right'>
+          <span class='price'>#{price}</span>
+          <span class="multiply">x</span>
+          <span class='count'>#{count}</span>
+          <a href="javascript:;" class="delete"><i class="icon-minus-sign icon-white"></i></a>
+          <input name='order[order_items_attributes][][menu_item_id]' type='hidden' value='#{menuItemId}'>
+          <input name='order[order_items_attributes][][price]' type='hidden' value='#{price}'>
+          <input name='order[order_items_attributes][][amount]' type='hidden' value='#{count}'>
+        </span>
+      """
+      if $orderItem.length is 0
+        $('#order_form ul').append $("<li id='order_item_#{menuItemId}' data-menu-id='#{menuItemId}'>#{orderItemHtml}</li>")
+      else
+        $orderItem.html orderItemHtml
+
+    updateTotalCost()
 
   $("ul#menu_items li").click ->
     $name = $(this).find "span.name"
