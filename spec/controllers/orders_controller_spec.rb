@@ -65,7 +65,6 @@ describe OrdersController do
         lambda {
           post :create, {
             :order => {
-              :user_id => @user.to_param,
               :order_items_attributes => [
                 { 'menu_item_id' => menu_item.to_param, 'amount' => '1'}
               ]

@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = Order.find params[:id]
+    @order = current_user.orders.find params[:id]
   end
 
   def create
@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find params[:id]
+    @order = current_user.orders.find params[:id]
 
     Order.transaction do
       @order.order_items.destroy_all
