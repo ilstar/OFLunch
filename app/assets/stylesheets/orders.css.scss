@@ -2,40 +2,85 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$background-hover-color: #00B1ED;
-ul#menu_items {
-  width: 670px;
+$menu-items-background-hover-color: #00B1ED;
+$order-items-wrapper-background-color: #0F91CF;
 
+ul#menu_items, ul#order_items {
   li {
     list-style: none;
     padding: 3px 0px;
-    background: url('/assets/dash.gif') 175px 12px repeat-x;
+    background: url('/assets/dash.gif') 0 center repeat-x;
+  }
+}
 
+ul#menu_items {
+  margin: 0 0 9px 2px;
+  li {
+    span.count {
+      float: left;
+      width: 15px;
+      text-align: center;
+      padding-left: 3px;
+      padding-right: 3px;
+      background-color: white;
+    }
+
+    span.price, span.name {
+      background-color: white;
+    }
     span.name {
-      background: white;
       padding-left: 8px;
       padding-right: 8px;
     }
     span.price {
       float: right;
-      background: white;
       padding-left: 8px;
       padding-right: 8px;
     }
-    span.count {
-      float: left;
-    }
-
     &:hover {
       cursor: pointer;
       color: white;
       border-radius: 4px;
-      background-color: $background-hover-color;
+      background-color: $menu-items-background-hover-color;
       background-image: none;
 
-      span.name, span.price {
-        background-color: $background-hover-color;
+      span.name, span.price, span.count {
+        background-color: $menu-items-background-hover-color;
       }
     }
+  }
+}
+
+ul#order_items {
+  min-width: 300px;
+
+  li {
+    .name {
+      background-color: $order-items-wrapper-background-color;
+      padding-right: 5px;
+    }
+    .right {
+      float: right;
+      padding-left: 5px;
+      padding-right: 3px;
+      background-color: $order-items-wrapper-background-color;
+    }
+    a.delete {
+      color: white;
+    }
+  }
+}
+
+#order_form_wrapper {
+  position: fixed;
+  color: white;
+  top: 50px;
+  padding: 12px;
+  background-color: $order-items-wrapper-background-color;
+  box-shadow:0 0 15px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+
+  h4 {
+    margin-bottom: 5px;
   }
 }

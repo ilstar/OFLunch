@@ -10,16 +10,18 @@ jQuery ->
 
     price = parseInt price
     count = parseInt count
-    str = "
+    str = """
       <span class='name'>#{name}</span>
-      x
-      <span class='price'>#{price}</span>
-      <span class='count'>#{count}</span> = #{price * count}
-      <input name='order[order_items_attributes][][menu_item_id]' type='hidden' value='#{menuItemId}'>
-      <input name='order[order_items_attributes][][price]' type='hidden' value='#{price}'>
-      <input name='order[order_items_attributes][][amount]' type='hidden' value='#{count}'>
-      <a>-----</a>
-    "
+      <span class='right'>
+        <span class='price'>#{price}</span>
+        <span class="multiply">x</span>
+        <span class='count'>#{count}</span>
+        <a href="javascript:;" class="delete"><i class="icon-minus-sign icon-white"></i></a>
+        <input name='order[order_items_attributes][][menu_item_id]' type='hidden' value='#{menuItemId}'>
+        <input name='order[order_items_attributes][][price]' type='hidden' value='#{price}'>
+        <input name='order[order_items_attributes][][amount]' type='hidden' value='#{count}'>
+      </span>
+    """
     if $('#order_form ul').find("#order_item_#{menuItemId}").length is 0
       $('#order_form ul').append $("<li id='order_item_#{menuItemId}' data-menu-id='#{menuItemId}'>#{str}</li>")
     else
@@ -31,7 +33,7 @@ jQuery ->
     $price = $(this).find "span.price"
     $count = $(this).find "span.count"
 
-    if $count.html() is ""
+    if $count.html() is "&nbsp;"
       $count.html 1
     else
       $count.html parseInt($count.html()) + 1
@@ -40,7 +42,7 @@ jQuery ->
     $('#order_form_wrapper').show() if $('#order_items').children().length > 0
 
   $('ul#order_items li a').live 'click', ->
-    $li = $(this).parent()
+    $li = $(this).parent().parent()
     $name = $($li).find "span.name"
     $price = $($li).find "span.price"
     $count = $($li).find "span.count"
@@ -49,7 +51,7 @@ jQuery ->
     updateOrderItem menuItemId, $name.html(), $price.html(), newCount
 
     if newCount is 0
-      $("#menu_item_#{menuItemId} span.count").html null
+      $("#menu_item_#{menuItemId} span.count").html "&nbsp;"
     else
       $("#menu_item_#{menuItemId} span.count").html newCount
 

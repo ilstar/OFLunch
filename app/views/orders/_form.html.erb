@@ -1,17 +1,50 @@
-<%= render :partial => "application/errors", :locals => {:target => @order}  %>
+<div class="row">
+  <div class="span6">
+    <%= render :partial => "application/errors", :locals => {:target => @order}  %>
 
-  <% MealTime.today.vendors.each do |vendor| %>
-  <h3 id="<%= dom_id vendor %>"><%= vendor.name %></h3>
-  <ul id="menu_items">
-    <% vendor.menu_items_order_by_popular.each do |menu_item| %>
-    <li id="<%= dom_id menu_item %>" data-menu-id="<%= menu_item.id %>">
-      <span class="name"><%= menu_item.name %></span>
-      <span class="price"><%= menu_item.price %></span>
-      <span class="count"><%= @order.order_items.detect {|order_item| order_item.menu_item_id == menu_item.id }.try(:amount) %></span>
-    </li>
+    <% MealTime.today.vendors.each do |vendor| %>
+      <h3 id="<%= dom_id vendor %>"><%= vendor.name %></h3>
+
+      <ul id="menu_items">
+        <% vendor.menu_items_order_by_popular.each do |menu_item| %>
+          <li id="<%= dom_id menu_item %>" data-menu-id="<%= menu_item.id %>">
+            <span class="name"><%= menu_item.name %></span>
+            <span class="price"><%= menu_item.price %></span>
+            <span class="count"><%= (order_item = @order.order_items.detect {|order_item| order_item.menu_item_id == menu_item.id }).nil? ? raw('&nbsp;') : order_item.amount %></span>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-  <% end %>
+  </div><!-- span7 end -->
+
+  <div class="span5">
+    <div id="order_form_wrapper" class="<%= @order.new_record? ? 'hide' : '' %>">
+      <h4>我的订单</h4>
+      <%= simple_form_for(@order, html: {id: 'order_form'}) do |f| %>
+        <ul id="order_items">
+          <% @order.order_items.each do |order_item| %>
+            <% menu_item = order_item.menu_item %>
+            <li id="order_item_<%= menu_item.id %>" data-menu-id="<%= menu_item.id %>">
+              <span class="name"><%= menu_item.name %></span>
+              <span class="right">
+                <span class="price"><%= order_item.price %></span>
+                <span class="multiply">x</span>
+                <span class="count"><%= order_item.amount %></span>
+                <a href="javascript:;" class="delete"><i class="icon-minus-sign icon-white"></i></a>
+                <input name="order[order_items_attributes][][menu_item_id]" type="hidden" value="<%= menu_item.id %>">
+                <input name="order[order_items_attributes][][price]" type="hidden" value="<%= menu_item.price %>">
+                <input name="order[order_items_attributes][][amount]" type="hidden" value="<%= order_item.amount %>">
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
+      <% end %>
+    </div>
+
+  </div><!-- span5 end -->
+</div>  
+
 
 <ul class="nav nav-tabs nav-stacked" style="position:fixed;top: 200px; left: 0px;">
   <% MealTime.today.vendors.each do |vendor| %>
@@ -19,31 +52,9 @@
     <li><%= link_to vendor.name, "javascript:$('body').scrollTo($('##{dom_id(vendor)}').offset().top - 41, 0, {duration: 250})" %></li>
   <% end %>
 </ul>
-              <%#= text_field_tag "menu_items[][count]", @order.order_items.detect {|order_item| order_item.menu_item == menu_item}.try(:amount).to_i, type: 'number', min: 0 %>
 
 <%= content_for :head do %>
   <%= javascript_include_tag "orders" %>
   <%= stylesheet_link_tag    "orders", :media => "all" %>
 <% end %>
-
-<div id="order_form_wrapper" class="<%= @order.new_record? ? 'hide' : '' %>" style="position: absolute; top: 50px; right: 50px; background-color: yellow;">
-<%= simple_form_for(@order, html: {id: 'order_form'}) do |f| %>
-<ul id="order_items">
-  <% @order.order_items.each do |order_item| %>
-  <% menu_item = order_item.menu_item %>
-  <li id="order_item_<%= menu_item.id %>" data-menu-id="<%= menu_item.id %>">
-    <span class="name"><%= menu_item.name %></span>
-    x      <span class="price"><%= order_item.price %></span>
-    <span class="count"><%= order_item.amount %></span>
-    = <%= order_item.total_price %>
-    <input name="order[order_items_attributes][][menu_item_id]" type="hidden" value="<%= menu_item.id %>">
-    <input name="order[order_items_attributes][][price]" type="hidden" value="<%= menu_item.price %>">
-    <input name="order[order_items_attributes][][amount]" type="hidden" value="<%= order_item.amount %>">
-    <a>-----</a>
-  </li>
-  <% end %>
-</ul>
-    <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
-<% end %>
-</div>
 
