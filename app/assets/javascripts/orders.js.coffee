@@ -6,7 +6,6 @@ jQuery ->
   updateOrderItem = (menuItemId, name, price, count) ->
     if count is 0
       $("#order_item_#{menuItemId}").remove()
-      return
 
     price = parseInt price
     count = parseInt count
@@ -22,10 +21,16 @@ jQuery ->
         <input name='order[order_items_attributes][][amount]' type='hidden' value='#{count}'>
       </span>
     """
-    if $('#order_form ul').find("#order_item_#{menuItemId}").length is 0
-      $('#order_form ul').append $("<li id='order_item_#{menuItemId}' data-menu-id='#{menuItemId}'>#{str}</li>")
-    else
-      $('#order_form ul').find("#order_item_#{menuItemId}").html str
+    if count isnt 0
+      if $('#order_form ul').find("#order_item_#{menuItemId}").length is 0
+        $('#order_form ul').append $("<li id='order_item_#{menuItemId}' data-menu-id='#{menuItemId}'>#{str}</li>")
+      else
+        $('#order_form ul').find("#order_item_#{menuItemId}").html str
+
+    total_cost = 0
+    $('#order_items li').each ->
+      total_cost += parseInt($("span.count", this).html()) * parseFloat($("span.price", this).html())
+    $("#total_cost span").html total_cost
     return
 
   $("ul#menu_items li").click ->

@@ -38,6 +38,7 @@
             </li>
           <% end %>
         </ul>
+        <div id="total_cost" class="pull-right">总价：￥<span><%= @order.total_price %></span></div>
       <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
       <% end %>
     </div>
