@@ -11,28 +11,6 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
-  def confirm
-    if selected_items.blank?
-      redirect_to :back, :alert => "请选择菜品"
-    else
-      if params.key?(:id)
-        @order = Order.find params[:id]
-        @order.order_items.reject! {|item| item.present? }
-      else
-        @order = current_user.orders.build
-      end
-
-      selected_items.each do |si|
-        mi = MenuItem.find si[:id]
-        @order.order_items.build(
-          :price        => mi.price,
-          :amount       => si[:count],
-          :menu_item_id => mi.id
-        )
-      end
-    end
-  end
-
   def edit
     @order = Order.find params[:id]
   end
@@ -71,9 +49,4 @@ class OrdersController < ApplicationController
     redirect_to orders_url, :alert => message
   end
 
-  private
-
-  def selected_items
-    params[:menu_items].select { |menu_item| menu_item[:count].to_i > 0 and menu_item[:count].to_i.to_s == menu_item[:count] }
-  end
 end

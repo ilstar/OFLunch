@@ -56,22 +56,6 @@ describe OrdersController do
     end
   end
 
-  describe "POST confirm" do
-    it "redirect to back when have no item selected"
-
-    it "confirm an new order"
-
-    it "confirm an update order"
-  end
-
-  describe "GET edit" do
-    it "renders template" do
-      get :edit, id: @order.to_param
-
-      response.should be_success
-    end
-  end
-
   describe "POST create" do
     it "creates order and redirect to index" do
       @order.destroy

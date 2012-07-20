@@ -18,11 +18,7 @@ OFLunch::Application.routes.draw do
 
   resources :balance_logs, :only => [:create]
 
-  resources :orders, only: %w{index new edit create update destroy} do
-    collection do
-      post 'confirm'
-    end
-  end
+  resources :orders, only: %w{index new edit create update destroy}
 
   resources :meal_times, except: [:new, :show] do
     resources :menu_of_meals, only: %w{create destroy index}
