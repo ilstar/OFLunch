@@ -15,27 +15,23 @@ ul#menu_items, ul#order_items {
 
 ul#menu_items {
   margin: 0 0 9px 2px;
+
   li {
     span.count {
       float: left;
       width: 15px;
       text-align: center;
-      padding-left: 3px;
-      padding-right: 3px;
+      padding-left: 5px;
       background-color: white;
     }
 
     span.price, span.name {
       background-color: white;
-    }
-    span.name {
       padding-left: 8px;
       padding-right: 8px;
     }
     span.price {
       float: right;
-      padding-left: 8px;
-      padding-right: 8px;
     }
     &:hover {
       cursor: pointer;
@@ -48,6 +44,20 @@ ul#menu_items {
         background-color: $menu-items-background-hover-color;
       }
     }
+  }
+}
+
+#order_form_wrapper {
+  position: fixed;
+  color: white;
+  top: 50px;
+  padding: 12px;
+  background-color: $order-items-wrapper-background-color;
+  box-shadow:0 0 15px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+
+  h4 {
+    margin-bottom: 5px;
   }
 }
 
@@ -68,19 +78,5 @@ ul#order_items {
     a.delete {
       color: white;
     }
-  }
-}
-
-#order_form_wrapper {
-  position: fixed;
-  color: white;
-  top: 50px;
-  padding: 12px;
-  background-color: $order-items-wrapper-background-color;
-  box-shadow:0 0 15px rgba(0, 0, 0, 0.5);
-  border-radius: 6px;
-
-  h4 {
-    margin-bottom: 5px;
   }
 }
