@@ -37,8 +37,8 @@ jQuery ->
     updateTotalCost()
 
   $("ul#menu_items li").click ->
-    $name = $(this).find "span.name"
-    $price = $(this).find "span.price"
+    name = $("span.name", this).html()
+    price = $("span.price", this).html()
     $count = $(this).find "span.count"
 
     if $count.html() is "&nbsp;"
@@ -46,24 +46,19 @@ jQuery ->
     else
       $count.html parseInt($count.html()) + 1
 
-    updateOrderItem $(this).data('menu-id'), $name.html(), $price.html(), $count.html()
+    updateOrderItem $(this).data('menu-id'), name, price, $count.html()
+
     $('#order_form_wrapper').show() if $('#order_items').children().length > 0
 
-  $('ul#order_items li a').live 'click', ->
-    $li = $(this).parent().parent()
-    $name = $($li).find "span.name"
-    $price = $($li).find "span.price"
-    $count = $($li).find "span.count"
-    menuItemId = $($li).data 'menu-id'
+  $('ul#order_items li a.delete').live 'click', ->
+    $orderItem = $(this).parent().parent()
+    name = $("span.name", $orderItem).html()
+    price = $("span.price", $orderItem).html()
+    $count = $("span.count", $orderItem)
+    menuItemId = $orderItem.data 'menu-id'
     newCount = parseInt($count.html()) - 1
-    updateOrderItem menuItemId, $name.html(), $price.html(), newCount
 
-    if newCount is 0
-      $("#menu_item_#{menuItemId} span.count").html "&nbsp;"
-    else
-      $("#menu_item_#{menuItemId} span.count").html newCount
-
+    updateOrderItem menuItemId, name, price, newCount
+    $("#menu_item_#{menuItemId} span.count").html if newCount is 0 then "&nbsp;" else newCount
     $('#order_form_wrapper').hide() if $('#order_items').children().length is 0
-
-    return
 
