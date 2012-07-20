@@ -32,7 +32,6 @@
                 <span class="count"><%= order_item.amount %></span>
                 <a href="javascript:;" class="delete"><i class="icon-minus-sign icon-white"></i></a>
                 <input name="order[order_items_attributes][][menu_item_id]" type="hidden" value="<%= menu_item.id %>">
-                <input name="order[order_items_attributes][][price]" type="hidden" value="<%= menu_item.price %>">
                 <input name="order[order_items_attributes][][amount]" type="hidden" value="<%= order_item.amount %>">
               </span>
             </li>

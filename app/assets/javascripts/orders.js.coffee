@@ -25,7 +25,6 @@ jQuery ->
           <span class='count'>#{count}</span>
           <a href="javascript:;" class="delete"><i class="icon-minus-sign icon-white"></i></a>
           <input name='order[order_items_attributes][][menu_item_id]' type='hidden' value='#{menuItemId}'>
-          <input name='order[order_items_attributes][][price]' type='hidden' value='#{price}'>
           <input name='order[order_items_attributes][][amount]' type='hidden' value='#{count}'>
         </span>
       """

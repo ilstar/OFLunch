@@ -67,11 +67,7 @@ describe OrdersController do
             :order => {
               :user_id => @user.to_param,
               :order_items_attributes => [
-                {
-                  'menu_item_id' => menu_item.to_param,
-                  'price' => menu_item.price.to_s,
-                  'amount' => '1'
-                }
+                { 'menu_item_id' => menu_item.to_param, 'amount' => '1'}
               ]
             }
           }
@@ -79,6 +75,7 @@ describe OrdersController do
         }.should change{ OrderItem.count }.by(1)
       }.should change{ Order.count }.by(1)
 
+      assigns(:order).total_price.should == menu_item.price * 1
       response.should redirect_to(orders_url)
     end
 
@@ -93,8 +90,8 @@ describe OrdersController do
 
       put :update, :id => @order.to_param, :order => {
         :order_items_attributes => [
-            {'menu_item_id' => @menu_item2.to_param, 'price' => @menu_item2.price.to_s, 'amount' => '3'},
-            {'menu_item_id' => @new_menu_item.to_param, 'price' => @new_menu_item.price.to_s, 'amount' => '2'}
+            {'menu_item_id' => @menu_item2.to_param, 'amount' => '3'},
+            {'menu_item_id' => @new_menu_item.to_param, 'amount' => '2'}
           ]
         }
 
