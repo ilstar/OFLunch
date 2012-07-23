@@ -1,4 +1,7 @@
 # -*- encoding : utf-8 -*-
+
+require Rails.root.join 'lib/disable_assets_logger'
+
 OFLunch::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -35,4 +38,7 @@ OFLunch::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.middleware.insert_before Rails::Rack::Logger, DisableAssetsLogger
+
 end
