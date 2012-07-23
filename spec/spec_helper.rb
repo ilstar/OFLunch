@@ -28,11 +28,11 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 end
 
-def only_admin_can(method, action)
+def only_admin_can(method, action, params = {})
   it "only accessable for admin #{method} :#{action}" do
     sign_in FactoryGirl.create :user
 
-    send(method, action)
+    send(method, action, params)
 
     response.should redirect_to(root_url)
     controller.notice.should == '无权访问'

@@ -12,7 +12,7 @@ describe MenuItemsController do
   end
 
   describe "GET index" do
-    only_admin_can :get, 'index'
+    only_admin_can :get, 'index', vendor_id: 1
 
     it "assigns all menu_items as @menu_items" do
       get :index, vendor_id: @vendor.to_param, format: 'js'
@@ -24,7 +24,7 @@ describe MenuItemsController do
   end
 
   describe "POST create" do
-    only_admin_can :post, 'create'
+    only_admin_can :post, 'create', vendor_id: 1
 
     describe "with valid params" do
       it "created successfully and rendered" do
@@ -46,7 +46,7 @@ describe MenuItemsController do
   end
 
   describe "PUT update" do
-    only_admin_can :put, 'update'
+    only_admin_can :put, 'update', id: 1
 
     describe "with valid params" do
       it "updates the attributes and rendered" do
@@ -69,7 +69,7 @@ describe MenuItemsController do
   end
 
   describe "DELETE destroy" do
-    only_admin_can :delete, 'destroy'
+    only_admin_can :delete, 'destroy', vendor_id: 1, id: 1
 
     it "destroys the requested menu_item" do
       expect {
