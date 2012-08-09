@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Admin::VendorsController < ApplicationController
+class Admin::VendorsController < Admin::BaseController
   set_tab :vendors
 
   def index
