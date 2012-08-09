@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
-class MenuItemsController < ApplicationController
-  before_filter :admin_required
+class Admin::MenuItemsController < Admin::BaseController
   before_filter :load_vendor
 
   def index

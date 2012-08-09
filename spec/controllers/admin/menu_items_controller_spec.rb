@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe MenuItemsController do
+describe Admin::MenuItemsController do
   before do
     @admin = FactoryGirl.create :admin
 

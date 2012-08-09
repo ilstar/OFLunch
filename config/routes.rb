@@ -2,7 +2,12 @@
 OFLunch::Application.routes.draw do
 
   namespace :admin do
-    resources :vendors, only: %w{index create update destroy}
+
+    resources :menu_items, only: %w{update}
+    resources :vendors, only: %w{index create update destroy} do
+      resources :menu_items, only: %w{index create destroy}
+    end
+    
   end
 
   resources :messages, only: [] do
@@ -32,11 +37,6 @@ OFLunch::Application.routes.draw do
       put :unlock
       put :close
     end
-  end
-
-  resources :menu_items, only: %w{update}
-  resources :vendors, only: %w{index create update destroy} do
-    resources :menu_items, only: %w{index create destroy}
   end
 
   devise_for :users
