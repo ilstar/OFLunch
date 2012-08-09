@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe VendorsController do
+describe Admin::VendorsController do
   render_views
 
   before do

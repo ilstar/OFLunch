@@ -1,6 +1,10 @@
 # -*- encoding : utf-8 -*-
 OFLunch::Application.routes.draw do
 
+  namespace :admin do
+    resources :vendors, only: %w{index create update destroy}
+  end
+
   resources :messages, only: [] do
     member do
       put :redirect
