@@ -27,7 +27,7 @@
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
     <h3 id='user_email'></h3>
-    <%= form_for [:admin, BalanceLog.new(:amount => 100)], :html => {:class => "form-inline"}  do |f|%>
+    <%= form_for [:admin, @balance_log], :html => {:class => "form-inline"}  do |f|%>
     </div>
 
     <div class="modal-body input-append">
