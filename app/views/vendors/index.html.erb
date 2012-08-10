@@ -1,5 +1,16 @@
-<ul class="nav nav-pills nav-stacked">
-  <% @vendors.each do |vendor| %>
-  <li><%= link_to vendor.name, '#' %></li>
-  <% end %>
-</ul>
+<div class="row">
+
+  <div class="span2">
+    <ul class="nav nav-tabs nav-stacked">
+      <% @vendors.each do |vendor| %>
+      <li><%= link_to vendor.name, vendor_menu_items_path(vendor), remote: true %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="span6">
+    <div id="menu_items">
+      Click on left links to see more.
+    </div>
+  </div>
+</div>

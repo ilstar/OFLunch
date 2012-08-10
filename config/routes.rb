@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 OFLunch::Application.routes.draw do
 
+  get "menu_items/index"
+
   namespace :admin do
 
     resources :menu_items, only: %w{update}
@@ -10,7 +12,9 @@ OFLunch::Application.routes.draw do
     
   end
 
-  resources :vendors, only: %w{index}
+  resources :vendors, only: %w{index} do
+    resources :menu_items, only: %w{index}
+  end
 
   resources :messages, only: [] do
     member do
