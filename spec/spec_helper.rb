@@ -26,6 +26,13 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  # default render_views for all controllers
+  config.include(Module.new {
+    def self.included(base)
+      base.render_views
+    end
+  }, :type => :controller)
 end
 
 def only_admin_can(method, action, params = {})
