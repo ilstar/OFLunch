@@ -1,7 +1,7 @@
 <div class="row">
 
   <div class="span2">
-    <ul class="nav nav-tabs nav-stacked">
+    <ul class="nav nav-pills nav-stacked">
       <% @vendors.each do |vendor| %>
       <li><%= link_to vendor.name, vendor_menu_items_path(vendor), remote: true %></li>
       <% end %>
@@ -14,3 +14,15 @@
     </div>
   </div>
 </div>
+
+<%= content_for :footer do %>
+<script type="text/javascript">
+
+  $body = $('body');
+  $body.on('click', 'ul.nav li', function() {
+    $("ul.nav li.active").removeClass('active');
+    $(this).addClass('active');
+  });
+
+</script>
+<% end %>

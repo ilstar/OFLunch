@@ -13,6 +13,7 @@
         <%= tabs_tag builder: MenuTabBuilder, open_tabs: {class: 'nav'} do |tab| %>
           <%= tab.home t("nav.home"), root_path %>
           <%= tab.order_items t("nav.order_items"), order_items_path %>
+          <%= tab.vendor_list "商家列表", vendors_path %>
           <% if current_user and current_user.admin? %>
           <li class="divider-vertical"></li>
           <%= tab.meal_times t("nav.mom"), meal_times_path %>
