@@ -10,6 +10,8 @@ OFLunch::Application.routes.draw do
     
   end
 
+  resources :vendors, only: %w{index}
+
   resources :messages, only: [] do
     member do
       put :redirect
