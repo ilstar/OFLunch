@@ -12,6 +12,15 @@ OFLunch::Application.routes.draw do
     
     resources :balances, only: %w{index}
     resources :balance_logs, :only => %w{create}
+
+    resources :meal_times, except: [:new, :show] do
+      member do
+        put :lock
+        put :unlock
+        put :close
+      end
+    end
+
   end
 
   resources :vendors, only: %w{index} do
@@ -33,16 +42,6 @@ OFLunch::Application.routes.draw do
   get 'order_items/:date' => 'order_items#index', as: 'date_order_items'
 
   resources :orders, only: %w{index new edit create update destroy}
-
-  resources :meal_times, except: [:new, :show] do
-    resources :menu_of_meals, only: %w{create destroy index}
-
-    member do
-      put :lock
-      put :unlock
-      put :close
-    end
-  end
 
   devise_for :users
 

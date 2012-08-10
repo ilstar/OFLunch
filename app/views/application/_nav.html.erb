@@ -17,7 +17,7 @@
 
           <% if current_user and current_user.admin? %>
             <li class="divider-vertical"></li>
-            <%= tab.meal_times t("nav.mom"), meal_times_path %>
+            <%= tab.meal_times t("nav.mom"), admin_meal_times_path %>
             <%= tab.balances t("nav.balances"), admin_balances_path %>
             <%= tab.vendors "商家管理", admin_vendors_path %>
           <% end %>

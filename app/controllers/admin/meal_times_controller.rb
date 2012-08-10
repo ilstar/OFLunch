@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class MealTimesController < ApplicationController
+class Admin::MealTimesController < Admin::BaseController
   set_tab :meal_times
 
   def index
@@ -13,7 +13,7 @@ class MealTimesController < ApplicationController
 
     respond_to do |format|
       if @meal_time.save
-        format.html { redirect_to meal_times_url }
+        format.html { redirect_to admin_meal_times_url }
       else
         format.html { render 'index' }
       end

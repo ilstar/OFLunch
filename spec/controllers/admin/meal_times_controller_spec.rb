@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe MealTimesController do
+describe Admin::MealTimesController do
   before do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:admin)
     @meal_time = FactoryGirl.create(:meal_time)
     
     sign_in @user
@@ -57,7 +57,7 @@ describe MealTimesController do
       it "redirect to index" do
         post :create, meal_time: { vendor_ids: [@vendor1.to_param] }
         
-        response.should redirect_to(meal_times_url)
+        response.should redirect_to(admin_meal_times_url)
       end
     end
 
