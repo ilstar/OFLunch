@@ -36,7 +36,7 @@
     <div>
       <% if @today_order.meal_time.unlock? %>
         <%= link_to edit_icon_tag, edit_order_path(@today_order), class: 'btn btn-info' %>
-        <%= link_to delete_icon_tag(t('.delete_order')), order_path(@today_order), class: 'btn btn-danger', confirm: t('delete_confirm'), method: 'delete' %>
+        <%= link_to delete_icon_tag(t('.delete_order')), order_path(@today_order), class: 'btn btn-danger', data: {confirm: t('delete_confirm')}, method: 'delete' %>
       <% end %>
       <p class='pull-right highlight'>
         <span class="label label-info">

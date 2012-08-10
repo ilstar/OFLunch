@@ -5,7 +5,7 @@ describe Admin::VendorsController do
   render_views
 
   before do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:admin)
     @vendor = FactoryGirl.create(:vendor)
 
     sign_in @user
