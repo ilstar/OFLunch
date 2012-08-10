@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BalancesController do
+describe Admin::BalancesController do
   before do
     @admin = FactoryGirl.create :admin
 

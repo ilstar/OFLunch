@@ -10,6 +10,8 @@ OFLunch::Application.routes.draw do
       resources :menu_items, only: %w{index create destroy}
     end
     
+    resources :balances, only: %w{index}
+    resources :balance_logs, :only => %w{create}
   end
 
   resources :vendors, only: %w{index} do
@@ -27,11 +29,8 @@ OFLunch::Application.routes.draw do
 
   get "order_items/index"
 
-  resources :balances, only: %w{index}
   resources :order_items, :only => [:index]
   get 'order_items/:date' => 'order_items#index', as: 'date_order_items'
-
-  resources :balance_logs, :only => [:create]
 
   resources :orders, only: %w{index new edit create update destroy}
 

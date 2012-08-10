@@ -1,5 +1,4 @@
-class BalancesController < ApplicationController
-  before_filter :admin_required
+class Admin::BalancesController < Admin::BaseController
   set_tab :balances
 
   def index

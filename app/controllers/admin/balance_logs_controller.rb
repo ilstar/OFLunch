@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-class BalanceLogsController < ApplicationController
+class Admin::BalanceLogsController < Admin::BaseController
   def create
     @balance_log = BalanceLog.new(params[:balance_log])
     @balance = @balance_log.balance
@@ -12,6 +12,6 @@ class BalanceLogsController < ApplicationController
       flash.notice = "为#{@balance.user.identifier}充值失败" + ", #{@balance_log.errors.messages[:amount].join(",") }"
     end
 
-    redirect_to balances_path
+    redirect_to admin_balances_path
   end
 end
