@@ -54,7 +54,9 @@
 </ul>
 
 <%= content_for :head do %>
-  <%= javascript_include_tag "orders" %>
   <%= stylesheet_link_tag    "orders", :media => "all" %>
+<% end %>
+<%= content_for :footer do %>
+  <%= javascript_include_tag "orders" %>
 <% end %>
 
