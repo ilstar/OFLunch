@@ -5,6 +5,7 @@ class Admin::MenuItemsController < Admin::BaseController
   def index
     @menu_items = @vendor.menu_items
     @menu_item = MenuItem.new
+    @categories = Category.all
 
     respond_to do |format|
       format.js
@@ -16,6 +17,7 @@ class Admin::MenuItemsController < Admin::BaseController
 
     respond_to do |format|
       if @menu_item.save
+        @categories = Category.all
         format.js
       else
         format.js { render 'new' }

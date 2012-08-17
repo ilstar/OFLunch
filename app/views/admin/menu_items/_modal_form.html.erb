@@ -10,6 +10,7 @@
     <div class="form-inputs">
       <%= f.input :name, autofocus: true %>
       <%= f.input :price %>
+      <%= f.input :category_id, collection: @categories %>
       <%= f.input :serial_num %>
     </div>
   </div>

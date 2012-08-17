@@ -56,6 +56,7 @@ zh-CN:
         name: 名称
         price: 价格(￥)
         serial_num: 编号
+        category_id: 类别
       user:
         current_password: 当前密码
         password: 密码
