@@ -1,7 +1,5 @@
-<% @categories.each do |category| %>
-  <% next if category.menu_items.empty? %>
-
-  <h3><%= category.try(:name) || '未分类' %></h3>
+<% @menu_items_group_category.each do |category, menu_items| %>
+  <h3><%= category.name %></h3>
 
   <table class="table table-striped table-bordered">
     <tr>
@@ -9,7 +7,7 @@
       <th>价格</th>
     </tr>
 
-    <% category.menu_items.each do |menu_item| %>
+    <% menu_items.each do |menu_item| %>
     <tr>
       <td><%= menu_item.name %></td>
       <td><%= menu_item.price %></td>

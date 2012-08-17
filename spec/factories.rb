@@ -24,6 +24,7 @@ FactoryGirl.define do
 
   factory :menu_item do
     association :vendor
+    association :category
     name 'menu_item name'
     price 4
   end
