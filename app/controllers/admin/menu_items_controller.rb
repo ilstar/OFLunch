@@ -14,10 +14,10 @@ class Admin::MenuItemsController < Admin::BaseController
 
   def create
     @menu_item = @vendor.menu_items.build(params[:menu_item])
+    @categories = Category.all
 
     respond_to do |format|
       if @menu_item.save
-        @categories = Category.all
         format.js
       else
         format.js { render 'new' }
