@@ -12,6 +12,10 @@
  *= require bills
 */
 
+.brand {
+  height: 22px;
+}
+
 .form-inputs label {
   display: inline;
 }
