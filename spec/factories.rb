@@ -18,6 +18,10 @@ FactoryGirl.define do
     end
   end
 
+  factory :category do
+    name "category name"
+  end
+
   factory :menu_item do
     association :vendor
     name 'menu_item name'

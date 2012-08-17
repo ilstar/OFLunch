@@ -1,7 +1,7 @@
 class MenuItemsController < ApplicationController
   def index
-    @vendor = Vendor.find params[:vendor_id]
-    @menu_items = @vendor.menu_items
+    @categories = Category.joins(menu_items: :vendor).where("menu_items.vendor_id = ?", params[:vendor_id])
+
 
     respond_to do |format|
       format.js
