@@ -5,15 +5,19 @@
     <% MealTime.today.vendors.each do |vendor| %>
       <h3 id="<%= dom_id vendor %>"><%= vendor.name %></h3>
 
-      <ul id="menu_items">
-        <% vendor.menu_items_order_by_popular.each do |menu_item| %>
-          <li id="<%= dom_id menu_item %>" data-menu-id="<%= menu_item.id %>">
-            <span class="name"><%= menu_item.name %></span>
-            <span class="price"><%= menu_item.price %></span>
-            <span class="count"><%= (order_item = @order.order_items.detect {|order_item| order_item.menu_item_id == menu_item.id }).nil? ? raw('&nbsp;') : order_item.amount %></span>
-          </li>
-        <% end %>
-      </ul>
+      <% vendor.categories_with_menu_items.each do |category, menu_items| %>
+        <h5><%= category.name %></h5>
+
+        <ul id="menu_items">
+          <% menu_items.each do |menu_item| %>
+            <li id="<%= dom_id menu_item %>" data-menu-id="<%= menu_item.id %>">
+              <span class="name"><%= menu_item.name %></span>
+              <span class="price"><%= menu_item.price %></span>
+              <span class="count"><%= (order_item = @order.order_items.detect {|order_item| order_item.menu_item_id == menu_item.id }).nil? ? raw('&nbsp;') : order_item.amount %></span>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
     <% end %>
   </div><!-- span7 end -->
 

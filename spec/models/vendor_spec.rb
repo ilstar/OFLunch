@@ -38,4 +38,26 @@ describe Vendor do
       ]
     end
   end
+
+  describe "#menu_items_group_by_categories" do
+    before do
+      @category1 = FactoryGirl.create :category
+      @menu_item1 = FactoryGirl.create :menu_item, category: @category1, vendor: @vendor
+      @category2 = FactoryGirl.create :category
+      @menu_item2 = FactoryGirl.create :menu_item, category: @category2, vendor: @vendor
+      @other_cateogry = FactoryGirl.create :category
+    end
+
+    it "doesn't include other category" do
+      @vendor.categories_with_menu_items.keys.include?(@other_cateogry).should be_false
+    end
+
+    it "has correct categories and menu_items" do
+      categories_with_menu_items = @vendor.categories_with_menu_items
+
+      categories_with_menu_items.keys.sort.should == [@category1, @category2].sort
+      categories_with_menu_items[@category1].should == [@menu_item1]
+      categories_with_menu_items[@category2].should == [@menu_item2]
+    end
+  end
 end

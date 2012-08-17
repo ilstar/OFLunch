@@ -9,4 +9,17 @@ class Vendor < ActiveRecord::Base
   def menu_items_order_by_popular
     self.menu_items.joins("LEFT JOIN order_items ON menu_items.id = order_items.menu_item_id").group('menu_items.id').order('SUM(amount) DESC')
   end
+
+  # return categories which belongs a certain vendor
+  # format: {
+  #   <Category> => [<MenuItem>, <MenuItem>]
+  # }
+  def categories_with_menu_items
+    result = {}
+    self.menu_items.each do |menu_item|
+      result[menu_item.category] ||= []
+      result[menu_item.category] << menu_item
+    end
+    result
+  end
 end
