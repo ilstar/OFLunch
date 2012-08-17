@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120528064458) do
+ActiveRecord::Schema.define(:version => 20120817012017) do
 
   create_table "balance_logs", :force => true do |t|
     t.integer  "balance_id"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(:version => 20120528064458) do
     t.datetime "updated_at",                                :null => false
   end
 
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "identifier"
+    t.datetime "deleted_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "meal_times", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -40,10 +48,13 @@ ActiveRecord::Schema.define(:version => 20120528064458) do
     t.float    "price"
     t.string   "serial_num"
     t.integer  "vendor_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.datetime "deleted_at"
+    t.integer  "category_id"
   end
+
+  add_index "menu_items", ["category_id"], :name => "index_menu_items_on_category_id"
 
   create_table "menu_of_days", :force => true do |t|
     t.date     "date"
