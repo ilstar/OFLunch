@@ -5,6 +5,7 @@ zh-CN:
       db: "%Y-%m-%d"
   nav:
     home: 主页
+    ordering: 点餐
     mom: 今日菜单
     order_items: 今日订单
     balances: 余额管理

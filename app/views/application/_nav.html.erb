@@ -11,7 +11,7 @@
       <img class="brand" src="http://product.gree.net/share/img/header-logo-01.png"/>
       <div class="nav-collapse">
         <%= tabs_tag builder: MenuTabBuilder, open_tabs: {class: 'nav'} do |tab| %>
-          <%= tab.home t("nav.home"), root_path %>
+          <%= tab.home t("nav.ordering"), root_path %>
           <%= tab.order_items t("nav.order_items"), order_items_path %>
           <%= tab.vendor_list "商家列表", vendors_path %>
 
