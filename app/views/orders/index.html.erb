@@ -6,12 +6,8 @@
 
 <% if @today_meal_time %>
 
-  <% if @today_order.blank? %>
-    <% unless @today_meal_time.activated? %>
-      <span class='alert alert-warning'> 点餐时间已过，如有疑问或想继续点餐请联系管理员</span>
-    <%end%>
+  <% if @today_order.present? %>
 
-  <% else %>
     <h2>我的订单</h2>
     <table class="table table-bordered">
       <thead>
@@ -43,7 +39,10 @@
       </p>
     </div>
 
+  <% elsif !@today_meal_time.activated? %>
+    <span class='alert alert-warning'> 点餐时间已过，如有疑问或想继续点餐请联系管理员</span>
   <% end %>
+  
 <% else %>
   <%= t '.no_mom' %>
 <% end %>
