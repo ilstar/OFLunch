@@ -9,8 +9,6 @@
   <% if @today_order.blank? %>
     <% if @today_meal_time.can_not_order_now? %>
       <span class='alert alert-warning'> 点餐时间已过，如有疑问或想继续点餐请联系管理员</span>
-    <%else%>
-      <%= link_to t('.order'), new_order_path %>
     <%end%>
 
   <% else %>

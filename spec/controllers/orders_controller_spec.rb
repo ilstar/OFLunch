@@ -24,14 +24,12 @@ describe OrdersController do
     end
 
     describe "when today meal time is created" do
-      it "renders template when today order hasn't created" do
+      it "redirects to orders#new when order hasn't created" do
         @order.destroy
-        
+
         get :index
 
-        assigns(:today_meal_time).should_not be_nil
-        assigns(:today_order).should be_nil
-        response.should be_success
+        response.should redirect_to(new_order_url)
       end
 
       it "renders template when today order is created" do
