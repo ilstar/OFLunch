@@ -5,6 +5,8 @@ class MealTime < ActiveRecord::Base
   has_many :orders
   has_many :order_items, :through => :orders
 
+  validates_inclusion_of :status, in: %w(locked closed), allow_nil: true
+
   attr_accessor :vendor_ids
 
   def self.today
@@ -64,8 +66,9 @@ class MealTime < ActiveRecord::Base
     self.status == "closed"
   end
 
-  def can_not_order_now?
-    self.closed? || self.locked?
+  # return true when users can place order
+  def activated?
+    self.status.nil?
   end
 
   def self.notify_admin_if_today_meal_time_is_not_closed!

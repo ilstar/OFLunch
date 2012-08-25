@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     if @today_meal_time = MealTime.today
       @today_order = @today_meal_time.orders.for_user_id(current_user.id).last
 
-      redirect_to new_order_url if @today_order.blank? and !@today_meal_time.can_not_order_now?
+      redirect_to new_order_url if @today_meal_time.activated? and @today_order.blank?
     end
   end
 
