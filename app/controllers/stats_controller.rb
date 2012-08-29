@@ -1,5 +1,7 @@
 class StatsController < ApplicationController
 
+  set_tab :stats
+
   def popular_menus
     now = Time.current
     @menu_items = MenuItem.joins(:order_items)

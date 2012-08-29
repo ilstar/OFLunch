@@ -14,7 +14,7 @@
           <%= tab.home t("nav.ordering"), root_path %>
           <%= tab.order_items t("nav.order_items"), order_items_path %>
           <%= tab.vendor_list "商家列表", vendors_path %>
-          <%= tab.stat "排行榜", popular_menus_stats_path %>
+          <%= tab.stats "排行榜", popular_menus_stats_path %>
 
           <% if current_user and current_user.admin? %>
             <li class="divider-vertical"></li>
