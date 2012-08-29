@@ -1,0 +1,12 @@
+<% if @menu_items.length == 0 %>
+  <p>数据不多，无法统计</p>
+<% else %>
+
+<h2>本周最收欢迎的菜单</h2>
+<ol>
+  <% @menu_items.each do |item| %>
+  <li><%= item.name %><%= item.menu_item_count %></li>
+  <% end %>
+</ol>
+
+<% end %>

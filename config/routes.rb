@@ -1,6 +1,12 @@
 # -*- encoding : utf-8 -*-
 OFLunch::Application.routes.draw do
 
+  resources :stats, only: %w{} do
+    collection do
+      get :popular_menus
+    end
+  end
+
   get "menu_items/index"
 
   namespace :admin do
