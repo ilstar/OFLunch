@@ -82,16 +82,21 @@ describe Admin::VendorsController do
 
   describe "DELETE destroy" do
     it "destroys the requested vendor" do
-      vendor = Vendor.create! valid_attributes
       expect {
-        delete :destroy, {id: vendor.to_param, format: 'js'}
+        delete :destroy, {id: @vendor.to_param, format: 'js'}
       }.to change(Vendor, :count).by(-1)
+
+      response.should render_template('destroy')
     end
 
-    it "redirects to the vendors list" do
-      vendor = Vendor.create! valid_attributes
-      delete :destroy, {id: vendor.to_param, format: 'js'}
-      response.should render_template('destroy')
+    it "could not delete when today meal time is activated" do
+      FactoryGirl.create :meal_time
+
+      expect {
+        delete :destroy, id: @vendor.to_param, format: 'js'
+      }.to change { Vendor.count }.by(0)
+
+      response.code.should == '405'
     end
   end
 

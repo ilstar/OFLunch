@@ -77,6 +77,16 @@ describe Admin::MenuItemsController do
       }.to change(@vendor.menu_items, :count).by(-1)
       response.should be_success
     end
+
+    it "can not delete when today meal time is activated" do
+      FactoryGirl.create :meal_time
+      
+      expect {
+        delete :destroy, id: @menu_item.to_param, vendor_id: @vendor.to_param, format: 'js'
+      }.to change { @vendor.menu_items.count }.by(0)
+
+      response.code.should == '405'
+    end
   end
 
   def valid_attributes
