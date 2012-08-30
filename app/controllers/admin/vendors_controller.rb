@@ -37,15 +37,10 @@ class Admin::VendorsController < Admin::BaseController
 
   def destroy
     @vendor = Vendor.find(params[:id])
+    @vendor.destroy
 
     respond_to do |format|
-      format.js {
-        if MealTime.today.try(:activated?)
-          head 405
-        else
-          @vendor.destroy
-        end
-      }
+      format.js
     end
   end
 end

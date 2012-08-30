@@ -39,15 +39,10 @@ class Admin::MenuItemsController < Admin::BaseController
 
   def destroy
     @menu_item = MenuItem.find(params[:id])
+    @menu_item.destroy
 
     respond_to do |format|
-      format.js {
-        if MealTime.today.try(:activated?)
-          head 405
-        else
-          @menu_item.destroy
-        end
-      }
+      format.js
     end
   end
 

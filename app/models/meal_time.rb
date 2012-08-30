@@ -18,6 +18,7 @@ class MealTime < ActiveRecord::Base
     where(["created_at > ? AND created_at < ?", date.beginning_of_day, date.end_of_day]).first
   end
 
+
   def vendor_ids
     self.vendors.map &:id
   end
