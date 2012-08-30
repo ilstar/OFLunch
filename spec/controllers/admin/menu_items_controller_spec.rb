@@ -77,6 +77,44 @@ describe Admin::MenuItemsController do
       }.to change(@vendor.menu_items, :count).by(-1)
       response.should be_success
     end
+
+    it "can not delete when today meal is open and someone order the dish" do
+      meal_time = FactoryGirl.create :meal_time
+      order = FactoryGirl.create :order, meal_time: meal_time
+      order_item = FactoryGirl.create :order_item, order: order, menu_item: @menu_item
+
+      expect {
+        delete :destroy, id: @menu_item.to_param, vendor_id: @vendor.to_param, format: 'js'
+      }.to change { MenuItem.count }.by(0)
+
+      response.code.should == '422'
+    end
+
+    it "can not delete when today meal is locked and someone order the dish" do
+      meal_time = FactoryGirl.create :meal_time
+      order = FactoryGirl.create :order, meal_time: meal_time
+      order_item = FactoryGirl.create :order_item, order: order, menu_item: @menu_item
+      meal_time.lock!
+
+      expect {
+        delete :destroy, id: @menu_item.to_param, vendor_id: @vendor.to_param, format: 'js'
+      }.to change { MenuItem.count }.by(0)
+
+      response.code.should == '422'
+    end
+
+    it "can delete when today meal is closed and someone order the dish" do
+      meal_time = FactoryGirl.create :meal_time
+      order = FactoryGirl.create :order, meal_time: meal_time
+      order_item = FactoryGirl.create :order_item, order: order, menu_item: @menu_item
+      meal_time.close!
+
+      expect {
+        delete :destroy, id: @menu_item.to_param, vendor_id: @vendor.to_param, format: 'js'
+      }.to change { MenuItem.count }.by(-1)
+
+      response.should be_success
+    end
   end
 
   def valid_attributes

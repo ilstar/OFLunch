@@ -39,10 +39,15 @@ class Admin::MenuItemsController < Admin::BaseController
 
   def destroy
     @menu_item = MenuItem.find(params[:id])
-    @menu_item.destroy
 
     respond_to do |format|
-      format.js
+      # when somebody order the dish, admin can not delete the menu item until the meal time become closed.
+      if meal_time = MealTime.today and (meal_time.activated? or meal_time.locked?) and (today_order_items = @menu_item.order_items.where(["created_at > ?", Time.current.beginning_of_day])).count > 0
+        format.js { render js: "var container = $('<span>#{today_order_items.map(&:order).map(&:user).map(&:name).join(", ") + "ordered the dish, please inform them to delete their order before you delete this menu item"}</span>');container.purr();", status: :unprocessable_entity }
+      else
+        @menu_item.destroy
+        format.js
+      end
     end
   end
 
