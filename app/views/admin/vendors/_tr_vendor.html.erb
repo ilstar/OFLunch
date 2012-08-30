@@ -2,6 +2,8 @@
   <td width="50%"><%= best_in_place vendor, :name, path: [:admin, vendor] %></td>
   <td>
     <%= link_to '菜单', admin_vendor_menu_items_path(vendor), remote: true %>
-    <%= link_to '删除', [:admin, vendor], data: {confirm: "你确定要删除 #{vendor.name} 吗？"}, method: :delete, remote: true %>
+    <% if @meal_time.nil? or @meal_time.closed? %>
+      <%= link_to '删除', [:admin, vendor], data: {confirm: "你确定要删除 #{vendor.name} 吗？"}, method: :delete, remote: true %>
+    <% end %>
   </td>
 </tr>

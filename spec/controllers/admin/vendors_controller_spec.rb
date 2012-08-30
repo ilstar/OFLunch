@@ -81,17 +81,42 @@ describe Admin::VendorsController do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested vendor" do
-      vendor = Vendor.create! valid_attributes
-      expect {
-        delete :destroy, {id: vendor.to_param, format: 'js'}
-      }.to change(Vendor, :count).by(-1)
+    before do
+      @meal_time = FactoryGirl.create :meal_time
+      @menu_item = FactoryGirl.create :menu_item, vendor: @vendor
+      @order = FactoryGirl.create :order, meal_time: @meal_time
+      @order_item = FactoryGirl.create :order_item, order: @order, menu_item: @menu_item
     end
 
-    it "redirects to the vendors list" do
-      vendor = Vendor.create! valid_attributes
-      delete :destroy, {id: vendor.to_param, format: 'js'}
+    it "destroys the requested vendor" do
+      @meal_time.destroy
+      
+      expect {
+        delete :destroy, {id: @vendor.to_param, format: 'js'}
+      }.to change(Vendor, :count).by(-1)
       response.should render_template('destroy')
+    end
+
+    it "can not delete when today meal time is acitvated" do
+      expect {
+        delete :destroy, id: @vendor.to_param, format: 'js'
+      }.to change { Vendor.count }.by(0)
+    end
+
+    it "can not delete when today meal time is locked" do
+      @meal_time.lock!
+
+      expect {
+        delete :destroy, id: @vendor.to_param, format: 'js'
+      }.to change { Vendor.count }.by(0)
+    end
+
+    it "can delete when today meal time is closed" do
+      @meal_time.close!
+      
+      expect {
+        delete :destroy, id: @vendor.to_param, format: 'js'
+      }.to change { Vendor.count }.by(-1)
     end
   end
 

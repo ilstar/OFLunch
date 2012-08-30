@@ -5,6 +5,7 @@ class Admin::VendorsController < Admin::BaseController
   def index
     @vendors = Vendor.all
     @vendor = Vendor.new
+    @meal_time = MealTime.today
 
     respond_to do |format|
       format.html
@@ -37,10 +38,14 @@ class Admin::VendorsController < Admin::BaseController
 
   def destroy
     @vendor = Vendor.find(params[:id])
-    @vendor.destroy
 
     respond_to do |format|
-      format.js
+      if MealTime.today.try(:activated?) or MealTime.today.try(:locked?)
+        format.js { render js: "用户正在订餐中，无法删除商家#{@vendor.name}" }
+      else
+        @vendor.destroy
+        format.js
+      end
     end
   end
 end
