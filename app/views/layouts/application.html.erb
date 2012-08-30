@@ -24,11 +24,12 @@
 
     <%= javascript_include_tag "application" %>
     <%= yield :footer %>
-  </body>
 
-  <% if original_user %>
-    <div class="alert alert-info" id="switch_account_bar">
-      切换回 <%= link_to original_user.name, change_sessions_path, method: 'put' %>
-    </div>
-  <% end %>
+    <% if original_user %>
+      <div class="alert alert-info" id="switch_account_bar">
+        切换回 <%= link_to original_user.name, change_sessions_path, method: 'put' %>
+      </div>
+    <% end %>
+  
+  </body>
 </html>
