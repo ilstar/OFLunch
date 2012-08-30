@@ -86,8 +86,6 @@ describe Admin::MenuItemsController do
       expect {
         delete :destroy, id: @menu_item.to_param, vendor_id: @vendor.to_param, format: 'js'
       }.to change { MenuItem.count }.by(0)
-
-      response.code.should == '422'
     end
 
     it "can not delete when today meal is locked and someone order the dish" do
@@ -99,8 +97,6 @@ describe Admin::MenuItemsController do
       expect {
         delete :destroy, id: @menu_item.to_param, vendor_id: @vendor.to_param, format: 'js'
       }.to change { MenuItem.count }.by(0)
-
-      response.code.should == '422'
     end
 
     it "can delete when today meal is closed and someone order the dish" do
