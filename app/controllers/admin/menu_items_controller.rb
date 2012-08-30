@@ -43,7 +43,7 @@ class Admin::MenuItemsController < Admin::BaseController
     respond_to do |format|
       # when somebody order the dish, admin can not delete the menu item until the meal time become closed.
       if meal_time = MealTime.today and (meal_time.activated? or meal_time.locked?) and (today_order_items = @menu_item.order_items.where(["created_at > ?", Time.current.beginning_of_day])).count > 0
-        format.js { render js: "var container = $('<span class=alert>#{"删除失败，因为" + today_order_items.map(&:order).map(&:user).map(&:name).join(", ") + " 已经订了#{@menu_item.name}"}</span>');container.purr();" }
+        format.js { render js: %{var container = $('<span class="flash-error">删除失败，因为#{today_order_items.map(&:order).map(&:user).map(&:name).join(", ")}已经订了#{@menu_item.name}</span>');container.purr();} }
       else
         @menu_item.destroy
         format.js
