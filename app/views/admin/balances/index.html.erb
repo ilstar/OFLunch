@@ -16,8 +16,9 @@
       <tr>
         <td><%= balance.user.identifier %></td>
         <td><%= balance.amount %></td>
-        <td><%#= link_to raw("<i class='icon-list-alt'> </i>  ") +'详情', balance, :class => "btn" %>
-          <%= link_to raw("<i class='icon-plus'> </i>  ") +'充值', "#myModal",  :class => "btn", "data-toggle" => "modal", :onclick => "javascripts:fill_form('#{balance.user.identifier}', '#{balance.id}');"  %></td>
+        <td>
+          <%= link_to raw("<i class='icon-plus'> </i>  ") +'充值', "#myModal",  :class => "btn", "data-toggle" => "modal", :onclick => "javascripts:fill_form('#{balance.user.identifier}', '#{balance.id}');"  %>
+        </td>
       </tr>
     <% end %>
   </tbody>
