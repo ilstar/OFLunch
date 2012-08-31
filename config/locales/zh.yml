@@ -15,13 +15,6 @@ zh-CN:
     balance_history: 充值记录
 
   # controllers views
-  meal_times:
-    index:
-      no_mom_selected: 今日菜单尚未出炉，请从下面选择今日菜单！
-      choose_mom: 开始选择
-      today_menu: 今日菜单(%{date})
-    new:
-      all_vendors: 所有餐馆
   orders:
     index:
       no_mom: 今日菜单尚未公布，敬请期待！
@@ -32,15 +25,21 @@ zh-CN:
       balance_is_too_less: 亲啊，您已经欠账%{n}元，赶紧充值吧亲！
     new:
       all_vendors: 所有餐馆
-  balances:
-    index:
-      remaining_sum: 总余额
-  balance_logs:
-    index:
-      current_account_balance: 账户余额
   bills:
     index:
       current_account_balance: 账户余额
+  admin:
+    balances:
+      index:
+        remaining_sum: 总余额
+    balance_logs:
+      index:
+        current_account_balance: 账户余额
+    meal_times:
+      index:
+        no_mom_selected: 今日菜单尚未出炉，请从下面选择今日菜单！
+        choose_mom: 开始选择
+        today_menu: 今日菜单(%{date})
 
   meal_time:
     no_more_than_2_vendors: 最多只能选择两家餐馆
