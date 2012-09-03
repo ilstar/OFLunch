@@ -96,4 +96,15 @@ describe OrderItemsController do
     end
   end
 
+  describe "PUT rating" do
+    it "rates 4 stars" do
+      order_item = FactoryGirl.create :order_item
+      order_item.rating.should_not == 4
+
+      put :rating, id: order_item.to_param, value: '4'
+
+      assigns(:order_item).rating.should == 4
+    end
+  end
+
 end

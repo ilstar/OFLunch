@@ -12,6 +12,13 @@ class OrderItemsController < ApplicationController
     @today_order_items = @mom.try(:order_items) || []
   end
 
+  def rating
+    @order_item = OrderItem.find params[:id]
+    @order_item.update_attribute :rating, params[:value].to_i
+
+    head :ok
+  end
+
   private
   def determine_layout
     current_user ? "application" : "blank"

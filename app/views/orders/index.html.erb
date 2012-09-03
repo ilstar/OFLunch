@@ -11,7 +11,10 @@
     <h2>我的订单</h2>
     <table class="table table-bordered">
       <thead>
-        <tr> <th> 编号 </th> <th>供应商</th> <th> 名称 </th> <th> 价格 </th> <th> 数量 </th> <th> 小计 </th> </tr>
+        <tr>
+          <th> 编号 </th> <th>供应商</th> <th> 名称 </th> <th> 价格 </th> <th> 数量 </th> <th> 小计 </th>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
         <%- @today_order.order_items.each do |object| %>
@@ -22,6 +25,11 @@
             <td> <%= object.price %></td>
             <td> <%= object.amount %></td>
             <td> <%= object.total_price %></td>
+            <td data-order_item_id="<%= object.id %>">
+              <% (1..5).each do |i| %>
+                <input name="rating-<%= dom_id(object) %>" type="radio" class="rating" value="<%= i %>"/>
+              <% end %>
+            </td>
           </tr>
         <%end%>
       </tbody>
@@ -48,3 +56,27 @@
 <% end %>
 
 <div class="clearfix"></div>
+
+<%= content_for :footer do %>
+<script type="text/javascript">
+$('.rating').rating({
+  required: true,
+  callback: function(value) {
+    rating = $(this);
+    order_item_id = rating.parent().data('order_item_id');
+    $.ajax({
+      type: 'PUT',
+      url: '/order_items/' + order_item_id + '/rating',
+      data: {value: value},
+      success: function() {
+        rating.rating('disable');
+      },
+      error: function() {
+        alert("something going wrong, please try again later.");
+        rating.rating({select: 1});
+      }
+    })
+  },
+})
+</script>
+<% end %>

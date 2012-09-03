@@ -7,6 +7,9 @@
 //= require jquery.effects.drop
 //= require jquery.ui.draggable
 
+# rating
+//= require jquery.rating.pack
+
 jQuery ->
   jQuery('.best_in_place').best_in_place()
 

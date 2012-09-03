@@ -44,7 +44,11 @@ OFLunch::Application.routes.draw do
 
   get "order_items/index"
 
-  resources :order_items, :only => [:index]
+  resources :order_items, :only => [:index] do
+    member do
+      put :rating
+    end
+  end
   get 'order_items/:date' => 'order_items#index', as: 'date_order_items'
 
   resources :orders, only: %w{index new edit create update destroy}
