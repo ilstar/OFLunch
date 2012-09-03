@@ -107,4 +107,16 @@ describe OrderItemsController do
     end
   end
 
+  describe "PUT comment" do
+    it "adds comments" do
+      order_item = FactoryGirl.create :order_item
+      order_item.comment.should be_nil
+      comment = 'blabla'
+
+      put :comment, id: order_item.to_param, comment: comment
+
+      assigns(:order_item).comment.should == comment
+    end
+  end
+
 end

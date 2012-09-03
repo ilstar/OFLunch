@@ -19,6 +19,11 @@ class OrderItemsController < ApplicationController
     head :ok
   end
 
+  def comment
+    @order_item = OrderItem.find params[:id]
+    # @order_item.update_attribute :comment, params[:comment]
+  end
+
   private
   def determine_layout
     current_user ? "application" : "blank"

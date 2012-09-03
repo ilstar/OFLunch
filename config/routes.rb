@@ -47,6 +47,7 @@ OFLunch::Application.routes.draw do
   resources :order_items, :only => [:index] do
     member do
       put :rating
+      put :comment
     end
   end
   get 'order_items/:date' => 'order_items#index', as: 'date_order_items'

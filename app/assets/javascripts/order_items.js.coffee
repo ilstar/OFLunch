@@ -6,11 +6,14 @@ jQuery ->
   $('.rating').rating
     required: true
     callback: (value) ->
+      orderItemId = $(this).parent().data('order_item_id')
       $.ajax
         type: "PUT"
-        url: "/order_items/#{$(this).parent().data('order_item_id')}/rating"
+        url: "/order_items/#{orderItemId}/rating"
         data: {value: value}
         success: =>
           $(this).rating('disable')
+          $('#ratingForm').attr 'action', "/order_items/#{orderItemId}/comment"
+          $('#ratingModal').modal('show')
         error: =>
           alert "something going wrong, please try again later."
