@@ -10,6 +10,8 @@
 # rating
 //= require jquery.rating.pack
 
+//= require order_items
+
 jQuery ->
   jQuery('.best_in_place').best_in_place()
 
