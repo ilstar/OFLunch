@@ -2,9 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
-gem 'jquery-rails', '2.0.0'
-gem 'jquery-ui-rails', '0.4.0'
-
 gem 'devise', '2.1.2'
 gem 'simple_form', '2.0.0'
 gem "tabs_on_rails", '2.1.1'
@@ -37,6 +34,8 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails', '2.1.3'
+  gem 'jquery-rails', '2.1.1'
+  gem 'jquery-ui-rails', '2.0.0'
 end
 
 
