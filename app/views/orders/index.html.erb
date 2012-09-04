@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         <%- @today_order.order_items.each do |order_item| %>
-          <tr> 
+          <tr id="<%= dom_id order_item %>">
             <td> <%= order_item.serial_num %></td>
             <td> <%= order_item.vendor.name %></td>
             <td> <%= order_item.name %></td>
@@ -28,14 +28,18 @@
             <td> <%= order_item.amount %></td>
             <td> <%= order_item.total_price %></td>
             <% if @today_meal_time.closed? %>
-              <td data-order_item_id="<%= order_item.id %>">
+              <td>
+                <div>
                 <% (1..5).each do |i| %>
-                  <% options = {name: "rating-#{dom_id order_item}", type: "radio", class: "rating", value: i} %>
+                  <% options = {name: "rating-#{dom_id order_item}", type: "radio", class: "rating", value: i, data: {order_item_id: order_item.id}} %>
                   <% options[:disabled] = "disabled" if order_item.rating.present? %>
                   <% options[:checked] = "checked" if order_item.rating == i %>
                   <%= content_tag :input, options do %>
                   <% end %>
                 <% end %>
+                </div>
+                <br/>
+                <div class="comment"><%= order_item.comment %></div>
               </td>
             <% end %>
           </tr>

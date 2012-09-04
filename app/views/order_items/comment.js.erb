@@ -1,2 +1,3 @@
 $('#ratingModal').modal('hide')
-$('#order_item_comment').html(null)
+$('#comment').html(null)
+$("#<%= dom_id @order_item %> .comment").html("<%= @order_item.comment %>")

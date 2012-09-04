@@ -21,7 +21,7 @@ class OrderItemsController < ApplicationController
 
   def comment
     @order_item = OrderItem.find params[:id]
-    # @order_item.update_attribute :comment, params[:comment]
+    @order_item.update_attribute :comment, params[:comment]
   end
 
   private

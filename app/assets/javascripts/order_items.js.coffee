@@ -6,7 +6,7 @@ jQuery ->
   $('.rating').rating
     required: true
     callback: (value) ->
-      orderItemId = $(this).parent().data('order_item_id')
+      orderItemId = $(this).data('order-item-id')
       $.ajax
         type: "PUT"
         url: "/order_items/#{orderItemId}/rating"
