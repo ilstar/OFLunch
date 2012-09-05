@@ -50,9 +50,9 @@
 </div>  
 
 
-<ul class="nav nav-tabs nav-stacked" style="position:fixed;top: 200px; left: 0px;">
+<ul id="quick-nav" class="nav nav-tabs nav-stacked">
   <% MealTime.today.vendors.each do |vendor| %>
-    <li><%= link_to vendor.name, "javascript:$('body').scrollTo($('##{dom_id(vendor)}').offset().top - 41, 0, {duration: 250})" %></li>
+    <li data-target="<%= dom_id vendor %>"><%= link_to vendor.name, "javascript:;" %></li>
   <% end %>
 </ul>
 
