@@ -2,7 +2,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :menu_item
 
-  delegate :serial_num, :vendor, :name, :to => :menu_item
+  delegate :vendor, :name, :to => :menu_item
   before_save :set_price_according_menu_item
 
   def total_price

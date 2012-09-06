@@ -61,3 +61,7 @@ jQuery ->
     $("#menu_item_#{menuItemId} span.count").html if newCount is 0 then "&nbsp;" else newCount
     $('#order_form_wrapper').hide() if $('#order_items').children().length is 0
 
+# listen click event on left nav of /orders/new page.
+$("body").on 'click', "#quick-nav li", ->
+  $target = $("##{$(this).data 'target'}")
+  $("body").animate {scrollTop: $target.offset().top - 41}, 250

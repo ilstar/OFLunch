@@ -9,10 +9,10 @@
   <% if @today_order.present? %>
 
     <h2>我的订单</h2>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th> 编号 </th> <th>供应商</th> <th> 名称 </th> <th> 价格 </th> <th> 数量 </th> <th> 小计 </th>
+          <th>供应商</th> <th> 名称 </th> <th> 价格 </th> <th> 数量 </th> <th> 小计 </th>
           <% if @today_meal_time.closed? %>
             <th>评分</th>
           <% end %>
@@ -21,7 +21,6 @@
       <tbody>
         <%- @today_order.order_items.each do |order_item| %>
           <tr id="<%= dom_id order_item %>">
-            <td> <%= order_item.serial_num %></td>
             <td> <%= order_item.vendor.name %></td>
             <td> <%= order_item.name %></td>
             <td> <%= order_item.price %></td>
