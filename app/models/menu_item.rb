@@ -7,4 +7,6 @@ class MenuItem < ActiveRecord::Base
   has_many :order_items
 
   validates_presence_of :name, :price, :category_id
+
+  scope :eatable, where("category_id <> ?", Category.find_by_identifier('freight').try(:id).to_i)
 end

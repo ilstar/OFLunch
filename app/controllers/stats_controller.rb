@@ -4,7 +4,8 @@ class StatsController < ApplicationController
 
   def popular_menus
     now = Time.current
-    @menu_items = MenuItem.joins(:order_items)
+    @menu_items = MenuItem.eatable
+                          .joins(:order_items)
                           .select("name, COUNT(menu_items.id) AS menu_item_count")
                           .group("menu_item_id")
                           .order("menu_item_count DESC")
