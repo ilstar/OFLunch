@@ -113,7 +113,7 @@ describe OrderItemsController do
       order_item.comment.should be_nil
       comment = 'blabla'
 
-      put :comment, id: order_item.to_param, comment: comment
+      put :comment, id: order_item.to_param, comment: comment, format: 'js'
 
       assigns(:order_item).comment.should == comment
     end
