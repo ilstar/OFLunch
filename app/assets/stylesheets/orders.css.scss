@@ -30,6 +30,11 @@ ul#menu_items {
       padding-left: 8px;
       padding-right: 8px;
     }
+    span.comment {
+      background-color: white;
+      margin-left: -8px;
+      padding-right: 8px;
+    }
     span.price {
       float: right;
     }
@@ -40,7 +45,7 @@ ul#menu_items {
       background-color: $menu-items-background-hover-color;
       background-image: none;
 
-      span.name, span.price, span.count {
+      span.name, span.price, span.count, span.comment {
         background-color: $menu-items-background-hover-color;
       }
     }

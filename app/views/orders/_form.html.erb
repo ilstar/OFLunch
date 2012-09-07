@@ -13,8 +13,12 @@
             <li id="<%= dom_id menu_item %>" data-menu-id="<%= menu_item.id %>">
               <span class="name">
                 <%= menu_item.name %>
-                <%= rating_summary_tag menu_item.average_rating, menu_item.last_comment if menu_item.last_comment %>
               </span>
+              <% if menu_item.last_comment %>
+                <span class="comment">
+                  <%= rating_summary_tag menu_item.average_rating, menu_item.last_comment %>
+                </span>
+              <% end %>
               <span class="price"><%= menu_item.price %></span>
               <span class="count"><%= (order_item = @order.order_items.detect {|order_item| order_item.menu_item_id == menu_item.id }).nil? ? raw('&nbsp;') : order_item.amount %></span>
             </li>
