@@ -29,4 +29,19 @@ module ApplicationHelper
     </div>
     }
   end
+
+  def rating_summary_tag(rating, comment)
+    title = (1..5).map do |i|
+      if i <= rating.round
+        image_tag "red_star.png", width: "14x14"
+      else
+        image_tag "white_star.png", width: "14x14"
+      end
+    end.join('') + " (#{rating})"
+
+    link_to "javascript:;", rel: 'popover', data: {title: title.gsub('"', "'"), content: comment, trigger: 'hover'} do
+      image_tag "comment.png", width: "12x12"
+    end
+  end
+
 end

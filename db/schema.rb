@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904032254) do
+ActiveRecord::Schema.define(:version => 20120906074844) do
 
   create_table "balance_logs", :force => true do |t|
     t.integer  "balance_id"
@@ -47,10 +47,11 @@ ActiveRecord::Schema.define(:version => 20120904032254) do
     t.string   "name"
     t.float    "price"
     t.integer  "vendor_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.datetime "deleted_at"
     t.integer  "category_id"
+    t.float    "average_rating"
   end
 
   add_index "menu_items", ["category_id"], :name => "index_menu_items_on_category_id"
