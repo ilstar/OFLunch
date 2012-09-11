@@ -11,4 +11,4 @@ max_persistent_conns: 4048
 environment: production
 servers: 1
 daemonize: true
-chdir: /opt/www/oflunch/current
+chdir: /home/ilstar/www/oflunch/current
