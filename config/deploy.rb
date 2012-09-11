@@ -5,28 +5,29 @@ require "bundler/capistrano"
 require "whenever/capistrano"
 load 'deploy/assets'
 
-set :rvm_ruby_string, '1.9.2'
+set :rvm_ruby_string, '1.9.3'
 set :rvm_type, :user
 set :whenever_command, "bundle exec whenever"
 
 # main details
 set :application, "oflunch"
-role :web, "10.64.17.47"
-role :app, "10.64.17.47"
-role :db,  "10.64.17.47", :primary => true
+remote_ip = "106.187.95.163"
+role :web, remote_ip
+role :app, remote_ip
+role :db,  remote_ip, :primary => true
 
 # server details
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
-set :deploy_to, "/opt/www/oflunch"
+set :deploy_to, "/home/ilstar/www/oflunch"
 set :deploy_via, :remote_cache
-set :user, "luke"
+set :user, "ilstar"
 set :use_sudo, false
 
 # repo details
 set :scm, :git
 set :repository, "git://github.com/ilstar/OFLunch.git"
-set :branch, "master"
+set :branch, "deploy_to_linode"
 set :git_enable_submodules, 1
 
 # tasks
