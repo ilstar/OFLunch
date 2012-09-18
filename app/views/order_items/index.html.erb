@@ -24,7 +24,7 @@
           <tr>
             <td> <%= object.menu_item_with_deleted.name %> x <%= objects.sum(&:amount) %>  </td>
             <td> <%= object.menu_item_with_deleted.price %></td>
-            <td> <%= number_to_currency(objects.sum(&:total_price), :unit => "￥") %></td>
+            <td> <%= number_to_currency(objects.sum(&:total_price), :unit => "￥", precision: 1) %></td>
             <td> <%= raw objects.map{ |oi| oi.order.user.name +  (oi.amount > 1 ? "（#{oi.amount}）" : "") }.join("</br>" )%></td>
           </tr>
         <%end%>
