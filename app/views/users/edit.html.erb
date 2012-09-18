@@ -7,11 +7,18 @@
 
   <%= simple_form_for @user , :html => {:class => "form-horizontal"} do |f|%>
   <div class="inputs">
+    <%= f.input :avatar, label: '&nbsp;' do %>
+      <%= gravatar_image_tag @user.email, class: 'img-rounded' %>
+      <br/>
+      在<%= link_to 'Gravatar', 'https://en.gravatar.com/', target: '_blank' %>上修改你的头像
+    <% end %>
+  </div>
+  <div class="inputs">
     <%= f.input :email, disabled: true %>
     <%= f.input :name, :placeholder => @user.name || "Name", :class => "input-small" %>
   </div>
   <div class="form-actions">
-  	<%= f.submit "Update", :class => "btn-primary" %>
+  	<%= f.submit "Update", :class => "btn btn-primary" %>
   </div>
   <%end%>
 </div>
