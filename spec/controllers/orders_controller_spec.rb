@@ -50,7 +50,7 @@ describe OrdersController do
       order = nil
       Timecop.freeze Time.current.yesterday do
         meal_time = FactoryGirl.create :meal_time
-        order = FactoryGirl.create :order, meal_time: meal_time
+        order = FactoryGirl.create :order, meal_time: meal_time, user: @user
         FactoryGirl.create :order_item, order: order
       end
 
