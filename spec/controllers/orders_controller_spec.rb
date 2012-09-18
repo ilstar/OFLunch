@@ -45,6 +45,20 @@ describe OrdersController do
         assigns(:today_meal_time).should_not be_nil
       end
     end
+
+    it "renders last meal time order items" do
+      order = nil
+      Timecop.freeze Time.current.yesterday do
+        meal_time = FactoryGirl.create :meal_time
+        order = FactoryGirl.create :order, meal_time: meal_time
+        FactoryGirl.create :order_item, order: order
+      end
+
+      get :index
+
+      response.should be_success
+      assigns(:last_order).should == order
+    end
   end
 
   describe "GET 'new'" do

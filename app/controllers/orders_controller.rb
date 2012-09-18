@@ -8,6 +8,10 @@ class OrdersController < ApplicationController
 
       redirect_to new_order_url if @today_meal_time.activated? and @today_order.blank?
     end
+
+    if last_meal_time = MealTime.history.last
+      @last_order = last_meal_time.orders.for_user_id(current_user.id).last
+    end
   end
 
   def new
