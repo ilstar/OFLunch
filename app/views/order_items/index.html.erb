@@ -41,8 +41,13 @@
     <span class="alert alert-warning">菜单已关闭</span>
   <%end%>
   <% if @mom.locked? %>
-    <%= link_to "结算", "#myModalClose", :class => "btn btn-danger" , "data-toggle" => "modal"%>
-    <%= link_to "解锁菜单", "#myModalUnlock", :class => "btn btn-inverse" , "data-toggle" => "modal"%>
+    <%= link_to "#myModalClose", :class => "btn btn-danger" , "data-toggle" => "modal" do %>
+      <i class='icon-shopping-cart icon-white'></i> 结算
+    <% end %>
+
+    <%= link_to "#myModalUnlock", :class => "btn btn-inverse" , "data-toggle" => "modal" do %>
+      <i class='icon-repeat icon-white'></i> 解锁菜单
+    <% end %>
 
     <div class="modal hide" id="myModalClose">
       <div class="modal-header">
@@ -75,13 +80,12 @@
         <%= link_to "确认", unlock_admin_meal_time_path(@mom), :class => "btn btn-primary", :method => :put %>
       </div>
     </div>
-
-    <div>
-    </div>
   <%end%>
 
   <% if @mom.unlock? %>
-    <%= link_to "锁定菜单", "#myModal", :class => "btn btn-primary" , "data-toggle" => "modal"%>
+    <%= link_to "#myModal", :class => "btn btn-primary" , "data-toggle" => "modal" do %>
+      <i class='icon-lock icon-white'></i> 锁定菜单
+    <% end %>
 
     <div class="modal hide" id="myModal">
       <div class="modal-header">
