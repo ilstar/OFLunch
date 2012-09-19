@@ -29,8 +29,8 @@
           <ul class="nav pull-right">
             <li>
               <%= link_to edit_user_path do %>
-                <%= gravatar_image_tag current_user.email, gravatar: {size: 25}, class: 'img-rounded' %>
-                Hi, <%= current_user.identifier %>
+                <%= gravatar_image_tag current_user.email, gravatar: {size: 22}, class: 'img-rounded' %>
+                <%= current_user.identifier %>
               <% end %>
             </li>
             <% if not @messages.empty? %>
