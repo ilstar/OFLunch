@@ -1,7 +1,7 @@
 <h2 class="pull-left">消费详情</h2>
 
 <span class="pull-right label <%= current_user.account_balance > 20 ? 'label-info' : 'label-warning' %>">
-  <%= t '.current_account_balance' %><%= number_to_currency current_user.account_balance, unit: '￥' %>
+  <%= t '.current_account_balance' %><%= number_to_currency current_user.account_balance, unit: '￥', precision: 1 %>
 </span>
 
 <div class="clearfix"></div>
@@ -24,11 +24,11 @@
     <% balance_logs = bills.select {|bill| bill.is_a?(BalanceLog)} %>
     <% orders = bills.select {|bill| bill.is_a?(Order)} %>
     <% balance_logs.each do |log| %>
-      <span class="label label-important" rel="tooltip"><%= number_to_currency log.amount, :unit => "￥" %></span>
+      <span class="label label-important" rel="tooltip"><%= number_to_currency log.amount, :unit => "￥", precision: 1 %></span>
       <br/>
     <% end %>
     <% orders.each do |order| %>
-      <span class="label label-success" rel="popover" data-content="<%= render partial: 'order_popover', locals: {order: order} %>"><%= number_to_currency order.total_price, :unit => "￥" %></span> <br/>
+      <span class="label label-success" rel="popover" data-content="<%= render partial: 'order_popover', locals: {order: order} %>"><%= number_to_currency order.total_price, :unit => "￥", precision: 1 %></span> <br/>
     <% end %>
 
   <% end %>

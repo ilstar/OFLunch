@@ -53,7 +53,7 @@
       <% end %>
       <p class='pull-right highlight'>
         <span class="label label-info">
-          总价:<%= number_to_currency(@today_order.total_price, :unit => "￥") %>
+          总价:<%= number_to_currency(@today_order.total_price, :unit => "￥", precision: 1) %>
         </span>
       </p>
     </div>

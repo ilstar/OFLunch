@@ -6,7 +6,7 @@
   <% @mom.vendors.with_deleted.each do |vendor| %>
     <% order_items_by_vendor = @today_order_items.select{|oi| oi.menu_item_with_deleted.vendor_id == vendor.id } %>
     <% next if order_items_by_vendor.empty? %>
-    <span class='btn disabled btn-primary'><%= vendor.name %>&nbsp;&nbsp; <span style=";"><%= number_to_currency(order_items_by_vendor.sum(&:total_price), :unit => "￥") %></span></span>
+    <span class='btn disabled btn-primary'><%= vendor.name %>&nbsp;&nbsp; <span style=";"><%= number_to_currency(order_items_by_vendor.sum(&:total_price), :unit => "￥", precision: 1) %></span></span>
 
     <div style='margin-bottom: 3px;'></div>
 
