@@ -27,7 +27,12 @@
 
         <% if current_user%>
           <ul class="nav pull-right">
-            <li><%= link_to "Hi, #{current_user.identifier}", edit_user_path %></li>
+            <li>
+              <%= link_to edit_user_path do %>
+                <%= gravatar_image_tag current_user.email, gravatar: {size: 22}, class: 'img-rounded' %>
+                <%= current_user.identifier %>
+              <% end %>
+            </li>
             <% if not @messages.empty? %>
               <li><a id="unread-message-count" href="javascript:;"><span><%= @messages.count %></span></a></li>
             <% end %>

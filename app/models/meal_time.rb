@@ -7,6 +7,8 @@ class MealTime < ActiveRecord::Base
 
   validates_inclusion_of :status, in: %w(locked closed), allow_nil: true
 
+  scope :history, where("created_at <= ?", Time.current.beginning_of_day)
+
   attr_accessor :vendor_ids
 
   def self.today

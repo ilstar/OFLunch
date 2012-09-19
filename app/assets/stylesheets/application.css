@@ -13,6 +13,8 @@
  *
  * rating
  *= require jquery.rating
+ *
+ *= require admin/balances
 */
 
 .brand {

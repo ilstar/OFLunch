@@ -6,6 +6,7 @@ gem 'devise', '2.1.2'
 gem 'simple_form', '2.0.0'
 gem "tabs_on_rails", '2.1.1'
 gem "watu_table_builder", :require => "table_builder"
+gem 'gravatar_image_tag', '1.1.3'
 
 gem 'mysql2', '0.3.11'
 
