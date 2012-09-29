@@ -11,9 +11,10 @@ set :whenever_command, "bundle exec whenever"
 
 # main details
 set :application, "oflunch"
-role :web, "10.64.17.47"
-role :app, "10.64.17.47"
-role :db,  "10.64.17.47", :primary => true
+remote_ip = '10.64.16.60'
+role :web, remote_ip
+role :app, remote_ip
+role :db,  remote_ip, :primary => true
 
 # server details
 default_run_options[:pty] = true
