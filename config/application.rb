@@ -86,6 +86,6 @@ module OFLunch
       user_name: $config['mail_username'],
       password: $config['mail_password'],
     }
-    config.action_mailer.default_url_options = { host: "10.64.17.47" }
+    config.action_mailer.default_url_options = { host: "10.64.16.60" }
   end
 end
