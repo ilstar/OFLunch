@@ -23,4 +23,11 @@ jQuery ->
     $("#change_user_form").load("/sessions")
 
   $('#switch_account_bar').draggable({cursor: 'move'})
+
+  # patch
+  # with twitter-bootstrap-rails 2.1.3, the link of sign out in nav bar can't request server with delete method.
+  $('body')
+    .off('click.dropdown touchstart.dropdown.data-api', '.dropdown')
+    .on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', (e) -> e.stopPropagation() )
+
   return
