@@ -18,7 +18,11 @@
 */
 
 .brand {
-  height: 22px;
+  width: 80px;
+  background-image: url("http://product.gree.net/share/img/header-logo-01.png");
+  background-size: 80px 22px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .form-inputs label {
