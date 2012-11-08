@@ -11,8 +11,17 @@ class MealTime < ActiveRecord::Base
 
   attr_accessor :vendor_ids
 
-  def self.today
-    where(["created_at > ? AND created_at < ?", Time.current.beginning_of_day, Time.current.end_of_day]).first
+  def self.opened
+    now = Time.current
+    # before 15 pm, lunch time
+    # after 15 pm, dinner time
+    divide = ActiveSupport::TimeZone[Time.zone.name].parse("#{now.to_date.to_s} 14:40")
+
+    if now <= divide
+      where(["created_at > ? AND created_at < ?", now.beginning_of_day, divide]).first
+    else
+      where(["created_at > ? AND created_at < ?", divide, now.end_of_day]).first
+    end
   end
 
   def self.by_date(date)
@@ -74,7 +83,7 @@ class MealTime < ActiveRecord::Base
   end
 
   def self.notify_admin_if_today_meal_time_is_not_closed!
-    return if self.today.nil? or self.today.closed?
+    return if self.opened.nil? or self.opened.closed?
     MealTimeMailer.remind_to_close(User.admin.map(&:email)).deliver
   end
 
@@ -85,6 +94,6 @@ class MealTime < ActiveRecord::Base
   end
 
   def no_more_than_one_meal_per_day
-    self.errors.add :base, I18n.t('meal_time.exists_today') if self.new_record? && self.class.today
+    self.errors.add :base, I18n.t('meal_time.exists_today') if self.new_record? && self.class.opened
   end
 end

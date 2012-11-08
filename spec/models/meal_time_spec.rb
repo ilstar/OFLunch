@@ -9,6 +9,25 @@ describe MealTime do
     @meal_time = FactoryGirl.create(:meal_time)
   end
 
+  describe ".opened" do
+    it "can't create more than one meal time in certian duration" do
+      @new_meal_time = FactoryGirl.build :meal_time
+      @new_meal_time.valid?.should be_false
+    end
+
+    it "could create 2 meal time in same day but not in same duration" do
+      MealTime.destroy_all
+
+      Timecop.freeze ActiveSupport::TimeZone[Time.zone.name].parse('2012-11-07 10:00') do
+        FactoryGirl.create :meal_time
+      end
+
+      Timecop.freeze ActiveSupport::TimeZone[Time.zone.name].parse('2012-11-07 16:00') do
+        FactoryGirl.create :meal_time
+      end
+    end
+  end
+
   describe ".by_date" do
     it "be nil when have no meal_time at that date" do
       MealTime.by_date('2019-01-01').should be_nil

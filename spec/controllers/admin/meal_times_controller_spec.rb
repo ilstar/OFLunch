@@ -10,7 +10,7 @@ describe Admin::MealTimesController do
   end
 
   describe "GET index" do
-    it "successfully rendered when no today meal time" do
+    it "successfully rendered when no opened meal time" do
       MealTime.destroy_all
 
       get :index
@@ -18,8 +18,8 @@ describe Admin::MealTimesController do
       response.should be_success
     end
 
-    it "successfully rendered when today meal time is created" do
-      MealTime.today.should_not be_nil
+    it "successfully rendered when opened meal time is created" do
+      MealTime.opened.should_not be_nil
 
       get :index
 

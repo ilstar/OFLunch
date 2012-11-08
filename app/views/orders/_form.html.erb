@@ -2,7 +2,7 @@
   <div class="span6">
     <%= render :partial => "application/errors", :locals => {:target => @order}  %>
 
-    <% MealTime.today.vendors.each do |vendor| %>
+    <% MealTime.opened.vendors.each do |vendor| %>
       <h3 id="<%= dom_id vendor %>"><%= vendor.name %></h3>
 
       <% vendor.categories_with_menu_items.each do |category, menu_items| %>
@@ -58,7 +58,7 @@
 
 
 <ul id="quick-nav" class="nav nav-tabs nav-stacked">
-  <% MealTime.today.vendors.each do |vendor| %>
+  <% MealTime.opened.vendors.each do |vendor| %>
     <li data-target="<%= dom_id vendor %>"><%= link_to vendor.name, "javascript:;" %></li>
   <% end %>
 </ul>

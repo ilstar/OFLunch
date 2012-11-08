@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   set_tab :home
   
   def index
-    if @today_meal_time = MealTime.today
+    if @today_meal_time = MealTime.opened
       @today_order = @today_meal_time.orders.for_user_id(current_user.id).last
 
       redirect_to new_order_url if @today_meal_time.activated? and @today_order.blank?
@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.build(params[:order])
-    @order.meal_time = MealTime.today
+    @order.meal_time = MealTime.opened
     if @order.save
       redirect_to orders_path, :alert => "下单成功"
     else

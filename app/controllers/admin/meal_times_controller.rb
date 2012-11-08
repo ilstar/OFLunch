@@ -3,7 +3,7 @@ class Admin::MealTimesController < Admin::BaseController
   set_tab :meal_times
 
   def index
-    @today_meal_time = MealTime.today
+    @today_meal_time = MealTime.opened
 
     @meal_time = MealTime.new if @today_meal_time.nil?
   end

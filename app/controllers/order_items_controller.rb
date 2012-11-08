@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
     if params.key?(:date)
       @mom = MealTime.by_date(params[:date])
     else
-      @mom = MealTime.today
+      @mom = MealTime.opened
     end
     @today_order_items = @mom.try(:order_items) || []
   end
