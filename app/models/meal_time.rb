@@ -15,7 +15,7 @@ class MealTime < ActiveRecord::Base
     now = Time.current
     # before 15 pm, lunch time
     # after 15 pm, dinner time
-    divide = ActiveSupport::TimeZone[Time.zone.name].parse("#{now.to_date.to_s} 14:40")
+    divide = ActiveSupport::TimeZone[Time.zone.name].parse("#{now.to_date.to_s} 15:00")
 
     if now <= divide
       where(["created_at > ? AND created_at < ?", now.beginning_of_day, divide]).first
