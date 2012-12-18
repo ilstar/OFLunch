@@ -12,7 +12,7 @@ set :whenever_command, "bundle exec whenever"
 
 # main details
 set :application, "oflunch"
-remote_ip = OFLUNCH_SERVER_IP
+remote_ip = 'oflunch.tk'
 role :web, remote_ip
 role :app, remote_ip
 role :db,  remote_ip, :primary => true

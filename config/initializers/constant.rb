@@ -1,1 +1,0 @@
-OFLUNCH_SERVER_IP = 'oflunch.tk'

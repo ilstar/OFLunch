@@ -86,6 +86,6 @@ module OFLunch
       user_name: $config['mail_username'],
       password: $config['mail_password'],
     }
-    config.action_mailer.default_url_options = { host: OFLUNCH_SERVER_IP }
+    config.action_mailer.default_url_options = { host: 'oflunch.tk' }
   end
 end
