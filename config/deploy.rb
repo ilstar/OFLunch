@@ -4,7 +4,6 @@ require 'rvm/capistrano'
 require "bundler/capistrano"
 require "whenever/capistrano"
 load 'deploy/assets'
-require './config/initializers/constant'
 
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :user
