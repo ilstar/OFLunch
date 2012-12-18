@@ -4,6 +4,7 @@ require 'rvm/capistrano'
 require "bundler/capistrano"
 require "whenever/capistrano"
 load 'deploy/assets'
+require './config/initializers/constant'
 
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :user
@@ -11,7 +12,7 @@ set :whenever_command, "bundle exec whenever"
 
 # main details
 set :application, "oflunch"
-remote_ip = '10.64.16.60'
+remote_ip = OFLUNCH_SERVER_IP
 role :web, remote_ip
 role :app, remote_ip
 role :db,  remote_ip, :primary => true
