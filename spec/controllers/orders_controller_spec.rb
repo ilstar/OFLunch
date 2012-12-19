@@ -66,6 +66,14 @@ describe OrdersController do
       get 'new'
       response.should be_success
     end
+
+    it "redirect to index if no mom" do
+      @meal_time.destroy
+
+      get :new
+
+      response.should redirect_to(orders_url)
+    end
   end
 
   describe "POST create" do

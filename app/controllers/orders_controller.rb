@@ -15,6 +15,8 @@ class OrdersController < ApplicationController
   end
 
   def new
+    redirect_to orders_url if MealTime.today.nil?
+
     @order = Order.new
   end
 
