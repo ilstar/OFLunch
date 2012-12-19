@@ -1,1 +1,6 @@
-$("#tr_<%= dom_id(@vendor) %>").remove()
+$("#tr_<%= dom_id(@vendor) %>").remove();
+
+$menu_items_div = $('#menu_items_div');
+if ($menu_items_div.data('vendor_id') == "<%= dom_id(@vendor) %>") {
+    $menu_items_div.empty();
+};
