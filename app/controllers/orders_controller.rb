@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class OrdersController < ApplicationController
   set_tab :home
+  before_filter :check_mom_status_when_process_orders, only: %w(new create)
   
   def index
     if @today_meal_time = MealTime.today
@@ -15,8 +16,6 @@ class OrdersController < ApplicationController
   end
 
   def new
-    redirect_to orders_url if MealTime.today.nil?
-
     @order = Order.new
   end
 
@@ -26,7 +25,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.build(params[:order])
-    @order.meal_time = MealTime.today
+    @order.meal_time = @meal_time
     if @order.save
       redirect_to orders_path, :alert => "下单成功"
     else
@@ -56,6 +55,16 @@ class OrdersController < ApplicationController
     end
 
     redirect_to orders_url, :alert => message
+  end
+
+  protected
+
+  def check_mom_status_when_process_orders
+    @meal_time = MealTime.today
+
+    if @meal_time.nil? or @meal_time.locked?
+      redirect_to orders_url
+    end
   end
 
 end

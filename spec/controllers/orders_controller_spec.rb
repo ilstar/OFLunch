@@ -74,6 +74,14 @@ describe OrdersController do
 
       response.should redirect_to(orders_url)
     end
+
+    it "redirect to index if mom is locked" do
+      @meal_time.lock!
+
+      get :new
+
+      response.should redirect_to(orders_url)
+    end
   end
 
   describe "POST create" do
@@ -95,6 +103,25 @@ describe OrdersController do
       }.should change{ Order.count }.by(1)
 
       assigns(:order).total_price.should == menu_item.price * 1
+      response.should redirect_to(orders_url)
+    end
+
+    it "can't create order if mom is locked" do
+      @order.destroy
+      menu_item = FactoryGirl.create :menu_item
+      @meal_time.lock!
+
+      lambda {
+        post :create, {
+          :order => {
+            :order_items_attributes => [
+              { 'menu_item_id' => menu_item.to_param, 'amount' => '1'}
+            ]
+          }
+        }
+
+      }.should change{ Order.count }.by(0)
+
       response.should redirect_to(orders_url)
     end
 
