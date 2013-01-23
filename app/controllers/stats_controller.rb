@@ -7,7 +7,7 @@ class StatsController < ApplicationController
     @menu_items = MenuItem.eatable
                           .joins(:order_items)
                           .select("name, COUNT(menu_items.id) AS menu_item_count")
-                          .group("menu_item_id")
+                          .group("menu_item_id, name")
                           .order("menu_item_count DESC")
                           .where(["order_items.created_at >= ? AND order_items.created_at < ?", now.beginning_of_week, now.end_of_week])
                           .limit(10)
