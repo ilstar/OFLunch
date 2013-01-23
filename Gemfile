@@ -8,7 +8,7 @@ gem "tabs_on_rails", '2.1.1'
 gem "watu_table_builder", :require => "table_builder"
 gem 'gravatar_image_tag', '1.1.3'
 
-gem 'mysql2', '0.3.11'
+gem 'pg', '0.14.0'
 
 gem 'rails-i18n', '0.5.1'
 
