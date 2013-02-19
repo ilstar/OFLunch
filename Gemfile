@@ -53,6 +53,10 @@ group :development do
 
   # security scanner
   gem 'brakeman', '~> 1.6'
+
+  gem 'binding_of_caller'
+  gem 'better_errors'
+  gem 'meta_request'
 end
 
 gem 'magic_encoding'
