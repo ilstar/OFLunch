@@ -1,7 +1,7 @@
 $("#menu_items_table").append("<%= escape_javascript(render(partial: 'tr_menu_item', locals: {menu_item: @menu_item})) %>");
 
-// reset form and inputs.
-<% @menu_item = MenuItem.new %>
+// reset form and inputs but keep the previous category_id
+<% @menu_item = MenuItem.new category_id: @menu_item.category_id %>
 $("#menu_item_modal_form").html("<%= escape_javascript(render(partial: 'modal_form')) %>");
 
 jQuery('.best_in_place').best_in_place();
