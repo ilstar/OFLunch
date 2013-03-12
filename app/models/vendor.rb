@@ -17,8 +17,10 @@ class Vendor < ActiveRecord::Base
   def categories_with_menu_items
     result = {}
     self.menu_items.each do |menu_item|
-      result[menu_item.category] ||= []
-      result[menu_item.category] << menu_item
+      result[menu_item.category.name] ||= {}
+      result[menu_item.category.name]['category_name'] = menu_item.category.name
+      result[menu_item.category.name]['menu_items'] ||= []
+      result[menu_item.category.name]['menu_items'] << menu_item
     end
     result
   end

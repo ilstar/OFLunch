@@ -13,6 +13,9 @@
 //= require order_items
 //= require bills
 
+//= require angular.min
+//= require orders2
+
 jQuery ->
   jQuery('.best_in_place').best_in_place()
 

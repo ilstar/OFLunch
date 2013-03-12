@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   after_create :create_balance_for_user
 
   def identifier
-    self.name.presence || self.email 
+    self.name.presence || self.email
   end
 
   def admin?
@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
 
   def account_balance
     self.balance.amount
+  end
+
+  def today_order
+    MealTime.today.orders.find_by_user_id(self.id).order_items.map {|order_item| {id: order_item.id, name: order_item.menu_item.name, count: order_item.amount}}
   end
 
   protected

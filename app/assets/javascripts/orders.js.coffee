@@ -65,3 +65,6 @@ jQuery ->
 $("body").on 'click', "#quick-nav li", ->
   $target = $("##{$(this).data 'target'}")
   $("body").animate {scrollTop: $target.offset().top - 41}, 250
+
+@Name = ->
+  console.log 'haha'

@@ -2,7 +2,7 @@
 class OrdersController < ApplicationController
   set_tab :home
   before_filter :check_mom_status_when_process_orders, only: %w(new create)
-  
+
   def index
     if @today_meal_time = MealTime.today
       @today_order = @today_meal_time.orders.for_user_id(current_user.id).last
@@ -17,6 +17,19 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+
+    respond_to do |format|
+      format.json {
+        render json:
+        {
+          "menu_items" => MealTime.today.vendors.map {|vendor|
+            {'vendor_name' => vendor.name, 'categories' => vendor.categories_with_menu_items}
+          },
+          "order_items" => current_user.today_order
+        }
+      }
+      format.html
+    end
   end
 
   def edit
