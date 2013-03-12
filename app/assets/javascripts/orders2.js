@@ -1,7 +1,8 @@
 function OrderCtrl($scope, $http) {
+  $scope.order_items = [];
   $http.get("/orders/new.json").success(function(data) {
     $scope.menus = data.menu_items;
-  $scope.order_items = data.order_items;
+    $scope.order_items = data.order_items;
   })
 
 

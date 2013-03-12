@@ -32,7 +32,12 @@ class User < ActiveRecord::Base
   end
 
   def today_order
-    MealTime.today.orders.find_by_user_id(self.id).order_items.map {|order_item| {id: order_item.id, name: order_item.menu_item.name, count: order_item.amount}}
+    order = MealTime.today.orders.find_by_user_id(self.id)
+    if order
+      order.order_items.map {|order_item| {id: order_item.menu_item_id, name: order_item.menu_item.name, count: order_item.amount, price: order_item.menu_item.price}}
+    else
+      []
+    end
   end
 
   protected
