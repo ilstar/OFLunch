@@ -6,6 +6,7 @@
 //= require best_in_place
 //= require jquery.effects.drop
 //= require jquery.ui.draggable
+//= require angular.min
 
 # rating
 //= require jquery.rating.pack
@@ -13,8 +14,7 @@
 //= require order_items
 //= require bills
 
-//= require angular.min
-//= require orders2
+//= require orders
 
 jQuery ->
   jQuery('.best_in_place').best_in_place()

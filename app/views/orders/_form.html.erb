@@ -1,4 +1,4 @@
-<div class="row" ng-app ng-controller="OrderCtrl">
+<div class="row" ng-app="OrdersApp" ng-controller="OrdersCtrl">
   <div class="span6">
     <%= render :partial => "application/errors", :locals => {:target => @order}  %>
 
@@ -20,7 +20,7 @@
   </div><!-- span7 end -->
 
   <div class="span5">
-    <div id="order_form_wrapper" ng-hide="orderItemsEmpty();">
+    <div id="order_form_wrapper" ng-hide="isOrderItemsEmpty();">
       <h4>我的订单</h4>
       <%= simple_form_for(@order, html: {id: 'order_form'}) do |f| %>
         <ul id="order_items">
@@ -54,7 +54,3 @@
 <%= content_for :head do %>
   <%= stylesheet_link_tag    "orders", :media => "all" %>
 <% end %>
-<%= content_for :footer do %>
-  <!-- <%= javascript_include_tag "orders" %> -->
-<% end %>
-
