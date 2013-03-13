@@ -19,7 +19,9 @@ FactoryGirl.define do
   end
 
   factory :category do
-    name "category name"
+    sequence :name do |i|
+      "category_name_#{i}"
+    end
   end
 
   factory :menu_item do

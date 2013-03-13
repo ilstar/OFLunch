@@ -55,9 +55,9 @@ describe Vendor do
     it "has correct categories and menu_items" do
       categories_with_menu_items = @vendor.categories_with_menu_items
 
-      categories_with_menu_items.keys.sort.should == [@category1, @category2].sort
-      categories_with_menu_items[@category1].should == [@menu_item1]
-      categories_with_menu_items[@category2].should == [@menu_item2]
+      categories_with_menu_items.keys.sort.should == [@category1.name, @category2.name].sort
+      categories_with_menu_items[@category1.name]['menu_items'].should == [@menu_item1]
+      categories_with_menu_items[@category2.name]['menu_items'].should == [@menu_item2]
     end
   end
 end

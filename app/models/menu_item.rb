@@ -15,4 +15,19 @@ class MenuItem < ActiveRecord::Base
 
     "#{last_order_item.order.user.name} says:<br/>#{last_order_item.comment}"
   end
+
+  def self.today
+    today_meal_time = MealTime.today
+
+    return [] if today_meal_time.nil?
+
+    today_meal_time.vendors.map do |vendor|
+      {
+        'vendor_name' => vendor.name,
+        'categories' => vendor.categories_with_menu_items,
+        'vendor_id' => vendor.id,
+      }
+    end
+  end
+
 end

@@ -61,6 +61,24 @@ describe OrdersController do
     end
   end
 
+  describe "GET today" do
+    it "returns nothing on new page" do
+      @order.destroy
+
+      get :today, format: 'json'
+
+      assigns(:order_items).should be_empty
+      response.should be_success
+    end
+
+    it "returns order_items on edit page" do
+      get :today, format: 'json'
+
+      assigns(:order_items).should_not be_empty
+      response.should be_success
+    end
+  end
+
   describe "GET 'new'" do
     it "returns http success" do
       get 'new'

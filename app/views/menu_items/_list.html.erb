@@ -1,5 +1,5 @@
-<% @categories_with_menu_items.each do |category, menu_items| %>
-  <h3><%= category.name %></h3>
+<% @categories_with_menu_items.each do |category_name, menu_items| %>
+  <h3><%= category_name %></h3>
 
   <table class="table table-striped table-bordered">
     <tr>
@@ -7,7 +7,7 @@
       <th>价格</th>
     </tr>
 
-    <% menu_items.each do |menu_item| %>
+    <% menu_items['menu_items'].each do |menu_item| %>
     <tr>
       <td><%= menu_item.name %></td>
       <td><%= menu_item.price %></td>

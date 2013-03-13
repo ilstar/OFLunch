@@ -7,7 +7,11 @@ OFLunch::Application.routes.draw do
     end
   end
 
-  get "menu_items/index"
+  resources :menu_items, only: %w{index} do
+    collection do
+      get :today
+    end
+  end
 
   namespace :admin do
 
@@ -15,7 +19,7 @@ OFLunch::Application.routes.draw do
     resources :vendors, only: %w{index create update destroy} do
       resources :menu_items, only: %w{index create destroy}
     end
-    
+
     resources :balances, only: %w{index}
     resources :balance_logs, :only => %w{create}
 
@@ -42,8 +46,6 @@ OFLunch::Application.routes.draw do
 
   resources :bills, only: [:index]
 
-  get "order_items/index"
-
   resources :order_items, :only => [:index] do
     member do
       put :rating
@@ -52,7 +54,11 @@ OFLunch::Application.routes.draw do
   end
   get 'order_items/:date' => 'order_items#index', as: 'date_order_items'
 
-  resources :orders, only: %w{index new edit create update destroy}
+  resources :orders, only: %w{index new edit create update destroy} do
+    collection do
+      get :today
+    end
+  end
 
   devise_for :users
 

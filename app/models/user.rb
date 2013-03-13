@@ -31,12 +31,18 @@ class User < ActiveRecord::Base
     self.balance.amount
   end
 
-  def today_order
-    order = MealTime.today.orders.find_by_user_id(self.id)
-    if order
-      order.order_items.map {|order_item| {id: order_item.menu_item_id, name: order_item.menu_item.name, count: order_item.amount, price: order_item.menu_item.price}}
-    else
-      []
+  def today_order_items
+    today_order = MealTime.today.orders.find_by_user_id(self.id)
+
+    return [] if today_order.nil?
+
+    today_order.order_items.map do |order_item|
+      {
+        id: order_item.menu_item_id,
+        name: order_item.menu_item.name,
+        count: order_item.amount,
+        price: order_item.menu_item.price,
+      }
     end
   end
 

@@ -9,9 +9,10 @@ app = angular.module "OrdersApp", []
 app.controller "OrdersCtrl", ($scope, $http) ->
   $scope.order_items = []
 
-  $http.get("/orders/new.json").success (data) ->
-    $scope.menus = data.menu_items
-    $scope.order_items = data.order_items
+  $http.get("/orders/today.json").success (data) ->
+    $scope.order_items = data
+  $http.get("/menu_items/today.json").success (data) ->
+    $scope.menus = data
 
   $scope.isOrderItemsEmpty = ->
     $scope.order_items.length is 0

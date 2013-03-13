@@ -7,4 +7,13 @@ class MenuItemsController < ApplicationController
       format.js
     end
   end
+
+  def today
+    @menu_items = MenuItem.today
+
+    respond_to do |format|
+      format.json { render json: @menu_items }
+    end
+  end
+
 end
