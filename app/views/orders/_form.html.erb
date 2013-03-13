@@ -18,7 +18,7 @@
   </div><!-- span7 end -->
 
   <div class="span5">
-    <div id="order_form_wrapper" ng-hide="isOrderItemsEmpty();">
+    <div id="order_form_wrapper" ng-hide="isOrderItemsEmpty();" style="display: none;">
       <h4>我的订单</h4>
       <%= simple_form_for(@order, html: {id: 'order_form'}) do |f| %>
         <ul id="order_items">
