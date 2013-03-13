@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
         render json:
         {
           "menu_items" => MealTime.today.vendors.map {|vendor|
-            {'vendor_name' => vendor.name, 'categories' => vendor.categories_with_menu_items}
+            {'vendor_name' => vendor.name, 'categories' => vendor.categories_with_menu_items, 'vendor_id' => vendor.id}
           },
           "order_items" => current_user.today_order
         }

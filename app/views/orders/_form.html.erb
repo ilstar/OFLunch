@@ -3,16 +3,14 @@
     <%= render :partial => "application/errors", :locals => {:target => @order}  %>
 
     <div ng-repeat="menu in menus">
-      <h3>{{menu.vendor_name}}</h3>
+      <h3 id="vendor_{{menu.vendor_id}}" ng-bind-template="{{menu.vendor_name}}"></h3>
       <div ng-repeat="category in menu.categories">
-        <h5>{{category.category_name}}</h5>
+        <h5 ng-bind-template="{{category.category_name}}"></h5>
         <ul id="menu_items">
           <li ng-repeat="menu_item in category.menu_items" ng-click="addOrderItem(menu_item)">
-              <span class="name">
-                {{menu_item.name}}
-              </span>
-              <span class="price">{{ menu_item.price }}</span>
-              <span class="count">{{ orderItemsCount(menu_item.id) }}</span>
+              <span class="name" ng-bind-template="{{menu_item.name}}"></span>
+              <span class="price" ng-bind-template="{{ menu_item.price }}"></span>
+              <span class="count" ng-bind-template="{{ orderItemsCount(menu_item.id) }}"></span>
           </li>
         </ul>
       </div>
@@ -25,11 +23,11 @@
       <%= simple_form_for(@order, html: {id: 'order_form'}) do |f| %>
         <ul id="order_items">
           <li ng-repeat="order_item in order_items">
-              <span class="name">{{ order_item.name }}</span>
+              <span class="name" ng-bind-template="{{ order_item.name }}"></span>
               <span class="right">
-                <span class="price">{{ order_item.price }}</span>
+                <span class="price" ng-bind-template="{{ order_item.price }}"></span>
                 <span class="multiply">x</span>
-                <span class="count">{{ order_item.count }}</span>
+                <span class="count" ng-bind-template="{{ order_item.count }}"></span>
                 <a href="javascript:;" class="delete" ng-click="removeOrderItem(order_item)"><i class="icon-minus-sign icon-white"></i></a>
                 <input name="order[order_items_attributes][][menu_item_id]" type="hidden" value="{{ order_item.id }}">
                 <input name="order[order_items_attributes][][amount]" type="hidden" value="{{ order_item.count }}">
@@ -37,7 +35,7 @@
           </li>
         </ul>
         <div id="total_cost" class="pull-right">总价：￥<span>{{ totalPrice() }}</span></div>
-      <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
+        <%= f.button :submit, t('confirm'), class: 'btn btn-success' %>
       <% end %>
     </div>
 
