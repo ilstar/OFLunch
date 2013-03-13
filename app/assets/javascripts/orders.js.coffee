@@ -4,15 +4,19 @@
 
 # listen click event on left nav of /orders/new page.
 
-app = angular.module "OrdersApp", []
+app = angular.module "OrdersApp", ['ngResource']
 
-app.controller "OrdersCtrl", ($scope, $http) ->
+app.controller "OrdersCtrl", ($scope, $resource) ->
+  Order = $resource "/orders/today.json", {}, {
+    "today": {method: 'GET', isArray: true}
+  }
+  MenuItem = $resource "/menu_items/today.json", {}, {
+    "today": {method: 'GET', isArray: true}
+  }
   $scope.order_items = []
 
-  $http.get("/orders/today.json").success (data) ->
-    $scope.order_items = data
-  $http.get("/menu_items/today.json").success (data) ->
-    $scope.menus = data
+  $scope.order_items = Order.today()
+  $scope.menus = MenuItem.today()
 
   $scope.isOrderItemsEmpty = ->
     $scope.order_items.length is 0
@@ -48,6 +52,3 @@ app.controller "OrdersCtrl", ($scope, $http) ->
 $("body").on 'click', "#quick-nav li", ->
   $target = $("##{$(this).data 'target'}")
   $("body").animate {scrollTop: $target.offset().top - 41}, 250
-
-@Name = ->
-  console.log 'haha'

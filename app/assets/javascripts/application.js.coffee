@@ -7,6 +7,7 @@
 //= require jquery.effects.drop
 //= require jquery.ui.draggable
 //= require angular.min
+//= require angular-resource.min
 
 # rating
 //= require jquery.rating.pack
