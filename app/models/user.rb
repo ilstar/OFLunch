@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
     return [] if today_order.nil?
 
-    today_order.order_items.map do |order_item|
+    today_order.order_items.includes(:menu_item).map do |order_item|
       {
         id: order_item.menu_item_id,
         name: order_item.menu_item.name,
