@@ -15,8 +15,8 @@ app.controller "OrdersCtrl", ($scope, $resource) ->
   }
   $scope.order_items = []
 
-  $scope.order_items = Order.today()
   $scope.menus = MenuItem.today()
+  $scope.order_items = Order.today()
 
   $scope.isOrderItemsEmpty = ->
     $scope.order_items.length is 0
