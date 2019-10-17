@@ -12,7 +12,7 @@ gem 'mysql2', '0.3.11'
 
 gem 'rails-i18n', '0.5.1'
 
-gem 'will_paginate', '3.0.3'
+gem 'will_paginate', '3.0.5'
 
 gem 'best_in_place', '1.0.6'
 
